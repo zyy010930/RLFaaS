@@ -2,6 +2,8 @@ package scs.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,7 +65,11 @@ public class LoadGenController {
 					Repository.windowOnlineDataList.get(serviceId).clear();//clear windowOnlineDataList
 					if(serviceId<Repository.NUMBER_LC && serviceId>=0) {
 						//RecordDriver.getInstance().execute(serviceId);
-						Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+						FunctionThread thread = new FunctionThread(15);
+						new Thread(thread).start();
+						FunctionThread thread2 = new FunctionThread(10);
+						new Thread(thread2).start();
+						//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 					} else {
 						response.getWriter().write("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);
 					}
@@ -227,4 +233,20 @@ public class LoadGenController {
 			e.printStackTrace();
 		}
 	}
+
+	static class FunctionThread extends Thread{
+		private int serviceId;
+
+		public FunctionThread(){}
+
+		public FunctionThread(int id)
+		{
+			serviceId = id;
+		}
+
+		public void run(){
+			Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+		}
+	}
+
 }
