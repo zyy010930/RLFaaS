@@ -50,8 +50,8 @@ public class LoadExecThreadRandom extends Thread{
 					Repository.onlineDataList.get(serviceId).add(time);
 				}
 			} else {
-				int time=new Random().nextInt(100);
-				//int time=HttpClientPool.postResponseTime(httpclient, url, jsonObjectStr);
+				//int time=new Random().nextInt(100);
+				int time=HttpClientPool.postResponseTime(httpclient, url, jsonObjectStr);
 				synchronized (Repository.onlineDataList.get(serviceId)) {
 					Repository.onlineDataList.get(serviceId).add(time);
 				}
