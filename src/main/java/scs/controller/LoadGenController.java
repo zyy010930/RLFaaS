@@ -62,7 +62,7 @@ public class LoadGenController {
 					Repository.onlineDataList.get(serviceId).clear();//clear onlineDataList
 					Repository.windowOnlineDataList.get(serviceId).clear();//clear windowOnlineDataList
 					if(serviceId<Repository.NUMBER_LC && serviceId>=0) {
-						RecordDriver.getInstance().execute(serviceId); 
+						//RecordDriver.getInstance().execute(serviceId);
 						Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 					} else {
 						response.getWriter().write("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);

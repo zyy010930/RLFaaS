@@ -48,7 +48,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 	 
 		Repository.onlineQueryThreadRunning[serviceId]=true;
 		Repository.sendFlag[serviceId]=true;
-		while(Repository.onlineDataFlag[serviceId]==true){
+		if(Repository.onlineDataFlag[serviceId]==true){
 			if(Repository.sendFlag[serviceId]==true){
 				CountDownLatch begin=new CountDownLatch(1);
 				if (Repository.realRequestIntensity[serviceId]==0){
@@ -59,7 +59,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 					}
 				} else {
 					int sleepUnit=1000/Repository.realRequestIntensity[serviceId];
-					for (int i=0;i<Repository.realRequestIntensity[serviceId];i++){ 
+					for (int i=0;i<Repository.realRequestIntensity[serviceId];i++){
 						executor.execute(new LoadExecThreadRandom(httpClient,queryItemsStr,begin,serviceId,jsonParmStr,sleepUnit*i,"POST"));
 					}
 				}
