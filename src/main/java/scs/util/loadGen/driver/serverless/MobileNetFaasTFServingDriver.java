@@ -47,8 +47,8 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 	public void executeJob(int serviceId) {
 		//ExecutorService executor = Executors.newCachedThreadPool();
 		System.out.println("mobilenet");
-		Repository.onlineQueryThreadRunning[serviceId]=true;
-		Repository.sendFlag[serviceId]=true;
+		//Repository.onlineQueryThreadRunning[serviceId]=true;
+		//Repository.sendFlag[serviceId]=true;
 		//if(Repository.onlineDataFlag[serviceId]==true){
 		if(true){
 			System.out.println("mob-req");
@@ -98,7 +98,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 				e.printStackTrace();
 			}
 		}  */
-		Repository.onlineQueryThreadRunning[serviceId]=false; 
+		//Repository.onlineQueryThreadRunning[serviceId]=false;
 	}
 
 	/**
