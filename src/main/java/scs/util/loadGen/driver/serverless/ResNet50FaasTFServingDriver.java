@@ -62,7 +62,7 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 					}
 				} else {
 					int sleepUnit=1000;
-					for (int i=0;i<Repository.realRequestIntensity[serviceId];i++){ 
+					for (int i=0;i<3;i++){
 						//executor.execute(new LoadExecThreadRandom(httpClient,queryItemsStr,begin,serviceId,jsonParmStr,sleepUnit*i,"POST"));
 						try {
 							Thread.sleep(500);
@@ -74,8 +74,8 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 						}
 					}
 				}
-				Repository.sendFlag[serviceId]=false;
-				Repository.totalRequestCount[serviceId]+=Repository.realRequestIntensity[serviceId];
+				//Repository.sendFlag[serviceId]=false;
+				//Repository.totalRequestCount[serviceId]+=Repository.realRequestIntensity[serviceId];
 				//begin.countDown();
 			}else{
 				try {
