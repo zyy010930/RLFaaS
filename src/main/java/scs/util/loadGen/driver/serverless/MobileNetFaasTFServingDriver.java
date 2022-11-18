@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import scs.util.loadGen.driver.AbstractJobDriver;
+import scs.util.loadGen.threads.FunctionExec;
 import scs.util.loadGen.threads.LoadExecThread;
 import scs.util.loadGen.threads.LoadExecThreadRandom;
 import scs.util.repository.Repository;
@@ -50,7 +51,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 		Repository.sendFlag[serviceId]=true;
 		if(Repository.onlineDataFlag[serviceId]==true){
 			if(Repository.sendFlag[serviceId]==true){
-				CountDownLatch begin=new CountDownLatch(1);
+				//CountDownLatch begin=new CountDownLatch(1);
 				if (Repository.realRequestIntensity[serviceId]==0){
 					try {
 						Thread.sleep(1000);
@@ -60,12 +61,19 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 				} else {
 					int sleepUnit=1000/Repository.realRequestIntensity[serviceId];
 					for (int i=0;i<Repository.realRequestIntensity[serviceId];i++){
-						executor.execute(new LoadExecThreadRandom(httpClient,queryItemsStr,begin,serviceId,jsonParmStr,sleepUnit*i,"POST"));
+						//executor.execute(new LoadExecThreadRandom(httpClient,queryItemsStr,begin,serviceId,jsonParmStr,sleepUnit*i,"POST"));
+						try {
+							Thread.sleep(500);
+							FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit * i, "POST");
+							functionExec.exec();
+						}catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 				Repository.sendFlag[serviceId]=false;
 				Repository.totalRequestCount[serviceId]+=Repository.realRequestIntensity[serviceId];
-				begin.countDown();
+				//begin.countDown();
 			}else{
 				try {
 					Thread.sleep(10);
