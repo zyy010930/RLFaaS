@@ -46,9 +46,11 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 		System.out.println("resnet-50");
 		Repository.onlineQueryThreadRunning[serviceId]=true;
 		Repository.sendFlag[serviceId]=true;
-		if(Repository.onlineDataFlag[serviceId]==true){
+		//if(Repository.onlineDataFlag[serviceId]==true){
+		if(true){
 			System.out.println("res-req");
-			if(Repository.sendFlag[serviceId]==true){
+			//if(Repository.sendFlag[serviceId]==true){
+			if(true){
 				System.out.println("res-req");
 				//CountDownLatch begin=new CountDownLatch(1);
 				if (Repository.realRequestIntensity[serviceId]==0){

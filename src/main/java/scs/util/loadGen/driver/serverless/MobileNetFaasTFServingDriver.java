@@ -49,9 +49,11 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 		System.out.println("mobilenet");
 		Repository.onlineQueryThreadRunning[serviceId]=true;
 		Repository.sendFlag[serviceId]=true;
-		if(Repository.onlineDataFlag[serviceId]==true){
+		//if(Repository.onlineDataFlag[serviceId]==true){
+		if(true){
 			System.out.println("mob-req");
-			if(Repository.sendFlag[serviceId]==true){
+			//if(Repository.sendFlag[serviceId]==true){
+			if(true){
 				System.out.println("mob-req");
 				//CountDownLatch begin=new CountDownLatch(1);
 				if (Repository.realRequestIntensity[serviceId]==0){
