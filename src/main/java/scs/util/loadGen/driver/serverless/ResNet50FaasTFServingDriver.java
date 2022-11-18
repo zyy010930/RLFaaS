@@ -42,7 +42,7 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 	 */
 	public void executeJob(int serviceId) {
 		ExecutorService executor = Executors.newCachedThreadPool();
-
+		System.out.println("resnet-50");
 		Repository.onlineQueryThreadRunning[serviceId]=true;
 		Repository.sendFlag[serviceId]=true;
 		if(Repository.onlineDataFlag[serviceId]==true){

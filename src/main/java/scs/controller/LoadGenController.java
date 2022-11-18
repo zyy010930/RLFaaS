@@ -65,10 +65,13 @@ public class LoadGenController {
 					Repository.windowOnlineDataList.get(serviceId).clear();//clear windowOnlineDataList
 					if(serviceId<Repository.NUMBER_LC && serviceId>=0) {
 						//RecordDriver.getInstance().execute(serviceId);
+						System.out.println("start thread");
 						ExecutorService executor = Executors.newCachedThreadPool();
 						FunctionThread thread = new FunctionThread(15);
 						FunctionThread thread2 = new FunctionThread(10);
+						System.out.println("thread1");
 						executor.execute(thread);
+						System.out.println("thread2");
 						executor.execute(thread2);
 						//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 					} else {
