@@ -65,13 +65,12 @@ public class LoadGenController {
 					Repository.windowOnlineDataList.get(serviceId).clear();//clear windowOnlineDataList
 					if(serviceId<Repository.NUMBER_LC && serviceId>=0) {
 						//RecordDriver.getInstance().execute(serviceId);
-						/*
+						ExecutorService executor = Executors.newCachedThreadPool();
 						FunctionThread thread = new FunctionThread(15);
-						new Thread(thread).start();
 						FunctionThread thread2 = new FunctionThread(10);
-						new Thread(thread2).start();
-						 */
-						Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+						executor.execute(thread);
+						executor.execute(thread2);
+						//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 					} else {
 						response.getWriter().write("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);
 					}
