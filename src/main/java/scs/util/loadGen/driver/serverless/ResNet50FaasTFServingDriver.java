@@ -61,7 +61,7 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 						e.printStackTrace();
 					}
 				} else {
-					int sleepUnit=1000/Repository.realRequestIntensity[serviceId];
+					int sleepUnit=1000;
 					for (int i=0;i<Repository.realRequestIntensity[serviceId];i++){ 
 						//executor.execute(new LoadExecThreadRandom(httpClient,queryItemsStr,begin,serviceId,jsonParmStr,sleepUnit*i,"POST"));
 						try {
