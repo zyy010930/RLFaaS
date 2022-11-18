@@ -53,7 +53,8 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 			if(true){
 				System.out.println("res-req");
 				//CountDownLatch begin=new CountDownLatch(1);
-				if (Repository.realRequestIntensity[serviceId]==0){
+				//if (Repository.realRequestIntensity[serviceId]==0){
+				if(false){
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
