@@ -42,12 +42,14 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 	 * using countDown to send requests in open-loop
 	 */
 	public void executeJob(int serviceId) {
-		ExecutorService executor = Executors.newCachedThreadPool();
+		//ExecutorService executor = Executors.newCachedThreadPool();
 		System.out.println("resnet-50");
 		Repository.onlineQueryThreadRunning[serviceId]=true;
 		Repository.sendFlag[serviceId]=true;
 		if(Repository.onlineDataFlag[serviceId]==true){
+			System.out.println("res-req");
 			if(Repository.sendFlag[serviceId]==true){
+				System.out.println("res-req");
 				//CountDownLatch begin=new CountDownLatch(1);
 				if (Repository.realRequestIntensity[serviceId]==0){
 					try {
@@ -81,6 +83,7 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 			/*	System.out.println("loader watting "+TestRepository.list.size());*/
 			}
 		}
+		/*
 		executor.shutdown();
 		while(!executor.isTerminated()){
 			try {
@@ -88,7 +91,7 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 			} catch(InterruptedException e){
 				e.printStackTrace();
 			}
-		}  
+		}  */
 		Repository.onlineQueryThreadRunning[serviceId]=false; 
 	}
 

@@ -45,12 +45,14 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 	 * using countDown to send requests in open-loop
 	 */
 	public void executeJob(int serviceId) {
-		ExecutorService executor = Executors.newCachedThreadPool();
+		//ExecutorService executor = Executors.newCachedThreadPool();
 		System.out.println("mobilenet");
 		Repository.onlineQueryThreadRunning[serviceId]=true;
 		Repository.sendFlag[serviceId]=true;
 		if(Repository.onlineDataFlag[serviceId]==true){
+			System.out.println("mob-req");
 			if(Repository.sendFlag[serviceId]==true){
+				System.out.println("mob-req");
 				//CountDownLatch begin=new CountDownLatch(1);
 				if (Repository.realRequestIntensity[serviceId]==0){
 					try {
@@ -84,6 +86,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 			/*	System.out.println("loader watting "+TestRepository.list.size());*/
 			}
 		}
+		/*
 		executor.shutdown();
 		while(!executor.isTerminated()){
 			try {
@@ -91,7 +94,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 			} catch(InterruptedException e){
 				e.printStackTrace();
 			}
-		}  
+		}  */
 		Repository.onlineQueryThreadRunning[serviceId]=false; 
 	}
 
