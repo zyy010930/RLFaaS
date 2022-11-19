@@ -68,7 +68,7 @@ public class LoadGenController {
 						System.out.println("start thread");
 						ExecutorService executor = Executors.newCachedThreadPool();
 						//ExecutorService executor = Executors.newFixedThreadPool(2);
-						FunctionThread thread = new FunctionThread(15);
+						FunctionThread thread = new FunctionThread(16);
 						FunctionThread thread2 = new FunctionThread(10);
 						System.out.println("thread1");
 						executor.execute(thread);
