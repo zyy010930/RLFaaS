@@ -181,9 +181,9 @@ public class HttpClientPool {
 			strEntity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,"application/json"));
 			//设置参数到请求对象中
 			RequestConfig requestConfig = RequestConfig.custom()
-					.setConnectTimeout(5000)//一、连接超时：connectionTimeout-->指的是连接一个url的连接等待时间  
-					.setSocketTimeout(5000)// 二、读取数据超时：SocketTimeout-->指的是连接上一个url，获取response的返回等待时间  
-					.setConnectionRequestTimeout(5000)
+					.setConnectTimeout(10000)//一、连接超时：connectionTimeout-->指的是连接一个url的连接等待时间
+					.setSocketTimeout(10000)// 二、读取数据超时：SocketTimeout-->指的是连接上一个url，获取response的返回等待时间
+					.setConnectionRequestTimeout(10000)
 					.build();
 			post.setEntity(strEntity);
 			post.setConfig(requestConfig);
