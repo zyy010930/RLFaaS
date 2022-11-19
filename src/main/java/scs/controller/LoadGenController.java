@@ -66,7 +66,8 @@ public class LoadGenController {
 					if(serviceId<Repository.NUMBER_LC && serviceId>=0) {
 						//RecordDriver.getInstance().execute(serviceId);
 						System.out.println("start thread");
-						ExecutorService executor = Executors.newCachedThreadPool();
+						//ExecutorService executor = Executors.newCachedThreadPool();
+						ExecutorService executor = Executors.newFixedThreadPool(2);
 						FunctionThread thread = new FunctionThread(15);
 						FunctionThread thread2 = new FunctionThread(10);
 						System.out.println("thread1");
