@@ -66,14 +66,15 @@ public class LoadGenController {
 					if(serviceId<Repository.NUMBER_LC && serviceId>=0) {
 						//RecordDriver.getInstance().execute(serviceId);
 						System.out.println("start thread");
-						//ExecutorService executor = Executors.newCachedThreadPool();
-						ExecutorService executor = Executors.newFixedThreadPool(2);
+						ExecutorService executor = Executors.newCachedThreadPool();
+						//ExecutorService executor = Executors.newFixedThreadPool(2);
 						FunctionThread thread = new FunctionThread(15);
 						FunctionThread thread2 = new FunctionThread(10);
 						System.out.println("thread1");
 						executor.execute(thread);
 						System.out.println("thread2");
 						executor.execute(thread2);
+						executor.shutdown();
 						//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 					} else {
 						response.getWriter().write("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);
