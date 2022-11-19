@@ -176,6 +176,7 @@ public class HttpClientPool {
 		long begin=System.currentTimeMillis();
 		//采用post方式请求url
 		HttpPost post = new HttpPost(url);
+		System.out.println("post url");
 		try {
 			StringEntity strEntity = new StringEntity(jsonObjectStr, "utf-8");
 			strEntity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,"application/json"));
@@ -188,6 +189,7 @@ public class HttpClientPool {
 			post.setEntity(strEntity);
 			post.setConfig(requestConfig);
 			CloseableHttpResponse response=httpClient.execute(post);
+			System.out.println("execute post");
 			if(response.getStatusLine().getStatusCode()==200){
 				costTime=(int)(System.currentTimeMillis()-begin);
 			}
