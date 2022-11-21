@@ -70,10 +70,18 @@ public class LoadGenController {
 						//ExecutorService executor = Executors.newFixedThreadPool(2);
 						FunctionThread thread = new FunctionThread(16);
 						FunctionThread thread2 = new FunctionThread(10);
-						System.out.println("thread1");
+						FunctionThread thread3 = new FunctionThread(29);
+						FunctionThread thread4 = new FunctionThread(30);
+						FunctionThread thread5 = new FunctionThread(31);
+						FunctionThread thread6 = new FunctionThread(32);
+						FunctionThread thread7 = new FunctionThread(28);
 						executor.execute(thread);
-						System.out.println("thread2");
 						executor.execute(thread2);
+						executor.execute(thread3);
+						executor.execute(thread4);
+						executor.execute(thread5);
+						executor.execute(thread6);
+						executor.execute(thread7);
 						executor.shutdown();
 						//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 					} else {

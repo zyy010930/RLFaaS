@@ -28,16 +28,8 @@ import scs.util.loadGen.driver.sdcbench.SdcbenchSolrDriver;
 import scs.util.loadGen.driver.sdcbench.SdcbenchTpcwDriver;
 import scs.util.loadGen.driver.sdcbench.SdcbenchYamNetDriver;
 import scs.util.loadGen.driver.inference.SsdTFServingDriver;
-import scs.util.loadGen.driver.serverless.CatdogAliyunFaasTFServingDriver;
-import scs.util.loadGen.driver.serverless.CatdogFaasTFServingDriver;
-import scs.util.loadGen.driver.serverless.LstmFaasTFServingDriver;
-import scs.util.loadGen.driver.serverless.MobileNetFaasTFServingDriver;
-import scs.util.loadGen.driver.serverless.ResNet50FaasTFServingDriver;
-import scs.util.loadGen.driver.serverless.SsdFaasTFServingDriver;
-import scs.util.loadGen.driver.serverless.Textcnn20FaasTFServingDriver;
-import scs.util.loadGen.driver.serverless.Textcnn69FaasTFServingDriver;
-import scs.util.loadGen.driver.serverless.YamNetFaasTFServingDriver;
-import scs.util.loadGen.driver.webservice.SocialNetworkDriver; 
+import scs.util.loadGen.driver.serverless.*;
+import scs.util.loadGen.driver.webservice.SocialNetworkDriver;
 import scs.util.loadGen.driver.webservice.SolrSearchDriver;
 import scs.util.rmi.RmiService;
 
@@ -144,6 +136,12 @@ public class Repository{
 	public static String solrSearchParmStr="";
  	
 	public static String exampleURL="";
+
+	public static String HelloFaasBaseURL="";
+	public static String Md5FaasBaseURL="";
+	public static String CryptographyFaasBaseURL="";
+	public static String SortFaasBaseURL="";
+	public static String HashFaasBaseURL="";
 	/**
 	 * static code
 	 */
@@ -224,8 +222,12 @@ public class Repository{
 		// sdc web service
 		Repository.solrSearchBaseURL=prop.getProperty("solrSearchBaseURL").trim();
 		Repository.solrSearchParmStr=prop.getProperty("solrSearchParmStr").trim();
-		
-		
+
+		Repository.HelloFaasBaseURL=prop.getProperty("HelloFaasBaseURL").trim();
+		Repository.Md5FaasBaseURL=prop.getProperty("Md5FaasBaseURL").trim();
+		Repository.HashFaasBaseURL=prop.getProperty("HashFaasBaseURL").trim();
+		Repository.CryptographyFaasBaseURL=prop.getProperty("CryptographyFaasBaseURL").trim();
+		Repository.SortFaasBaseURL=prop.getProperty("SortFaasBaseURL").trim();
 		
 	}	
 	/**
@@ -417,21 +419,21 @@ public class Repository{
 		if(loaderIndex==27){
 			return new LoaderDriver("gSightSocialNetwork", SocialNetworkDriver.getInstance());
 		}
-//		if(loaderIndex==28){
-//			return new LoaderDriver("socialNetwork2", SocialNetworkDriver2.getInstance());
-//		}
-//		if(loaderIndex==29){
-//			return new LoaderDriver("socialNetwork3", SocialNetworkDriver3.getInstance());
-//		}
-//		if(loaderIndex==30){
-//			return new LoaderDriver("socialNetwork4", SocialNetworkDriver4.getInstance());
-//		}
-//		if(loaderIndex==31){
-//			return new LoaderDriver("socialNetwork5", SocialNetworkDriver5.getInstance());
-//		}
-//		if(loaderIndex==32){
-//			return new LoaderDriver("socialNetwork6", SocialNetworkDriver6.getInstance());
-//		}
+		if(loaderIndex==28){
+			return new LoaderDriver("hash", HashFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==29){
+			return new LoaderDriver("md5", Md5FaasServingDriver.getInstance());
+		}
+		if(loaderIndex==30){
+			return new LoaderDriver("hello", HelloFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==31){
+			return new LoaderDriver("sort", SortFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==32){
+			return new LoaderDriver("cryptography", CryptographyFaasServingDriver.getInstance());
+		}
 		return null;
 	} 
 
