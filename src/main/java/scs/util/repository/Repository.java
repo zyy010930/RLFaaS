@@ -50,7 +50,7 @@ public class Repository{
 		return repository;
 	}  
 
-	public final static int NUMBER_LC=28; //number of LC services 
+	public final static int NUMBER_LC=33; //number of LC services
 	
 	public static int windowSize=60; //window size of latency recorder
 	public static int recordInterval=1000; //record interval of latency recorder
