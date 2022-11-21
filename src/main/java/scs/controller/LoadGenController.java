@@ -112,7 +112,7 @@ public class LoadGenController {
 							{
 								int start = entry.getKey() - t;
 								t = entry.getKey();
-								System.out.println("sleep:" + start);
+								System.out.println("function:" + entry.getValue() + "sleep:" + start);
 								Thread.sleep(start*1000);
 								Repository.loaderMap.get(entry.getValue()).getAbstractJobDriver().executeJob(entry.getValue());
 							}
