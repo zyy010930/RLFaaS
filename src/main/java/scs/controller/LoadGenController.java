@@ -88,6 +88,7 @@ public class LoadGenController {
 					Repository.windowOnlineDataList.get(serviceId).clear();//clear windowOnlineDataList
 					if(true) {
 						//RecordDriver.getInstance().execute(serviceId);
+						System.out.println("build request!!!!!!!");
 						int time = 0;
 						for(int i=1;i<=10;i++)
 						{
