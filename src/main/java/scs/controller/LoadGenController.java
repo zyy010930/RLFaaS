@@ -46,13 +46,13 @@ public class LoadGenController {
 	private static Map<Integer,Double> mp2;
 	{
 		mp2 = new HashMap<Integer, Double>();
-		mp2.put(1,0.3);
-		mp2.put(2,0.4);
-		mp2.put(3,0.8);
-		mp2.put(4,0.9);
-		mp2.put(5,0.95);
-		mp2.put(6,1.0);
-		mp2.put(7,0.75);
+		mp2.put(1,0.7);
+		mp2.put(2,0.6);
+		mp2.put(3,0.2);
+		mp2.put(4,0.1);
+		mp2.put(5,0.05);
+		mp2.put(6,0.05);
+		mp2.put(7,0.25);
 	}
 	private ArrayList<Map<Integer,Integer>> functionList = new ArrayList<Map<Integer, Integer>>();
 	/**
