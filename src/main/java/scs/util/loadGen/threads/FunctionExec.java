@@ -4,6 +4,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import scs.util.repository.Repository;
 import scs.util.tools.HttpClientPool;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
@@ -35,8 +37,10 @@ public class FunctionExec {
                 }
             } else {
                 //int time=new Random().nextInt(100);
-                System.out.println("exec now");
+                Date date = new Date();
+                SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
                 int time= HttpClientPool.postResponseTime(httpclient, url, jsonObjectStr);
+                System.out.println("time" + dateFormat.format(date) + "response:" + time);
                 synchronized (Repository.onlineDataList.get(serviceId)) {
                     Repository.onlineDataList.get(serviceId).add(time);
                 }
