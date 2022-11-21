@@ -62,16 +62,13 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 					}
 				} else {
 					int sleepUnit=1000;
-					for (int i=0;i<3;i++){
-						//executor.execute(new LoadExecThreadRandom(httpClient,queryItemsStr,begin,serviceId,jsonParmStr,sleepUnit*i,"POST"));
-						try {
-							Thread.sleep(500);
-							System.out.println("res-req");
-							FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit * i, "POST");
-							functionExec.exec();
-						}catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+					try {
+						Thread.sleep(500);
+						System.out.println("res-req");
+						FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
+						functionExec.exec();
+					}catch (InterruptedException e) {
+						e.printStackTrace();
 					}
 				}
 				//Repository.sendFlag[serviceId]=false;

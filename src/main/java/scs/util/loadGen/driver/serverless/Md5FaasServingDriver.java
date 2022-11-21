@@ -55,15 +55,13 @@ public class Md5FaasServingDriver extends AbstractJobDriver{
                     }
                 } else {
                     int sleepUnit=1000;
-                    for (int i=0;i<3;i++){
-                        try {
-                            Thread.sleep(500);
-                            System.out.println("md5-req");
-                            FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit * i, "POST");
-                            functionExec.exec();
-                        }catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                    try {
+                        Thread.sleep(500);
+                        System.out.println("md5-req");
+                        FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
+                        functionExec.exec();
+                    }catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }else{

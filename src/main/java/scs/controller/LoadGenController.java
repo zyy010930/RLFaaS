@@ -1,7 +1,7 @@
 package scs.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Time;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -32,6 +32,29 @@ import scs.util.repository.Repository;
 public class LoadGenController {
 	private DataFormats dataFormat=DataFormats.getInstance();
 	private Repository instance=Repository.getInstance();
+	private static Map<Integer,Integer> mp;
+	{
+		mp = new HashMap<Integer, Integer>();
+		mp.put(1,10);
+		mp.put(2,16);
+		mp.put(3,28);
+		mp.put(4,29);
+		mp.put(5,30);
+		mp.put(6,31);
+		mp.put(7,32);
+	}
+	private static Map<Integer,Double> mp2;
+	{
+		mp2 = new HashMap<Integer, Double>();
+		mp2.put(1,0.3);
+		mp2.put(2,0.4);
+		mp2.put(3,0.8);
+		mp2.put(4,0.9);
+		mp2.put(5,0.95);
+		mp2.put(6,1.0);
+		mp2.put(7,0.75);
+	}
+	private ArrayList<Map<Integer,Integer>> functionList;
 	/**
 	 * Start the load generator for latency-critical services
 	 * @param intensity The concurrent request number per second (RPS)
@@ -63,26 +86,53 @@ public class LoadGenController {
 					Repository.totalRequestCount[serviceId]=0;//init totalRequestCount
 					Repository.onlineDataList.get(serviceId).clear();//clear onlineDataList
 					Repository.windowOnlineDataList.get(serviceId).clear();//clear windowOnlineDataList
-					if(serviceId<Repository.NUMBER_LC && serviceId>=0) {
+					if(true) {
 						//RecordDriver.getInstance().execute(serviceId);
+						int time = 0;
+						for(int i=1;i<=10;i++)
+						{
+							Map<Integer,Integer> funcMap = new TreeMap<Integer, Integer>();
+							for(int j=1;j<=7;j++)
+							{
+								if(Math.random()>=mp2.get(j)) {
+									int functionTime = (int) (Math.random() * 60) + time;
+									funcMap.put(functionTime,j);
+									//functionList.add(new HashMap<Integer, Integer>(j, functionTime));
+								}
+								functionList.add(funcMap);
+							}
+							time+=60;
+						}
 						System.out.println("start thread");
-						ExecutorService executor = Executors.newCachedThreadPool();
+						int startTime = 0;
+						for(int i=0;i<functionList.size();i++)
+						{
+							int t = 0;
+							for(Map.Entry<Integer, Integer> entry : functionList.get(i).entrySet())
+							{
+								int start = entry.getKey() - t;
+								t = entry.getKey();
+								Thread.sleep(start*1000);
+								Repository.loaderMap.get(entry.getValue()).getAbstractJobDriver().executeJob(entry.getValue());
+							}
+						}
+						//ExecutorService executor = Executors.newCachedThreadPool();
 						//ExecutorService executor = Executors.newFixedThreadPool(2);
-						FunctionThread thread = new FunctionThread(16);
-						FunctionThread thread2 = new FunctionThread(10);
-						FunctionThread thread3 = new FunctionThread(29);
-						FunctionThread thread4 = new FunctionThread(30);
-						FunctionThread thread5 = new FunctionThread(31);
-						FunctionThread thread6 = new FunctionThread(32);
-						FunctionThread thread7 = new FunctionThread(28);
-						executor.execute(thread);
-						executor.execute(thread2);
-						executor.execute(thread3);
-						executor.execute(thread4);
-						executor.execute(thread5);
-						executor.execute(thread6);
-						executor.execute(thread7);
-						executor.shutdown();
+//						FunctionThread thread = new FunctionThread(16);
+//						FunctionThread thread2 = new FunctionThread(10);
+//						FunctionThread thread3 = new FunctionThread(29);
+//						FunctionThread thread4 = new FunctionThread(30);
+//						FunctionThread thread5 = new FunctionThread(31);
+//						FunctionThread thread6 = new FunctionThread(32);
+//						FunctionThread thread7 = new FunctionThread(28);
+//						executor.execute(thread);
+//						executor.execute(thread2);
+//						executor.execute(thread3);
+//						executor.execute(thread4);
+//						executor.execute(thread5);
+//						executor.execute(thread6);
+//						executor.execute(thread7);
+//						executor.shutdown();
 						//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 					} else {
 						response.getWriter().write("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);
