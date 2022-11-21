@@ -97,12 +97,12 @@ public class LoadGenController {
 							{
 								if(Math.random()>=mp2.get(j)) {
 									int functionTime = (int) (Math.random() * 60) + time;
-									funcMap.put(functionTime,j);
+									funcMap.put(functionTime, j);
 									System.out.println(functionTime);
 									//functionList.add(new HashMap<Integer, Integer>(j, functionTime));
 								}
-								functionList.add(funcMap);
 							}
+							functionList.add(funcMap);
 							time+=60;
 						}
 						System.out.println("start thread");
