@@ -97,7 +97,7 @@ public class LoadGenController {
 							{
 								if(Math.random()>=mp2.get(j)) {
 									int functionTime = (int) (Math.random() * 60) + time;
-									funcMap.put(functionTime, j);
+									funcMap.put(functionTime, mp.get(j));
 									//functionList.add(new HashMap<Integer, Integer>(j, functionTime));
 								}
 							}
