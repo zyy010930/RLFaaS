@@ -40,7 +40,7 @@ public class FunctionExec {
                 Date date = new Date();
                 SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
                 int time= HttpClientPool.postResponseTime(httpclient, url, jsonObjectStr);
-                System.out.println("time" + dateFormat.format(date) + "response:" + time);
+                System.out.println("serviceId:" + serviceId + " time:" + dateFormat.format(date) + " response:" + time);
                 synchronized (Repository.onlineDataList.get(serviceId)) {
                     Repository.onlineDataList.get(serviceId).add(time);
                 }
