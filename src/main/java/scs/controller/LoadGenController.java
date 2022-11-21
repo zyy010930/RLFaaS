@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import net.sf.json.JSONArray;
 import scs.pojo.PageQueryData;
 import scs.pojo.QueryData;
-import scs.util.format.DataFormats; 
+import scs.util.format.DataFormats;
 import scs.util.loadGen.recordDriver.RecordDriver;
-import scs.util.repository.Repository; 
+import scs.util.repository.Repository;
 /**
  * Load generator controller class, it includes interfaces as follows:
  * 1.Control the open/close of load generator
@@ -54,7 +54,7 @@ public class LoadGenController {
 		mp2.put(6,1.0);
 		mp2.put(7,0.75);
 	}
-	private ArrayList<Map<Integer,Integer>> functionList;
+	private ArrayList<Map<Integer,Integer>> functionList = new ArrayList<Map<Integer, Integer>>();
 	/**
 	 * Start the load generator for latency-critical services
 	 * @param intensity The concurrent request number per second (RPS)
@@ -98,11 +98,9 @@ public class LoadGenController {
 								if(Math.random()>=mp2.get(j)) {
 									int functionTime = (int) (Math.random() * 60) + time;
 									funcMap.put(functionTime, j);
-									System.out.println(functionTime);
 									//functionList.add(new HashMap<Integer, Integer>(j, functionTime));
 								}
 							}
-							System.out.println(funcMap.size());
 							functionList.add(funcMap);
 							time+=60;
 						}
