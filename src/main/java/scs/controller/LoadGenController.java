@@ -102,6 +102,7 @@ public class LoadGenController {
 									//functionList.add(new HashMap<Integer, Integer>(j, functionTime));
 								}
 							}
+							System.out.println(funcMap.size());
 							functionList.add(funcMap);
 							time+=60;
 						}
