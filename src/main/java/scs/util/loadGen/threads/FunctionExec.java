@@ -43,7 +43,7 @@ public class FunctionExec {
                 Date date = new Date();
                 SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
                 int time= HttpClientPool.postResponseTime(httpclient, url, jsonObjectStr);
-
+/*
                 InputStream in = null;
                 try {
                     Process pro = Runtime.getRuntime().exec(new String[]{"faas-cli remove -f /home/zyy/INFless/developer/servingFunctions/mobilenet.yml"});
@@ -54,7 +54,7 @@ public class FunctionExec {
                     System.out.println("INFO:"+result);
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 System.out.println("serviceId:" + serviceId + " time:" + dateFormat.format(date) + " response:" + time);
                 synchronized (Repository.onlineDataList.get(serviceId)) {
