@@ -3,10 +3,12 @@ package scs.util.loadGen.threads;
 import org.apache.http.impl.client.CloseableHttpClient;
 import scs.util.repository.Repository;
 import scs.util.tools.HttpClientPool;
+import scs.util.tools.SSHTool;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -55,6 +57,8 @@ public class FunctionExec {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }*/
+                SSHTool tool = new SSHTool("192.168.3.154", "root", "wnlof309b507", StandardCharsets.UTF_8);
+                System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50.sh"));
 
                 System.out.println("serviceId:" + serviceId + " time:" + dateFormat.format(date) + " response:" + time);
                 synchronized (Repository.onlineDataList.get(serviceId)) {
