@@ -30,24 +30,7 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 	 */
 	private static ResNet50FaasTFServingDriver driver=null;
 	private SSHTool tool = new SSHTool("192.168.3.154", "root", "wnlof309b507", StandardCharsets.UTF_8);
-	// 创建定时器
-	private Timer timer = new Timer();
-	// 创建定时器任务
-	private TimerTask timerTask = new TimerTask() {
-		@Override
-		public void run() {
-			Date now = new Date();
-			if(FunctionList.timeMap.get(10).compareTo(now) < 0)
-			{
-				try {
-					FunctionList.funcMap.put(10,false);
-					System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50.sh"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	};
+
 
 	public ResNet50FaasTFServingDriver(){initVariables();}
 	public synchronized static ResNet50FaasTFServingDriver getInstance() {
@@ -99,10 +82,29 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 							System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50-create.sh"));
 						}
 						functionExec.exec();
+						
 						Date now = new Date();
-						Date deleteTime = new Date(now.getTime() + 120000);
+						Date deleteTime = new Date(now.getTime() + 60000);
 						FunctionList.timeMap.put(10,deleteTime);
-						timer.schedule(timerTask, 120000); //2分钟后判断函数是否删除
+						// 创建定时器
+						Timer timer = new Timer();
+						// 创建定时器任务
+						TimerTask timerTask = new TimerTask() {
+							@Override
+							public void run() {
+								Date now = new Date();
+								if(FunctionList.timeMap.get(10).compareTo(now) < 0)
+								{
+									try {
+										FunctionList.funcMap.put(10,false);
+										System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50.sh"));
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						};
+						timer.schedule(timerTask, 60000); //2分钟后判断函数是否删除
 
 //						System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50.sh"));
 					}catch (InterruptedException | IOException e) {
