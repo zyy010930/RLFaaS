@@ -82,7 +82,7 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 							System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50-create.sh"));
 						}
 						functionExec.exec();
-						
+
 						Date now = new Date();
 						Date deleteTime = new Date(now.getTime() + 60000);
 						FunctionList.timeMap.put(10,deleteTime);
