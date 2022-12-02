@@ -71,6 +71,7 @@ public class SortFaasServingDriver extends AbstractJobDriver{
 
                         if(!FunctionList.funcMap.get(31)) {
                             System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort-create.sh"));
+                            FunctionList.funcMap.put(31,true);
                         }
                         functionExec.exec();
 

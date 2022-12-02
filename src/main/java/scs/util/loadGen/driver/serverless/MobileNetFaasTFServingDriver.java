@@ -80,6 +80,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 
 						if(!FunctionList.funcMap.get(16)) {
 							System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/mobilenet-create.sh"));
+							FunctionList.funcMap.put(16,true);
 						}
 						functionExec.exec();
 

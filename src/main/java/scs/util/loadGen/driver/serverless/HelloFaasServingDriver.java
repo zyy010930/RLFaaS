@@ -71,6 +71,7 @@ public class HelloFaasServingDriver extends AbstractJobDriver{
 
                         if(!FunctionList.funcMap.get(30)) {
                             System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello-create.sh"));
+                            FunctionList.funcMap.put(30,true);
                         }
                         functionExec.exec();
 

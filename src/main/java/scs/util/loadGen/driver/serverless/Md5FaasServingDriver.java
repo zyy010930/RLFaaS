@@ -71,6 +71,7 @@ public class Md5FaasServingDriver extends AbstractJobDriver{
 
                         if(!FunctionList.funcMap.get(29)) {
                             System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/Md5-create.sh"));
+                            FunctionList.funcMap.put(29,true);
                         }
                         functionExec.exec();
 

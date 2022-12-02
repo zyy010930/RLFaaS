@@ -71,6 +71,7 @@ public class HashFaasServingDriver extends AbstractJobDriver{
 
                         if(!FunctionList.funcMap.get(28)) {
                             System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hash-create.sh"));
+                            FunctionList.funcMap.put(28,true);
                         }
                         functionExec.exec();
 
