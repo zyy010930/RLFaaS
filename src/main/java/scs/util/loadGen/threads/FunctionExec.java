@@ -44,6 +44,7 @@ public class FunctionExec {
                 //int time=new Random().nextInt(100);
                 Date date = new Date();
                 SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
+
                 int time= HttpClientPool.postResponseTime(httpclient, url, jsonObjectStr);
 /*
                 InputStream in = null;
@@ -57,8 +58,8 @@ public class FunctionExec {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }*/
-                SSHTool tool = new SSHTool("192.168.3.154", "root", "wnlof309b507", StandardCharsets.UTF_8);
-                System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50.sh"));
+                //SSHTool tool = new SSHTool("192.168.3.154", "root", "wnlof309b507", StandardCharsets.UTF_8);
+
 
                 System.out.println("serviceId:" + serviceId + " time:" + dateFormat.format(date) + " response:" + time);
                 synchronized (Repository.onlineDataList.get(serviceId)) {
