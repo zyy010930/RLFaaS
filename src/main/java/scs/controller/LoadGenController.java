@@ -19,6 +19,9 @@ import scs.pojo.QueryData;
 import scs.util.format.DataFormats;
 import scs.util.loadGen.recordDriver.RecordDriver;
 import scs.util.repository.Repository;
+import scs.util.tools.CSVReader;
+import scs.util.tools.FunctionRequest;
+
 /**
  * Load generator controller class, it includes interfaces as follows:
  * 1.Control the open/close of load generator
@@ -88,8 +91,26 @@ public class LoadGenController {
 					Repository.windowOnlineDataList.get(serviceId).clear();//clear windowOnlineDataList
 					if(true) {
 						//RecordDriver.getInstance().execute(serviceId);
+						CSVReader reader = new CSVReader();
+						List<Map.Entry<String, ArrayList<Integer>>> list = reader.getAzure();
+						FunctionRequest functionRequest = new FunctionRequest();
 						System.out.println("build request!!!!!!!");
-						int time = 0;
+						Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMap(0,list);
+						Map<Integer,ArrayList<Double>> funcMap = new TreeMap<>();
+						for(int i = 1;i <= 7;i++)
+						{
+							ArrayList<Double> timeList = new ArrayList<>();
+							for(int j = 1;j <= InvokeMap.get(i).size();j++)
+							{
+								if(InvokeMap.get(i).get(j) != 0)
+								{
+									Double functionTime = 1.0/InvokeMap.get(i).get(j) + j - 1;
+									timeList.add(functionTime);
+								}
+							}
+							funcMap.put(mp.get(i),timeList);
+						}
+						/*
 						for(int i=1;i<=10;i++)
 						{
 							Map<Integer,Integer> funcMap = new TreeMap<Integer, Integer>();
@@ -103,37 +124,36 @@ public class LoadGenController {
 							}
 							functionList.add(funcMap);
 							time+=60;
-						}
+						}*/
 						System.out.println("start thread");
-						for(int i=0;i<functionList.size();i++)
-						{
-							int t = 0;
-							for(Map.Entry<Integer, Integer> entry : functionList.get(i).entrySet())
-							{
-								int start = entry.getKey() - t;
-								t = entry.getKey();
-								System.out.println("function:" + entry.getValue() + "sleep:" + start);
-								Thread.sleep(start*1000);
-								Repository.loaderMap.get(entry.getValue()).getAbstractJobDriver().executeJob(entry.getValue());
-							}
-						}
-						//ExecutorService executor = Executors.newCachedThreadPool();
-						//ExecutorService executor = Executors.newFixedThreadPool(2);
-//						FunctionThread thread = new FunctionThread(16);
-//						FunctionThread thread2 = new FunctionThread(10);
-//						FunctionThread thread3 = new FunctionThread(29);
-//						FunctionThread thread4 = new FunctionThread(30);
-//						FunctionThread thread5 = new FunctionThread(31);
-//						FunctionThread thread6 = new FunctionThread(32);
-//						FunctionThread thread7 = new FunctionThread(28);
-//						executor.execute(thread);
-//						executor.execute(thread2);
-//						executor.execute(thread3);
-//						executor.execute(thread4);
-//						executor.execute(thread5);
-//						executor.execute(thread6);
-//						executor.execute(thread7);
-//						executor.shutdown();
+//						for(int i=0;i<functionList.size();i++)
+//						{
+//							int t = 0;
+//							for(Map.Entry<Integer, Integer> entry : functionList.get(i).entrySet())
+//							{
+//								int start = entry.getKey() - t;
+//								t = entry.getKey();
+//								System.out.println("function:" + entry.getValue() + "sleep:" + start);
+//								Thread.sleep(start*1000);
+//								Repository.loaderMap.get(entry.getValue()).getAbstractJobDriver().executeJob(entry.getValue());
+//							}
+//						}
+						ExecutorService executor = Executors.newFixedThreadPool(7);
+						FunctionThread thread = new FunctionThread(16,funcMap.get(16));
+						FunctionThread thread2 = new FunctionThread(10,funcMap.get(10));
+						FunctionThread thread3 = new FunctionThread(29,funcMap.get(29));
+						FunctionThread thread4 = new FunctionThread(30,funcMap.get(30));
+						FunctionThread thread5 = new FunctionThread(31,funcMap.get(31));
+						FunctionThread thread6 = new FunctionThread(32,funcMap.get(32));
+						FunctionThread thread7 = new FunctionThread(28,funcMap.get(28));
+						executor.execute(thread);
+						executor.execute(thread2);
+						executor.execute(thread3);
+						executor.execute(thread4);
+						executor.execute(thread5);
+						executor.execute(thread6);
+						executor.execute(thread7);
+						executor.shutdown();
 						//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 					} else {
 						response.getWriter().write("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);
@@ -301,16 +321,34 @@ public class LoadGenController {
 
 	static class FunctionThread extends Thread{
 		private int serviceId;
+		private ArrayList<Double> list;
 
 		public FunctionThread(){}
 
-		public FunctionThread(int id)
+		public FunctionThread(int id, ArrayList<Double> list)
 		{
-			serviceId = id;
+			this.serviceId = id;
+			this.list = list;
 		}
 
 		public void run(){
-			Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+			//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+			for(int i=0;i<list.size();i++)
+			{
+				double t = 0.0;
+				for(Double time : list)
+				{
+					double start = time - t;
+					t = time;
+					System.out.println("function:" + serviceId + "sleep:" + start);
+					try {
+						Thread.sleep((long)(start*1000));
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+				}
+			}
 		}
 	}
 
