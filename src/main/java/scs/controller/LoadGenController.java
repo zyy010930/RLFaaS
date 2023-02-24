@@ -95,7 +95,8 @@ public class LoadGenController {
 						List<Map.Entry<String, ArrayList<Integer>>> list = reader.getAzure();
 						FunctionRequest functionRequest = new FunctionRequest();
 						System.out.println("build request!!!!!!!");
-						Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMap(0,list);
+						Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMap(0,list); //一次取出7组调用记录
+						System.out.println("Invoke Map Build------");
 						Map<Integer,ArrayList<Double>> funcMap = new TreeMap<>();
 						for(int i = 1;i <= 7;i++)
 						{
