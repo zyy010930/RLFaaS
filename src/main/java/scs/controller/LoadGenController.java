@@ -97,15 +97,15 @@ public class LoadGenController {
 						System.out.println("build request!!!!!!!");
 						Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMap(0,list); //一次取出7组调用记录
 						System.out.println("Invoke Map Build------");
-						Map<Integer,ArrayList<Double>> funcMap = new TreeMap<>();
+						Map<Integer,ArrayList<Integer>> funcMap = new TreeMap<>();
 						for(int i = 1;i <= 7;i++)
 						{
-							ArrayList<Double> timeList = new ArrayList<>();
+							ArrayList<Integer> timeList = new ArrayList<>();
 							for(int j = 1;j <= InvokeMap.get(i).size();j++)
 							{
 								if(InvokeMap.get(i).get(j) != 0)
 								{
-									Double functionTime = 1.0/InvokeMap.get(i).get(j) + j - 1;
+									Integer functionTime = 1;
 									timeList.add(functionTime);
 								}
 							}
@@ -322,11 +322,11 @@ public class LoadGenController {
 
 	static class FunctionThread extends Thread{
 		private int serviceId;
-		private ArrayList<Double> list;
+		private ArrayList<Integer> list;
 
 		public FunctionThread(){}
 
-		public FunctionThread(int id, ArrayList<Double> list)
+		public FunctionThread(int id, ArrayList<Integer> list)
 		{
 			this.serviceId = id;
 			this.list = list;
@@ -336,14 +336,14 @@ public class LoadGenController {
 			//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 			for(int i=0;i<list.size();i++)
 			{
-				double t = 0.0;
-				for(Double time : list)
+				int t = 0;
+				for(Integer time : list)
 				{
-					double start = time - t;
+					int start = time - t;
 					t = time;
 					System.out.println("function:" + serviceId + "sleep:" + start);
 					try {
-						Thread.sleep((long)(start*1000));
+						Thread.sleep(start*1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
