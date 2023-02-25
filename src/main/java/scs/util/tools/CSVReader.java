@@ -9,7 +9,7 @@ public class CSVReader {
  
     public List<Map.Entry<String, ArrayList<Integer>>> getAzure() {
 
-        String csvFile = "C:/Users/86180/Desktop/Azure/invocations_per_function_md.anon.d01.csv";
+        String csvFile = "/home/dmy/azureFunction/invocations_per_function_md.anon.d01.csv";
         String line = "";
         String cvsSplitBy = ",";
         Map<String,ArrayList<Integer>> InvokeMap = new HashMap<>();
