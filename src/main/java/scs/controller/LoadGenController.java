@@ -336,12 +336,11 @@ public class LoadGenController {
 
 		public void run(){
 			//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
-			for(Integer time : list)
+			for(Integer time : this.list)
 			{
-				int start = time;
-				System.out.println("function:" + serviceId + "sleep:" + start);
+				System.out.println("function:" + serviceId + "sleep:" + time);
 				try {
-					Thread.sleep(start*60000);
+					Thread.sleep(time*60000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
