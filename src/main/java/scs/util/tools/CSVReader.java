@@ -32,13 +32,14 @@ public class CSVReader {
 
             }
             List<Map.Entry<String, ArrayList<Integer>>> entryList2 = new ArrayList<>(InvokeMap.entrySet());
+            /*
             Collections.sort(entryList2, new Comparator<Map.Entry<String, ArrayList<Integer>>>() {
                 @Override
                 public int compare(Map.Entry<String, ArrayList<Integer>> me1, Map.Entry<String, ArrayList<Integer>> me2) {
                     return Integer.valueOf(me1.getValue().size()).compareTo(me2.getValue().size()); // 升序排序
                     //return me2.getValue().compareTo(me1.getValue()); // 降序排序
                 }
-            });
+            });*/
             return entryList2;
 
         } catch (IOException e) {
