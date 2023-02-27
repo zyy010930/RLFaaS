@@ -65,7 +65,6 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                 } else {
                     int sleepUnit=1000;
                     try {
-                        Thread.sleep(500);
                         System.out.println("sort-req");
                         FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
@@ -74,7 +73,7 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                             FunctionList.funcMap.put(31,true);
                         }
                         functionExec.exec();
-
+/*
                         Date now = new Date();
                         Date deleteTime = new Date(now.getTime() + 60000);
                         FunctionList.timeMap.put(31,deleteTime);
@@ -96,8 +95,8 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                                 }
                             }
                         };
-                        timer.schedule(timerTask, 60000); //2分钟后判断函数是否删除
-                    }catch (InterruptedException | IOException e) {
+                        timer.schedule(timerTask, 60000); //2分钟后判断函数是否删除*/
+                    }catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
