@@ -342,7 +342,7 @@ public class LoadGenController {
 					int start = time;
 					System.out.println("function:" + serviceId + "sleep:" + start);
 					try {
-						Thread.sleep(start*1000);
+						Thread.sleep(start*60000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
