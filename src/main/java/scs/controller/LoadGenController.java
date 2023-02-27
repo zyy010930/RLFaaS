@@ -107,7 +107,6 @@ public class LoadGenController {
 								if(InvokeMap.get(i).get(j) != 0)
 								{
 									Integer functionTime = j - lastIndex;
-									System.out.println(functionTime);
 									timeList.add(functionTime);
 									lastIndex = j;
 								}
