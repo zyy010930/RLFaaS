@@ -11,6 +11,7 @@ public class FunctionRequest {
         Map<Integer,ArrayList<Integer>> mp = new HashMap<>();
         for(int i = p * 7,j = 1;i<(((p+1)*7)%list.size());i++,j++)
         {
+            System.out.println(list.get(i).getKey());
             mp.put(j,list.get(i).getValue());
         }
         return mp;
