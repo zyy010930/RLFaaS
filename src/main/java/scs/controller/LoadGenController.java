@@ -102,12 +102,12 @@ public class LoadGenController {
 						{
 							ArrayList<Integer> timeList = new ArrayList<>();
 							int lastIndex = 0;
-							System.out.println("调用次数" + InvokeMap.get(i).size());
 							for(int j = 0;j < InvokeMap.get(i).size();j++)
 							{
 								if(InvokeMap.get(i).get(j) != 0)
 								{
 									Integer functionTime = j - lastIndex;
+									System.out.println(functionTime);
 									timeList.add(functionTime);
 									lastIndex = j;
 								}
