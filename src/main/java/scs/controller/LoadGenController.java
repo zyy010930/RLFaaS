@@ -101,12 +101,14 @@ public class LoadGenController {
 						for(int i = 1;i <= 7;i++)
 						{
 							ArrayList<Integer> timeList = new ArrayList<>();
+							int lastIndex = 0;
 							for(int j = 0;j < InvokeMap.get(i).size();j++)
 							{
 								if(InvokeMap.get(i).get(j) != 0)
 								{
-									Integer functionTime = 1;
+									Integer functionTime = j - lastIndex;
 									timeList.add(functionTime);
+									lastIndex = j;
 								}
 							}
 							funcMap.put(mp.get(i),timeList);
