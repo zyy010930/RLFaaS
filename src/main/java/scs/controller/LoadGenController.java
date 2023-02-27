@@ -101,7 +101,7 @@ public class LoadGenController {
 						for(int i = 1;i <= 7;i++)
 						{
 							ArrayList<Integer> timeList = new ArrayList<>();
-							for(int j = 1;j <= InvokeMap.get(i).size();j++)
+							for(int j = 0;j < InvokeMap.get(i).size();j++)
 							{
 								if(InvokeMap.get(i).get(j) != 0)
 								{
