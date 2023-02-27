@@ -332,30 +332,20 @@ public class LoadGenController {
 		{
 			this.serviceId = id;
 			this.list = list;
-			if(id == 31)
-			{
-				for(Integer i : list){
-					System.out.println(i);
-				}
-			}
 		}
 
 		public void run(){
 			//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
-			for(int i=0;i<list.size();i++)
+			for(Integer time : list)
 			{
-				int t = 0;
-				for(Integer time : list)
-				{
-					int start = time;
-					System.out.println("function:" + serviceId + "sleep:" + start);
-					try {
-						Thread.sleep(start*60000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+				int start = time;
+				System.out.println("function:" + serviceId + "sleep:" + start);
+				try {
+					Thread.sleep(start*60000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
+				Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 			}
 		}
 	}
