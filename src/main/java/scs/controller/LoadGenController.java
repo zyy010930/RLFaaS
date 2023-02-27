@@ -339,8 +339,7 @@ public class LoadGenController {
 				int t = 0;
 				for(Integer time : list)
 				{
-					int start = time - t;
-					t = time;
+					int start = time;
 					System.out.println("function:" + serviceId + "sleep:" + start);
 					try {
 						Thread.sleep(start*1000);
