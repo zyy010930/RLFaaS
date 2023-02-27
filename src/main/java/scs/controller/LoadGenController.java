@@ -336,6 +336,7 @@ public class LoadGenController {
 
 		public void run(){
 			//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+			System.out.println("new start");
 			for(Integer time : this.list)
 			{
 				System.out.println("function:" + serviceId + "sleep:" + time);
