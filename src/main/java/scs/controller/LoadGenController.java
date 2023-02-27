@@ -332,7 +332,12 @@ public class LoadGenController {
 		{
 			this.serviceId = id;
 			this.list = list;
-			System.out.println(this.list.size());
+			if(id == 31)
+			{
+				for(Integer i : list){
+					System.out.println(i);
+				}
+			}
 		}
 
 		public void run(){
