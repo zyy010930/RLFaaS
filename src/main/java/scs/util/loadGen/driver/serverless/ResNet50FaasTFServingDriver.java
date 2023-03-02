@@ -53,37 +53,17 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 	 * using countDown to send requests in open-loop
 	 */
 	public void executeJob(int serviceId) {
-		//ExecutorService executor = Executors.newCachedThreadPool();
-		System.out.println("resnet-50");
-		//Repository.onlineQueryThreadRunning[serviceId]=true;
-		//Repository.sendFlag[serviceId]=true;
-		//if(Repository.onlineDataFlag[serviceId]==true){
-		if(true){
+		int sleepUnit=1000;
+		try {
 			System.out.println("res-req");
-			//if(Repository.sendFlag[serviceId]==true){
-			if(true){
-				System.out.println("res-req");
-				//CountDownLatch begin=new CountDownLatch(1);
-				//if (Repository.realRequestIntensity[serviceId]==0){
-				if(false){
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				} else {
-					int sleepUnit=1000;
-					try {
-						Thread.sleep(500);
-						System.out.println("res-req");
-						FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
+			FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
-						if(!FunctionList.funcMap.get(10)) {
-							System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50-create.sh"));
-							FunctionList.funcMap.put(10,true);
-						}
-						functionExec.exec();
-
+			if(!FunctionList.funcMap.get(10)) {
+				System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50-create.sh"));
+				FunctionList.funcMap.put(10,true);
+			}
+			functionExec.exec();
+/*
 						Date now = new Date();
 						Date deleteTime = new Date(now.getTime() + 60000);
 						FunctionList.timeMap.put(10,deleteTime);
@@ -105,35 +85,12 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 								}
 							}
 						};
-						timer.schedule(timerTask, 60000); //2分钟后判断函数是否删除
+						timer.schedule(timerTask, 60000); //2分钟后判断函数是否删除*/
 
 //						System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50.sh"));
-					}catch (InterruptedException | IOException e) {
-						e.printStackTrace();
-					}
-				}
-				//Repository.sendFlag[serviceId]=false;
-				//Repository.totalRequestCount[serviceId]+=Repository.realRequestIntensity[serviceId];
-				//begin.countDown();
-			}else{
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			/*	System.out.println("loader watting "+TestRepository.list.size());*/
-			}
+		}catch (IOException e) {
+			e.printStackTrace();
 		}
-		/*
-		executor.shutdown();
-		while(!executor.isTerminated()){
-			try {
-				Thread.sleep(2000);
-			} catch(InterruptedException e){
-				e.printStackTrace();
-			}
-		}  */
-		//Repository.onlineQueryThreadRunning[serviceId]=false;
 	}
 
 }
