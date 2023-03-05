@@ -142,13 +142,13 @@ public class LoadGenController {
 //							}
 //						}
 						ExecutorService executor = Executors.newFixedThreadPool(7);
-						FunctionThread thread = new FunctionThread(16,funcMap.get(16));
-						FunctionThread thread2 = new FunctionThread(10,funcMap.get(10));
-						FunctionThread thread3 = new FunctionThread(29,funcMap.get(29));
-						FunctionThread thread4 = new FunctionThread(30,funcMap.get(30));
-						FunctionThread thread5 = new FunctionThread(31,funcMap.get(31));
-						FunctionThread thread6 = new FunctionThread(32,funcMap.get(32));
-						FunctionThread thread7 = new FunctionThread(28,funcMap.get(28));
+						FunctionThread thread = new FunctionThread(1,funcMap.get(1));
+						FunctionThread thread2 = new FunctionThread(2,funcMap.get(2));
+						FunctionThread thread3 = new FunctionThread(3,funcMap.get(3));
+						FunctionThread thread4 = new FunctionThread(4,funcMap.get(4));
+						FunctionThread thread5 = new FunctionThread(5,funcMap.get(5));
+						FunctionThread thread6 = new FunctionThread(6,funcMap.get(6));
+						FunctionThread thread7 = new FunctionThread(7,funcMap.get(7));
 						executor.execute(thread);
 						executor.execute(thread2);
 						executor.execute(thread3);
