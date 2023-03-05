@@ -63,9 +63,10 @@ public class SortFaasServingDriver extends AbstractJobDriver{
             if(start == false)
             {
                 oldTime = new Date().getTime();
+                System.out.println(oldTime + "ms");
                 start = true;
             }else {
-                Long now = new Date().getTime();
+                long now = new Date().getTime();
                 timeList.add(now - oldTime);
                 System.out.println((now-oldTime) + "ms");
                 oldTime = now;
