@@ -89,4 +89,9 @@ public class Md5FaasServingDriver extends AbstractJobDriver{
         }
     }
 
+    @Override
+    public void coldStartManage(int serviceId) {
+
+    }
+
 }

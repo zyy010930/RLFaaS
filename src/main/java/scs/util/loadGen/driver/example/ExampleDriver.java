@@ -72,4 +72,9 @@ public class ExampleDriver extends AbstractJobDriver{
 		}  
 		Repository.onlineQueryThreadRunning[serviceId]=false; 
 	}
+
+	@Override
+	public void coldStartManage(int serviceId) {
+
+	}
 }

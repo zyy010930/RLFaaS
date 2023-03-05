@@ -60,6 +60,16 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                 System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort-create.sh"));
                 FunctionList.funcMap.put(31,true);
             }
+            if(start == false)
+            {
+                oldTime = new Date().getTime();
+                start = true;
+            }else {
+                Long now = new Date().getTime();
+                timeList.add(now - oldTime);
+                System.out.println((now-oldTime) + "ms");
+                oldTime = now;
+            }
             functionExec.exec();
 /*
                         Date now = new Date();
@@ -87,6 +97,11 @@ public class SortFaasServingDriver extends AbstractJobDriver{
         }catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void coldStartManage(int serviceId) {
+
     }
 
 }

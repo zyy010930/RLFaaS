@@ -89,4 +89,9 @@ public class HelloFaasServingDriver extends AbstractJobDriver{
         }
     }
 
+    @Override
+    public void coldStartManage(int serviceId) {
+
+    }
+
 }

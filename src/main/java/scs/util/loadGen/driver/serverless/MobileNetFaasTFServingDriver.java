@@ -62,6 +62,16 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 				System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/mobilenet-create.sh"));
 				FunctionList.funcMap.put(16,true);
 			}
+			if(start == false)
+			{
+				oldTime = new Date().getTime();
+				start = true;
+			}else {
+				Long now = new Date().getTime();
+				timeList.add(now - oldTime);
+				System.out.println((now-oldTime) + "ms");
+				oldTime = now;
+			}
 			functionExec.exec();
 /*
 						Date now = new Date();
@@ -89,6 +99,11 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void coldStartManage(int serviceId) {
+
 	}
 
 	/**

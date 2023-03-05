@@ -89,4 +89,9 @@ public class CryptographyFaasServingDriver extends AbstractJobDriver{
         }
     }
 
+    @Override
+    public void coldStartManage(int serviceId) {
+
+    }
+
 }

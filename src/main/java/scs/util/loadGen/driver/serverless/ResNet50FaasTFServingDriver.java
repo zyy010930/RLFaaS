@@ -93,4 +93,9 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 		}
 	}
 
+	@Override
+	public void coldStartManage(int serviceId) {
+
+	}
+
 }
