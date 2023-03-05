@@ -38,13 +38,13 @@ public class LoadGenController {
 	private static Map<Integer,Integer> mp;
 	{
 		mp = new HashMap<Integer, Integer>();
-		mp.put(1,10);
-		mp.put(2,16);
-		mp.put(3,28);
-		mp.put(4,29);
-		mp.put(5,30);
-		mp.put(6,31);
-		mp.put(7,32);
+		mp.put(1,1);
+		mp.put(2,2);
+		mp.put(3,3);
+		mp.put(4,4);
+		mp.put(5,5);
+		mp.put(6,6);
+		mp.put(7,7);
 	}
 	private static Map<Integer,Double> mp2;
 	{

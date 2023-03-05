@@ -33,7 +33,7 @@ public class Repository{
 		return repository;
 	}  
 
-	public final static int NUMBER_LC=33; //number of LC services
+	public final static int NUMBER_LC=8; //number of LC services
 	
 	public static int windowSize=60; //window size of latency recorder
 	public static int recordInterval=1000; //record interval of latency recorder
@@ -313,25 +313,25 @@ public class Repository{
 		if(loaderIndex==0){
 			return new LoaderDriver("example", ExampleDriver.getInstance());
 		}
-		if(loaderIndex==10){
+		if(loaderIndex==1){
 			return new LoaderDriver("resnet-50", ResNet50FaasTFServingDriver.getInstance());
 		}
-		if(loaderIndex==16){
+		if(loaderIndex==2){
 			return new LoaderDriver("mobilenet", MobileNetFaasTFServingDriver.getInstance());
 		}
-		if(loaderIndex==28){
+		if(loaderIndex==3){
 			return new LoaderDriver("hash", HashFaasServingDriver.getInstance());
 		}
-		if(loaderIndex==29){
+		if(loaderIndex==4){
 			return new LoaderDriver("md5", Md5FaasServingDriver.getInstance());
 		}
-		if(loaderIndex==30){
+		if(loaderIndex==5){
 			return new LoaderDriver("hello", HelloFaasServingDriver.getInstance());
 		}
-		if(loaderIndex==31){
+		if(loaderIndex==6){
 			return new LoaderDriver("sort", SortFaasServingDriver.getInstance());
 		}
-		if(loaderIndex==32){
+		if(loaderIndex==7){
 			return new LoaderDriver("cryptography", CryptographyFaasServingDriver.getInstance());
 		}
 		return null;
