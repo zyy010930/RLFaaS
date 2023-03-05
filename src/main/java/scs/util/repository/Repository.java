@@ -13,24 +13,7 @@ import scs.pojo.LoaderDriver;
 import scs.pojo.QueryData;
 import scs.pojo.ThreeTuple;
 import scs.util.loadGen.driver.example.ExampleDriver;
-import scs.util.loadGen.driver.inference.CatdogTFServingDriver;
-import scs.util.loadGen.driver.inference.HalfTFServingDriver;
-import scs.util.loadGen.driver.inference.LstmTFServingDriver;
-import scs.util.loadGen.driver.inference.MnistTFServingDriver;
-import scs.util.loadGen.driver.inference.ResNetTFServingDriver;
-import scs.util.loadGen.driver.inference.MobileNetTFServingDriver;
-import scs.util.loadGen.driver.inference.Textcnn69TFServingDriver;
-import scs.util.loadGen.driver.inference.YamNetTFServingDriver;
-import scs.util.loadGen.driver.sdcbench.SdcbenchRedisDriver;
-import scs.util.loadGen.driver.sdcbench.SdcbenchResNet50Driver;
-import scs.util.loadGen.driver.sdcbench.SdcbenchSocialNetworkDriver;
-import scs.util.loadGen.driver.sdcbench.SdcbenchSolrDriver;
-import scs.util.loadGen.driver.sdcbench.SdcbenchTpcwDriver;
-import scs.util.loadGen.driver.sdcbench.SdcbenchYamNetDriver;
-import scs.util.loadGen.driver.inference.SsdTFServingDriver;
 import scs.util.loadGen.driver.serverless.*;
-import scs.util.loadGen.driver.webservice.SocialNetworkDriver;
-import scs.util.loadGen.driver.webservice.SolrSearchDriver;
 import scs.util.rmi.RmiService;
 
 /**
@@ -330,94 +313,11 @@ public class Repository{
 		if(loaderIndex==0){
 			return new LoaderDriver("example", ExampleDriver.getInstance());
 		}
-		if(loaderIndex==1){
-			return new LoaderDriver("resnet-nonFaas", ResNetTFServingDriver.getInstance());
-		}
-		if(loaderIndex==2){
-			return new LoaderDriver("mnist-nonFaas", MnistTFServingDriver.getInstance());
-		}
-		if(loaderIndex==3){
-			return new LoaderDriver("half-nonFaas", HalfTFServingDriver.getInstance());
-		}
-		if(loaderIndex==4){
-			return new LoaderDriver("catdog-nonFaas", CatdogTFServingDriver.getInstance());
-		}
-		if(loaderIndex==5){
-			return new LoaderDriver("lstm2365-nonFaas", LstmTFServingDriver.getInstance());
-		}
-		if(loaderIndex==6){
-			return new LoaderDriver("ssd-nonFaas", SsdTFServingDriver.getInstance());
-		}
-		if(loaderIndex==7){
-			return new LoaderDriver("yamnet-nonFaas", YamNetTFServingDriver.getInstance());
-		}
-		if(loaderIndex==8){
-			return new LoaderDriver("textcnn69-nonFaas", Textcnn69TFServingDriver.getInstance());
-		}
-		if(loaderIndex==9){
-			return new LoaderDriver("mobileNet-nonFaas", MobileNetTFServingDriver.getInstance());
-		}
-		
-		
 		if(loaderIndex==10){
 			return new LoaderDriver("resnet-50", ResNet50FaasTFServingDriver.getInstance());
 		}
-		if(loaderIndex==11){
-			return new LoaderDriver("textcnn-69", Textcnn69FaasTFServingDriver.getInstance());
-		}
-		if(loaderIndex==12){
-			return new LoaderDriver("textcnn-20", Textcnn20FaasTFServingDriver.getInstance());
-		}
-		if(loaderIndex==13){
-			return new LoaderDriver("lstm-maxclass-2365", LstmFaasTFServingDriver.getInstance());
-		}
-		if(loaderIndex==14){
-			return new LoaderDriver("ssd", SsdFaasTFServingDriver.getInstance());
-		}
-		if(loaderIndex==15){
-			return new LoaderDriver("yamnet", YamNetFaasTFServingDriver.getInstance());
-		}
 		if(loaderIndex==16){
 			return new LoaderDriver("mobilenet", MobileNetFaasTFServingDriver.getInstance());
-		}
-		if(loaderIndex==17){
-			return new LoaderDriver("catdog", CatdogFaasTFServingDriver.getInstance());
-		}
-		if(loaderIndex==18){
-			return new LoaderDriver("catdogAliyun-Faas", CatdogAliyunFaasTFServingDriver.getInstance());
-		}
-		if(loaderIndex==19){
-			return new LoaderDriver("socialNetwork", SocialNetworkDriver.getInstance());
-		}
-		if(loaderIndex==20){
-			return new LoaderDriver("solrSearch", SolrSearchDriver.getInstance());
-		}
-		/**
-		 * sdcbench
-		 */
-		if(loaderIndex==21){
-			return new LoaderDriver("sdcBenchSolr", SdcbenchSolrDriver.getInstance());
-		}
-		if(loaderIndex==22){
-			return new LoaderDriver("sdcBenchResNet", SdcbenchResNet50Driver.getInstance());
-		}
-		if(loaderIndex==23){
-			return new LoaderDriver("sdcBenchTpcw", SdcbenchTpcwDriver.getInstance());
-		}
-		if(loaderIndex==24){
-			return new LoaderDriver("sdcBenchYamnet", SdcbenchYamNetDriver.getInstance());
-		}
-		if(loaderIndex==25){
-			return new LoaderDriver("sdcBenchSocialNetwork", SdcbenchSocialNetworkDriver.getInstance());
-		}
-		if(loaderIndex==26){
-			return new LoaderDriver("sdcBenchRedis", SdcbenchRedisDriver.getInstance());
-		}
-		/**
-		 * Gsight OpenFaas function web service
-		 */
-		if(loaderIndex==27){
-			return new LoaderDriver("gSightSocialNetwork", SocialNetworkDriver.getInstance());
 		}
 		if(loaderIndex==28){
 			return new LoaderDriver("hash", HashFaasServingDriver.getInstance());
