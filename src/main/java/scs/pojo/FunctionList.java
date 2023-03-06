@@ -9,13 +9,13 @@ public class FunctionList {
     private ArrayList<Function> functionArrayList;
     public static Map<Integer,Boolean> funcMap = new HashMap<Integer,Boolean>();
     static {
-        funcMap.put(10,true);
-        funcMap.put(16,true);
-        funcMap.put(28,true);
-        funcMap.put(29,true);
-        funcMap.put(30,true);
-        funcMap.put(31,true);
-        funcMap.put(32,true);
+        funcMap.put(1,true);
+        funcMap.put(2,true);
+        funcMap.put(3,true);
+        funcMap.put(4,true);
+        funcMap.put(5,true);
+        funcMap.put(6,true);
+        funcMap.put(7,true);
     };
 
     public static Map<Integer, Date> timeMap = new HashMap<Integer,Date>();
