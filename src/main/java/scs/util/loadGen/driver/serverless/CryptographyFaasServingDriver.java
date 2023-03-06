@@ -56,9 +56,9 @@ public class CryptographyFaasServingDriver extends AbstractJobDriver{
             System.out.println("Cryptography-req");
             FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
-            if(!FunctionList.funcMap.get(32)) {
+            if(!FunctionList.funcMap.get(7)) {
                 System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography-create.sh"));
-                FunctionList.funcMap.put(32,true);
+                FunctionList.funcMap.put(7,true);
             }
             functionExec.exec();
 /*

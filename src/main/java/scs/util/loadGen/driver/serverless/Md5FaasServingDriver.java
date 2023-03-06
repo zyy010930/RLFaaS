@@ -56,9 +56,9 @@ public class Md5FaasServingDriver extends AbstractJobDriver{
             System.out.println("md5-req");
             FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
-            if(!FunctionList.funcMap.get(29)) {
+            if(!FunctionList.funcMap.get(4)) {
                 System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/Md5-create.sh"));
-                FunctionList.funcMap.put(29,true);
+                FunctionList.funcMap.put(4,true);
             }
             functionExec.exec();
 /*

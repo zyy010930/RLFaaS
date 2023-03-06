@@ -58,9 +58,9 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 			System.out.println("mob-req");
 			FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
-			if(!FunctionList.funcMap.get(16)) {
+			if(!FunctionList.funcMap.get(2)) {
 				System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/mobilenet-create.sh"));
-				FunctionList.funcMap.put(16,true);
+				FunctionList.funcMap.put(2,true);
 			}
 			/*
 			if(start == false)

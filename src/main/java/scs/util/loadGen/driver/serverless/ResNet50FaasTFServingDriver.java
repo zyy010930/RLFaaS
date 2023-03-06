@@ -58,9 +58,9 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 			System.out.println("res-req");
 			FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
-			if(!FunctionList.funcMap.get(10)) {
+			if(!FunctionList.funcMap.get(1)) {
 				System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50-create.sh"));
-				FunctionList.funcMap.put(10,true);
+				FunctionList.funcMap.put(1,true);
 			}
 			functionExec.exec();
 /*
