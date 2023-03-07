@@ -9,6 +9,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import scs.controller.ConfigPara;
 import scs.pojo.FunctionList;
 import scs.util.loadGen.driver.AbstractJobDriver;
 import scs.util.loadGen.threads.FunctionExec;
@@ -50,40 +51,44 @@ public class HelloFaasServingDriver extends AbstractJobDriver{
     /**
      * using countDown to send requests in open-loop
      */
-    public void executeJob(int serviceId) {
+    public void executeJob(final int serviceId) {
         int sleepUnit=1000;
         try {
             System.out.println("hello-req");
             FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
-            if(!FunctionList.funcMap.get(5)) {
+            if(!FunctionList.funcMap.get(serviceId)) {
                 System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello-create.sh"));
-                FunctionList.funcMap.put(5,true);
+                FunctionList.funcMap.put(serviceId, true);
             }
+
+            ConfigPara.kpArray[serviceId-1] = 5*60000;        //Setting the keep-alive is 5 min
+            ConfigPara.funcFlagArray[serviceId-1] = 2;
             functionExec.exec();
-/*
-                        Date now = new Date();
-                        Date deleteTime = new Date(now.getTime() + 60000);
-                        FunctionList.timeMap.put(30,deleteTime);
-                        // 创建定时器
-                        Timer timer = new Timer();
-                        // 创建定时器任务
-                        TimerTask timerTask = new TimerTask() {
-                            @Override
-                            public void run() {
-                                Date now = new Date();
-                                if(FunctionList.timeMap.get(30).compareTo(now) < 0)
-                                {
-                                    try {
-                                        FunctionList.funcMap.put(30,false);
-                                        System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello.sh"));
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-                        };
-                        timer.schedule(timerTask, 60000); //2分钟后判断函数是否删除*/
+            ConfigPara.funcFlagArray[serviceId-1] = 1;
+
+            Date now = new Date();
+            Date deleteTime = new Date(now.getTime() + ConfigPara.kpArray[serviceId-1]);
+            FunctionList.timeMap.put(serviceId, deleteTime);
+            Timer timer = new Timer();
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    Date now = new Date();
+                    if(FunctionList.timeMap.get(serviceId).compareTo(now) < 0)
+                    {
+                        try {
+                            FunctionList.funcMap.put(serviceId, false);
+                            System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello.sh"));
+                            ConfigPara.funcFlagArray[serviceId-1] = 0;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            };
+            timer.schedule(timerTask, ConfigPara.kpArray[serviceId-1]);
+
         }catch (IOException e) {
             e.printStackTrace();
         }

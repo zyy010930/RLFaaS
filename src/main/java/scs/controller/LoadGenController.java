@@ -38,25 +38,15 @@ public class LoadGenController {
 	private static Map<Integer,Integer> mp;
 	{
 		mp = new HashMap<Integer, Integer>();
-		mp.put(1,1);
-		mp.put(2,2);
-		mp.put(3,3);
-		mp.put(4,4);
-		mp.put(5,5);
-		mp.put(6,6);
-		mp.put(7,7);
+		mp.put(1, 1);
+		mp.put(2, 2);
+		mp.put(3, 3);
+		mp.put(4, 4);
+		mp.put(5, 5);
+		mp.put(6, 6);
+		mp.put(7, 7);
 	}
-	private static Map<Integer,Double> mp2;
-	{
-		mp2 = new HashMap<Integer, Double>();
-		mp2.put(1,0.6);
-		mp2.put(2,0.6);
-		mp2.put(3,0.6);
-		mp2.put(4,0.6);
-		mp2.put(5,0.6);
-		mp2.put(6,0.6);
-		mp2.put(7,0.6);
-	}
+
 	private ArrayList<Map<Integer,Integer>> functionList = new ArrayList<Map<Integer, Integer>>();
 	/**
 	 * Start the load generator for latency-critical services
@@ -90,66 +80,25 @@ public class LoadGenController {
 					Repository.onlineDataList.get(serviceId).clear();//clear onlineDataList
 					Repository.windowOnlineDataList.get(serviceId).clear();//clear windowOnlineDataList
 					if(true) {
-						//RecordDriver.getInstance().execute(serviceId);
-						CSVReader reader = new CSVReader();
-						List<Map.Entry<String, ArrayList<Integer>>> list = reader.getAzure();
-						FunctionRequest functionRequest = new FunctionRequest();
-						System.out.println("build request!!!!!!!");
-						Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMap(0,list); //一次取出7组调用记录
-						System.out.println("Invoke Map Build------");
-						Map<Integer,ArrayList<Integer>> funcMap = new TreeMap<>();
-						for(int i = 1;i <= 7;i++)
-						{
-							ArrayList<Integer> timeList = new ArrayList<>();
-							int lastIndex = 0;
-							for(int j = 0;j < InvokeMap.get(i).size();j++)
-							{
-								if(InvokeMap.get(i).get(j) != 0)
-								{
-									Integer functionTime = j - lastIndex;
-									timeList.add(functionTime);
-									lastIndex = j;
-								}
-							}
-							funcMap.put(mp.get(i),timeList);
-						}
-						/*
-						for(int i=1;i<=10;i++)
-						{
-							Map<Integer,Integer> funcMap = new TreeMap<Integer, Integer>();
-							for(int j=1;j<=7;j++)
-							{
-								if(Math.random()>=mp2.get(j)) {
-									int functionTime = (int) (Math.random() * 60) + time;
-									funcMap.put(functionTime, mp.get(j));
-									//functionList.add(new HashMap<Integer, Integer>(j, functionTime));
-								}
-							}
-							functionList.add(funcMap);
-							time+=60;
-						}*/
+						//obtaining functions time internals
+						FuncExecTimeGen funcExecTimeGen = new FuncExecTimeGen();
+						Map<Integer, ArrayList<Integer>> funcMap = funcExecTimeGen.funcExecTimeGenAver();
+
+						//Setting Memory Capacity
+						ConfigPara configPara = new ConfigPara();
+						configPara.setMemoryCapacity(23.5);
+
 						System.out.println("start thread");
-//						for(int i=0;i<functionList.size();i++)
-//						{
-//							int t = 0;
-//							for(Map.Entry<Integer, Integer> entry : functionList.get(i).entrySet())
-//							{
-//								int start = entry.getKey() - t;
-//								t = entry.getKey();
-//								System.out.println("function:" + entry.getValue() + "sleep:" + start);
-//								Thread.sleep(start*1000);
-//								Repository.loaderMap.get(entry.getValue()).getAbstractJobDriver().executeJob(entry.getValue());
-//							}
-//						}
+
 						ExecutorService executor = Executors.newFixedThreadPool(7);
-						FunctionThread thread = new FunctionThread(1,funcMap.get(1));
-						FunctionThread thread2 = new FunctionThread(2,funcMap.get(2));
-						FunctionThread thread3 = new FunctionThread(3,funcMap.get(3));
-						FunctionThread thread4 = new FunctionThread(4,funcMap.get(4));
-						FunctionThread thread5 = new FunctionThread(5,funcMap.get(5));
-						FunctionThread thread6 = new FunctionThread(6,funcMap.get(6));
-						FunctionThread thread7 = new FunctionThread(7,funcMap.get(7));
-						executor.execute(thread);
+						FunctionThread thread1 = new FunctionThread(1, funcMap.get(1));
+						FunctionThread thread2 = new FunctionThread(2, funcMap.get(2));
+						FunctionThread thread3 = new FunctionThread(3, funcMap.get(3));
+						FunctionThread thread4 = new FunctionThread(4, funcMap.get(4));
+						FunctionThread thread5 = new FunctionThread(5, funcMap.get(5));
+						FunctionThread thread6 = new FunctionThread(6, funcMap.get(6));
+						FunctionThread thread7 = new FunctionThread(7, funcMap.get(7));
+						executor.execute(thread1);
 						executor.execute(thread2);
 						executor.execute(thread3);
 						executor.execute(thread4);
@@ -157,7 +106,6 @@ public class LoadGenController {
 						executor.execute(thread6);
 						executor.execute(thread7);
 						executor.shutdown();
-						//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 					} else {
 						response.getWriter().write("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);
 					}
@@ -169,6 +117,11 @@ public class LoadGenController {
 			e.printStackTrace();
 		}
 	}
+
+	public static Map<Integer,Integer> getMp() {
+		return mp;
+	}
+
 	/**
 	 * dynamically set the RPS of web-inference service
 	 * @param request
@@ -180,7 +133,7 @@ public class LoadGenController {
 			@RequestParam(value="intensity",required=true) int intensity,
 			@RequestParam(value="serviceId",required=true) int serviceId){
 		try{ 
-			intensity=intensity<0?0:intensity;//合法性校验
+			intensity=intensity<0?0:intensity;// legitimacy verification
 			Repository.realRequestIntensity[serviceId]=intensity;
 			response.getWriter().write("serviceId="+serviceId+" realRequestIntensity is set to "+Repository.realRequestIntensity[serviceId]);
 		}catch(Exception e){
@@ -345,9 +298,20 @@ public class LoadGenController {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+
+				OperWaitQueue.execQueueFunc();
+
+				/*
+				if(ConfigPara.funcCapacity[serviceId-1] >= ConfigPara.getRemainMemCapacity()) {
+					ConfigPara.waitQueue.add(serviceId);
+				} else {
+					ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[serviceId-1]);
+					Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+				}
+				 */
+
+				OperWaitQueue.execRequests(serviceId);
 			}
 		}
 	}
-
 }

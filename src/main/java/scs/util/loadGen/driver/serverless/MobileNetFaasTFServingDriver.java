@@ -9,6 +9,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import scs.controller.ConfigPara;
 import scs.pojo.FunctionList;
 import scs.util.loadGen.driver.AbstractJobDriver;
 import scs.util.loadGen.threads.FunctionExec;
@@ -52,51 +53,44 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 	/**
 	 * using countDown to send requests in open-loop
 	 */
-	public void executeJob(int serviceId) {
+	public void executeJob(final int serviceId) {
 		int sleepUnit=1000;
 		try {
 			System.out.println("mob-req");
 			FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
-			if(!FunctionList.funcMap.get(2)) {
+			if(!FunctionList.funcMap.get(serviceId)) {
 				System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/mobilenet-create.sh"));
-				FunctionList.funcMap.put(2,true);
+				FunctionList.funcMap.put(serviceId, true);
 			}
-			/*
-			if(start == false)
-			{
-				oldTime = new Date().getTime();
-				start = true;
-			}else {
-				Long now = new Date().getTime();
-				timeList.add(now - oldTime);
-				System.out.println((now-oldTime) + "ms");
-				oldTime = now;
-			}*/
+
+			ConfigPara.kpArray[serviceId-1] = 5*60000;        //Setting the keep-alive is 5 min
+			ConfigPara.funcFlagArray[serviceId-1] = 2;
 			functionExec.exec();
-/*
-						Date now = new Date();
-						Date deleteTime = new Date(now.getTime() + 60000);
-						FunctionList.timeMap.put(16,deleteTime);
-						// 创建定时器
-						Timer timer = new Timer();
-						// 创建定时器任务
-						TimerTask timerTask = new TimerTask() {
-							@Override
-							public void run() {
-								Date now = new Date();
-								if(FunctionList.timeMap.get(16).compareTo(now) < 0)
-								{
-									try {
-										FunctionList.funcMap.put(16,false);
-										System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/mobilenet.sh"));
-									} catch (IOException e) {
-										e.printStackTrace();
-									}
-								}
-							}
-						};
-						timer.schedule(timerTask, 60000); //2分钟后判断函数是否删除*/
+			ConfigPara.funcFlagArray[serviceId-1] = 1;
+
+			Date now = new Date();
+			Date deleteTime = new Date(now.getTime() + ConfigPara.kpArray[serviceId-1]);
+			FunctionList.timeMap.put(serviceId, deleteTime);
+			Timer timer = new Timer();
+			TimerTask timerTask = new TimerTask() {
+				@Override
+				public void run() {
+					Date now = new Date();
+					if(FunctionList.timeMap.get(serviceId).compareTo(now) < 0)
+					{
+						try {
+							FunctionList.funcMap.put(serviceId, false);
+							System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/mobilenet.sh"));
+							ConfigPara.funcFlagArray[serviceId-1] = 0;
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			};
+			timer.schedule(timerTask, ConfigPara.kpArray[serviceId-1]);
+
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
