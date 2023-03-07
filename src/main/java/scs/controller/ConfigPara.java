@@ -1,5 +1,6 @@
 package scs.controller;
 
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -39,6 +40,7 @@ public class ConfigPara {
 
         kpArray = new Integer[7];
         funcFlagArray = new Integer[7];
+        waitQueue = new LinkedList<>();
     }
 
     public static void setMemoryCapacity(Double currFuncCapacity1) {
