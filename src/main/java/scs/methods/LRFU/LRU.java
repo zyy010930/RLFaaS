@@ -24,6 +24,7 @@ public class LRU {
             if (ConfigPara.funcFlagArray[sid - 1] == 0) {
                 long tempTimeInterval = 0;
                 Integer tempSid = 0;
+                System.out.println("-------------waitQueue not empty,Add waitQueue-----------");
                 ConfigPara.waitQueue.add(sid);
 
                 for(int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
@@ -33,6 +34,7 @@ public class LRU {
                     }
                 }
                 if(tempSid != 0) {
+                    System.out.println("-----------release-----------");
                     OperWaitQueue.releaseFunc(tempSid);
 
                     for(int j = 0; j < ConfigPara.waitQueue.size(); j++) {
@@ -46,6 +48,7 @@ public class LRU {
                 }
             }
             else {
+                System.out.println("---------------waitQueue exec-----------------");
                 long t1 = System.currentTimeMillis();
                 funcStartExecTime[sid-1] = t1 - startTime;
                 OperWaitQueue.execFunc(sid);
@@ -53,11 +56,13 @@ public class LRU {
         }
         else {
             if(ConfigPara.funcCapacity[sid-1] <= ConfigPara.getRemainMemCapacity()) {
+                System.out.println("show capacity: " + ConfigPara.funcCapacity[sid-1] + " " + ConfigPara.getRemainMemCapacity());
                 long t1 = System.currentTimeMillis();
                 funcStartExecTime[sid-1] = t1 - startTime;
                 OperWaitQueue.execFunc(sid);
             }
             else {
+                System.out.println("-------------capacity not enough,Add waitQueue-----------");
                 ConfigPara.waitQueue.add(sid);
             }
         }
