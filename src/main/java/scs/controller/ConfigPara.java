@@ -43,7 +43,7 @@ public class ConfigPara {
     }
 
     public static void setMemoryCapacity(Double currFuncCapacity1) {
-        if(currFuncCapacity1 < maxFuncCapacity && currFuncCapacity1 >= minFuncCapacity) {
+        if(currFuncCapacity1 < maxFuncCapacity && currFuncCapacity1 >= 0) {
             currFuncCapacity = currFuncCapacity1;
         }
         else{

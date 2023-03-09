@@ -297,7 +297,7 @@ public class LoadGenController {
 					e.printStackTrace();
 				}
 
-				OverFramework.run(serviceId, 1);
+				OverFramework.run(serviceId, 2);
 			}
 		}
 	}

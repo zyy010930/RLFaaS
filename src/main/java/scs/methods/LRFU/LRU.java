@@ -11,12 +11,12 @@ import scs.controller.OperWaitQueue;
  * @Version 1.0
  */
 public class LRU {
-    private static long[] funcStartExecTime;
-    private static long startTime;
+    private static long[] funcStartExecTime = new long[]{0, 0, 0, 0, 0, 0, 0};
+    private static long startTime = System.currentTimeMillis();
 
     public LRU() {
-        funcStartExecTime = new long[]{0, 0, 0, 0, 0, 0, 0};
-        startTime = System.currentTimeMillis();
+        //funcStartExecTime = new long[]{0, 0, 0, 0, 0, 0, 0};
+        //startTime = System.currentTimeMillis();
     }
 
     public static void run(Integer sid) {

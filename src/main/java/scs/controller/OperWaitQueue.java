@@ -48,7 +48,9 @@ public class OperWaitQueue {
     }
 
     public static void execFunc(Integer sid) {
-        ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[sid-1]);
+        if(ConfigPara.funcFlagArray[sid-1] == 0) {
+            ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[sid - 1]);
+        }
         ConfigPara.funcFlagArray[sid-1] = 2;
         Repository.loaderMap.get(sid).getAbstractJobDriver().executeJob(sid);
     }
