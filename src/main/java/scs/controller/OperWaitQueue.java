@@ -32,7 +32,7 @@ public class OperWaitQueue {
                 if(ConfigPara.funcCapacity[ConfigPara.waitQueue.peek()-1] <= ConfigPara.getRemainMemCapacity()) {
                     Integer sid = ConfigPara.waitQueue.poll();
                     ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[sid-1]);
-                    ConfigPara.funcFlagArray[sid-1] = 2;
+                    //ConfigPara.funcFlagArray[sid-1] = 2;
                     Repository.loaderMap.get(sid).getAbstractJobDriver().executeJob(sid);
                 } else {
                     break;
@@ -54,7 +54,7 @@ public class OperWaitQueue {
         if(ConfigPara.funcFlagArray[sid-1] == 0) {
             ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[sid - 1]);
         }
-        ConfigPara.funcFlagArray[sid-1] = 2;
+        //ConfigPara.funcFlagArray[sid-1] = 2;
         Repository.loaderMap.get(sid).getAbstractJobDriver().executeJob(sid);
     }
 
