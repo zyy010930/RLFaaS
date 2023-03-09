@@ -57,9 +57,10 @@ public class Md5FaasServingDriver extends AbstractJobDriver{
             System.out.println("md5-req");
             FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
-            if(!FunctionList.funcMap.get(serviceId)) {
+            if(ConfigPara.funcFlagArray[serviceId-1] == 0) {
                 System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/Md5-create.sh"));
                 FunctionList.funcMap.put(serviceId, true);
+                ConfigPara.funcFlagArray[serviceId-1] = 2;
             }
 
             ConfigPara.kpArray[serviceId-1] = 5*60000;        //Setting the keep-alive is 5 min

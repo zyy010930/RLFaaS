@@ -59,9 +59,10 @@ public class SortFaasServingDriver extends AbstractJobDriver{
             System.out.println("sort-req");
             FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
-            if(!FunctionList.funcMap.get(serviceId)) {
+            if(ConfigPara.funcFlagArray[serviceId-1] == 0) {
                 System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort-create.sh"));
                 FunctionList.funcMap.put(serviceId, true);
+                ConfigPara.funcFlagArray[serviceId-1] = 2;
             }
 
             //直方图初始化过程，前20次采用最小和最大调用间隔进行划分，达到20次则改用直方图策略5%和99%。

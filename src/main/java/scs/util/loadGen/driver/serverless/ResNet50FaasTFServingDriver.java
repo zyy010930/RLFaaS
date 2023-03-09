@@ -59,9 +59,10 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 			System.out.println("res-req");
 			FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
-			if(!FunctionList.funcMap.get(serviceId)) {
+			if(ConfigPara.funcFlagArray[serviceId-1] == 0) {
 				System.out.println(tool.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50-create.sh"));
 				FunctionList.funcMap.put(serviceId, true);
+				ConfigPara.funcFlagArray[serviceId-1] = 2;
 			}
 
 			ConfigPara.kpArray[serviceId-1] = 5*60000;        //Setting the keep-alive is 5 min
