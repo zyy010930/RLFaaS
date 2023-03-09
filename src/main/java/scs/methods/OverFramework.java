@@ -34,7 +34,7 @@ public class OverFramework {
          * flag = 1: LFU
          * flag = 2: LRU
          */
-        switch (sid) {
+        switch (flag) {
             case 0:
                 OperWaitQueue.execQueueFunc();
                 OperWaitQueue.execRequests(sid);
