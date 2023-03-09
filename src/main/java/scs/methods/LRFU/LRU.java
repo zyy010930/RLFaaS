@@ -22,7 +22,7 @@ public class LRU {
     public static void run(Integer sid) {
         if(ConfigPara.waitQueue.size() != 0) {
             if (ConfigPara.funcFlagArray[sid - 1] == 0) {
-                long tempTimeInterval = 0;
+                long tempTimeInterval = Long.MAX_VALUE;
                 Integer tempSid = 0;
                 System.out.println("-------------waitQueue not empty,Add waitQueue-----------");
                 ConfigPara.waitQueue.add(sid);
