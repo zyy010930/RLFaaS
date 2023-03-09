@@ -37,8 +37,8 @@ public class ConfigPara {
         currFuncCapacity = 23.5;
         funcCapacity = new Double[]{7.0, 6.0, 6.0, 6.0, 7.0, 9.0, 6.0};
 
-        kpArray = new Integer[7];
-        funcFlagArray = new Integer[7];
+        kpArray = new Integer[]{0,0,0,0,0,0,0};
+        funcFlagArray = new Integer[]{0,0,0,0,0,0,0};
         waitQueue = new LinkedList<>();
     }
 
