@@ -16,7 +16,7 @@ public abstract class AbstractJobDriver {
 	
 	protected Random random=new Random();  
 	protected CloseableHttpClient httpClient;
-	protected Long oldTime;
+	protected long oldTime;
 	protected boolean start = false;
 	protected ArrayList<Long> timeList;
  
