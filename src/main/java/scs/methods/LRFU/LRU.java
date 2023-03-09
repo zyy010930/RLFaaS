@@ -3,6 +3,8 @@ package scs.methods.LRFU;
 import scs.controller.ConfigPara;
 import scs.controller.OperWaitQueue;
 
+import java.util.Queue;
+
 /**
  * @ClassName LRU
  * @Description ...
@@ -19,6 +21,14 @@ public class LRU {
         //startTime = System.currentTimeMillis();
     }
 
+    public static void queuePrint(Queue<Integer> queue)
+    {
+        for(Integer i : queue)
+        {
+            System.out.println(i + " ");
+        }
+    }
+
     public static void run(Integer sid) {
         if(ConfigPara.waitQueue.size() != 0) {
             if (ConfigPara.funcFlagArray[sid - 1] == 0) {
@@ -26,6 +36,7 @@ public class LRU {
                 Integer tempSid = 0;
                 System.out.println("-------------waitQueue not empty,Add waitQueue-----------");
                 ConfigPara.waitQueue.add(sid);
+                queuePrint(ConfigPara.waitQueue);
 
                 for(int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
                     if(ConfigPara.funcFlagArray[i] == 1 && funcStartExecTime[i] < tempTimeInterval) {
@@ -64,6 +75,7 @@ public class LRU {
             else {
                 System.out.println("-------------capacity not enough,Add waitQueue-----------");
                 ConfigPara.waitQueue.add(sid);
+                queuePrint(ConfigPara.waitQueue);
             }
         }
     }
