@@ -66,7 +66,7 @@ public class LRU {
             }
         }
         else {
-            if(ConfigPara.funcCapacity[sid-1] <= ConfigPara.getRemainMemCapacity()) {
+            if(ConfigPara.funcFlagArray[sid - 1] == 0 && ConfigPara.funcCapacity[sid-1] <= ConfigPara.getRemainMemCapacity()) {
                 System.out.println("show capacity: " + ConfigPara.funcCapacity[sid-1] + " " + ConfigPara.getRemainMemCapacity());
                 long t1 = System.currentTimeMillis();
                 funcStartExecTime[sid-1] = t1 - startTime;
