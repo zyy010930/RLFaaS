@@ -18,7 +18,7 @@ public abstract class AbstractJobDriver {
 	protected CloseableHttpClient httpClient;
 	protected long oldTime;
 	protected boolean start = false;
-	protected ArrayList<Long> timeList;
+	protected ArrayList<Long> timeList = new ArrayList<>();
  
 	protected abstract void initVariables();//init
 	/**

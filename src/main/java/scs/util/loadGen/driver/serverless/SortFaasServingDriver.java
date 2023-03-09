@@ -71,6 +71,7 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                 long nowTime = new Date().getTime();
                 System.out.println("now:" + nowTime + " ,old:" + oldTime);
                 timeList.add(nowTime - oldTime);
+
             }
 
             ConfigPara.kpArray[serviceId-1] = 5*60000;        //Setting the keep-alive is 5 min
