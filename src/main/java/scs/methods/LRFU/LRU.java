@@ -28,7 +28,7 @@ public class LRU {
                 ConfigPara.waitQueue.add(sid);
 
                 for(int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
-                    if(ConfigPara.funcFlagArray[i] == 1 && funcStartExecTime[i] > tempTimeInterval) {
+                    if(ConfigPara.funcFlagArray[i] == 1 && funcStartExecTime[i] < tempTimeInterval) {
                         tempTimeInterval = funcStartExecTime[i];
                         tempSid = i + 1;
                     }
