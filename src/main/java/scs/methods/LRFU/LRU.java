@@ -34,7 +34,7 @@ public class LRU {
             if (ConfigPara.funcFlagArray[sid - 1] == 0) {
                 long tempTimeInterval = Long.MAX_VALUE;
                 Integer tempSid = 0;
-                System.out.println("-------------waitQueue not empty,Add waitQueue-----------");
+                System.out.println(sid + "-------------waitQueue not empty,Add waitQueue-----------");
                 ConfigPara.waitQueue.add(sid);
                 queuePrint(ConfigPara.waitQueue);
 
@@ -45,7 +45,7 @@ public class LRU {
                     }
                 }
                 if(tempSid != 0) {
-                    System.out.println("-----------release-----------");
+                    System.out.println(sid + "-----------release-----------");
                     OperWaitQueue.releaseFunc(tempSid);
 
                     for(int j = 0; j < ConfigPara.waitQueue.size(); j++) {
@@ -59,7 +59,7 @@ public class LRU {
                 }
             }
             else {
-                System.out.println("---------------waitQueue exec-----------------");
+                System.out.println(sid + "---------------waitQueue exec-----------------");
                 long t1 = System.currentTimeMillis();
                 funcStartExecTime[sid-1] = t1 - startTime;
                 OperWaitQueue.execFunc(sid);
@@ -67,13 +67,13 @@ public class LRU {
         }
         else {
             if(ConfigPara.funcFlagArray[sid - 1] != 0 || ConfigPara.funcCapacity[sid-1] <= ConfigPara.getRemainMemCapacity()) {
-                System.out.println("show capacity: " + ConfigPara.funcCapacity[sid-1] + " " + ConfigPara.getRemainMemCapacity());
+                System.out.println(sid + "show capacity: " + ConfigPara.funcCapacity[sid-1] + " " + ConfigPara.getRemainMemCapacity());
                 long t1 = System.currentTimeMillis();
                 funcStartExecTime[sid-1] = t1 - startTime;
                 OperWaitQueue.execFunc(sid);
             }
             else {
-                System.out.println("-------------capacity not enough,Add waitQueue-----------");
+                System.out.println(sid + "-------------capacity not enough,Add waitQueue-----------");
                 ConfigPara.waitQueue.add(sid);
                 queuePrint(ConfigPara.waitQueue);
             }
