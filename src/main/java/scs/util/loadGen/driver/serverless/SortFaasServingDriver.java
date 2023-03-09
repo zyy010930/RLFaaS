@@ -2,6 +2,7 @@ package scs.util.loadGen.driver.serverless;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.sql.Time;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -60,6 +61,16 @@ public class SortFaasServingDriver extends AbstractJobDriver{
             if(!FunctionList.funcMap.get(serviceId)) {
                 System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort-create.sh"));
                 FunctionList.funcMap.put(serviceId, true);
+            }
+
+            if(start == false)
+            {
+                oldTime = new Date().getTime();
+                start = true;
+            }else {
+                long nowTime = new Date().getTime();
+                System.out.println("now:" + nowTime + " ,old:" + oldTime);
+                timeList.add(nowTime - oldTime);
             }
 
             ConfigPara.kpArray[serviceId-1] = 5*60000;        //Setting the keep-alive is 5 min
