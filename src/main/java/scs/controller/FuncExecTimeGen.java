@@ -19,15 +19,22 @@ public class FuncExecTimeGen {
 
     Map<Integer, ArrayList<Integer>> funcExecTimeGenAver() {
         CSVReader reader = new CSVReader();
+        /*
         List<Map.Entry<String, ArrayList<Integer>>> list = reader.getAzure();
 
         System.out.println("build request!!!!!!!");
         FunctionRequest functionRequest = new FunctionRequest();
 
         System.out.println("Invoke Map Build------");
-        Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMap(0,list); //obtain 7 groups records
-        Map<Integer,ArrayList<Integer>> funcMap = new TreeMap<>();
+        Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMap(0,list); //obtain 7 groups records */
 
+        Map<String,ArrayList<Integer>> mp = reader.getAzureTest();
+        System.out.println("build request!!!!!!!");
+        FunctionRequest functionRequest = new FunctionRequest();
+        System.out.println("Invoke Map Build------");
+        Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMapTest(mp);
+
+        Map<Integer,ArrayList<Integer>> funcMap = new TreeMap<>();
         for(int i = 1; i <= 7; i++)
         {
             ArrayList<Integer> timeList = new ArrayList<>();

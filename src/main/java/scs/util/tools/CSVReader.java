@@ -46,7 +46,36 @@ public class CSVReader {
             e.printStackTrace();
             return null;
         }
- 
     }
- 
+
+    public Map<String,ArrayList<Integer>> getAzureTest() {
+        String csvFile = "/home/dmy/azureFunction/invocations_per_function_md.anon.d01.csv";
+        String line = "";
+        String cvsSplitBy = ",";
+        Map<String,ArrayList<Integer>> InvokeMap = new HashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] country = line.split(cvsSplitBy);
+                if(country[3].compareTo("http") == 0) {
+                    ArrayList<Integer> list = new ArrayList<>();
+                    for (int i = 4; i <= 1443; i++) {
+                        list.add(Integer.parseInt(country[i]));
+                    }
+                    if (InvokeMap.containsKey(country[2]) == false) {
+                        InvokeMap.put(country[2], list);
+                    }
+                    System.out.println("[function= " + country[2] + " , trigger=" + country[3] + "]" + " num:" + list.size());
+                }
+
+            }
+            return InvokeMap;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
