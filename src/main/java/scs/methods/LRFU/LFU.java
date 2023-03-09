@@ -15,10 +15,10 @@ import java.util.Queue;
  * @Version 1.0
  */
 public class LFU {
-    private static Integer[] funcFreqArray;
+    private static Integer[] funcFreqArray = new Integer[]{0, 0, 0, 0, 0, 0, 0};
 
     public LFU() {
-        funcFreqArray = new Integer[]{0, 0, 0, 0, 0, 0, 0};
+        //funcFreqArray = new Integer[]{0, 0, 0, 0, 0, 0, 0};
     }
 
     public static void run(Integer sid) {
