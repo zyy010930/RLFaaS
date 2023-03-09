@@ -1,6 +1,9 @@
 package scs.controller;
 
+import org.apache.http.impl.client.CloseableHttpClient;
+import scs.util.loadGen.threads.FunctionExec;
 import scs.util.repository.Repository;
+import scs.util.tools.HttpClientPool;
 import scs.util.tools.SSHTool;
 
 import java.io.IOException;
@@ -56,6 +59,12 @@ public class OperWaitQueue {
     }
 
     public static void releaseFunc(Integer sid) {
+        CloseableHttpClient httpClient= HttpClientPool.getInstance().getConnection();
+        String queryItemsStr=Repository.CryptographyFaasBaseURL;
+        String jsonParmStr=Repository.resNet50ParmStr;
+        queryItemsStr=queryItemsStr.replace("Ip","192.168.3.154");
+        queryItemsStr=queryItemsStr.replace("Port","31112");
+        FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, sid, jsonParmStr, 1000, "POST");
         switch (sid){
             case 1:
                 try {
