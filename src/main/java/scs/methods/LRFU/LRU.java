@@ -51,6 +51,8 @@ public class LRU {
                     for(int j = 0; j < ConfigPara.waitQueue.size(); j++) {
                         if(ConfigPara.funcCapacity[ConfigPara.waitQueue.peek()-1] <= ConfigPara.getRemainMemCapacity()) {
                             Integer tempSid1 = ConfigPara.waitQueue.poll();
+                            long t1 = System.currentTimeMillis();
+                            funcStartExecTime[sid-1] = t1 - startTime;
                             OperWaitQueue.execFunc(tempSid1);
                         } else {
                             break;
