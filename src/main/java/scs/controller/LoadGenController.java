@@ -1,6 +1,5 @@
 package scs.controller;
 
-import java.sql.Time;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import net.sf.json.JSONArray;
+import scs.methods.LRFU.LFU;
+import scs.methods.LRFU.LRU;
+import scs.methods.OverFramework;
 import scs.pojo.PageQueryData;
 import scs.pojo.QueryData;
 import scs.util.format.DataFormats;
-import scs.util.loadGen.recordDriver.RecordDriver;
 import scs.util.repository.Repository;
-import scs.util.tools.CSVReader;
-import scs.util.tools.FunctionRequest;
 
 /**
  * Load generator controller class, it includes interfaces as follows:
@@ -288,7 +287,6 @@ public class LoadGenController {
 		}
 
 		public void run(){
-			//Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
 			System.out.println("new start");
 			for(Integer time : this.list)
 			{
@@ -299,18 +297,7 @@ public class LoadGenController {
 					e.printStackTrace();
 				}
 
-				OperWaitQueue.execQueueFunc();
-
-				/*
-				if(ConfigPara.funcCapacity[serviceId-1] >= ConfigPara.getRemainMemCapacity()) {
-					ConfigPara.waitQueue.add(serviceId);
-				} else {
-					ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[serviceId-1]);
-					Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
-				}
-				 */
-
-				OperWaitQueue.execRequests(serviceId);
+				OverFramework.run(serviceId, 0);
 			}
 		}
 	}

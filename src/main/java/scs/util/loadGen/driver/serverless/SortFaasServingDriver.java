@@ -3,6 +3,7 @@ package scs.util.loadGen.driver.serverless;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Time;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -63,6 +64,7 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                 FunctionList.funcMap.put(serviceId, true);
             }
 
+            //直方图初始化过程，前20次采用最小和最大调用间隔进行划分，达到20次则改用直方图策略5%和99%。
             if(start == false)
             {
                 oldTime = new Date().getTime();
@@ -71,8 +73,10 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                 long nowTime = new Date().getTime();
                 System.out.println("now:" + nowTime + " ,old:" + oldTime);
                 timeList.add(nowTime - oldTime);
-
+                oldTime = nowTime;
             }
+            timeList.sort(Comparator.naturalOrder());
+
 
             ConfigPara.kpArray[serviceId-1] = 5*60000;        //Setting the keep-alive is 5 min
             ConfigPara.funcFlagArray[serviceId-1] = 2;
