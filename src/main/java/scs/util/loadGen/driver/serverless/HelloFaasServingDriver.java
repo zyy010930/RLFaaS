@@ -66,7 +66,6 @@ public class HelloFaasServingDriver extends AbstractJobDriver{
 
             if(type == 3)
             {
-                //直方图初始化过程，前20次采用最小和最大调用间隔进行划分，达到20次则改用直方图策略5%和99%。
                 if(start == false)
                 {
                     oldTime = new Date().getTime();
@@ -86,15 +85,45 @@ public class HelloFaasServingDriver extends AbstractJobDriver{
                         standard = standard + (t - oldMean)*(t - mean);
                         cv = standard/mean/(60000.0*60000.0);
                         System.out.println("mean:" + mean + ", " + "standard:" + standard + ", cv:" + cv);
+                        if(timeList.size() >= 50 && cv <= 2.0) //样本数目足够且直方图具有代表性，采用5%和99%的样本点
+                        {
+                            preWarm = (double)timeList.get(Math.min(timeList.size() - 1,((int)(timeList.size()*0.05) - 1)));
+                            keepAlive = (double)timeList.get(Math.max(0,((int)(timeList.size()*0.99) - 1)));
+                        } else { //样本不足或者直方图不具有代表性，pre-warm设置为0，keep-alive设置一个较长时间
+                            preWarm = 0.0;
+                            keepAlive = 600000.0;
+                        }
                     }
                 }
                 timeList.sort(Comparator.naturalOrder());
             }
 
-            ConfigPara.kpArray[serviceId-1] = 5*60000;        //Setting the keep-alive is 5 min
+            ConfigPara.kpArray[serviceId-1] = (int)keepAlive;        //Setting the keep-alive
             ConfigPara.funcFlagArray[serviceId-1] = 2;
             functionExec.exec();
             ConfigPara.funcFlagArray[serviceId-1] = 1;
+
+            Date now1 = new Date();
+            Date preWarmTime = new Date(now1.getTime() + (long) preWarm);
+            FunctionList.preMap.put(serviceId, preWarmTime);
+            Timer timer1 = new Timer();
+            TimerTask timerTask1 = new TimerTask() {
+                @Override
+                public void run() {
+                    Date now = new Date();
+                    if(FunctionList.preMap.get(serviceId).compareTo(now) < 0)
+                    {
+                        try {
+                            FunctionList.funcMap.put(serviceId, true);
+                            System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello-create.sh"));
+                            ConfigPara.funcFlagArray[serviceId-1] = 1;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            };
+            timer1.schedule(timerTask1, (long) preWarm);
 
             Date now = new Date();
             Date deleteTime = new Date(now.getTime() + ConfigPara.kpArray[serviceId-1]);

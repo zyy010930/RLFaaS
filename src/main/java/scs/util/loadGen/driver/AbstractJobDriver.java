@@ -22,6 +22,8 @@ public abstract class AbstractJobDriver {
 	protected Double standard = 0.0;
 	protected Double mean = 0.0;
 	protected Double cv = 0.0;
+	protected double preWarm = 0.0;
+	protected double keepAlive = 600000.0;
  
 	protected abstract void initVariables();//init
 	/**

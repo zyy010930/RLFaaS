@@ -20,6 +20,8 @@ public class FunctionList {
 
     public static Map<Integer, Date> timeMap = new HashMap<Integer,Date>();
 
+    public static Map<Integer, Date> preMap = new HashMap<Integer,Date>();
+
     public FunctionList(){
         this.functionArrayList = new ArrayList<Function>();
     }
