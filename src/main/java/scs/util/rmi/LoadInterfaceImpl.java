@@ -149,7 +149,7 @@ public class LoadInterfaceImpl extends UnicastRemoteObject implements LoadInterf
 				Repository.windowOnlineDataList.get(serviceId).clear();//clear windowOnlineDataList
 				if(serviceId<Repository.NUMBER_LC && serviceId>=0) {
 					RecordDriver.getInstance().execute(serviceId); 
-					Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+					Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId,0);
 				} else {
 					System.out.println("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);
 				}
@@ -166,7 +166,7 @@ public class LoadInterfaceImpl extends UnicastRemoteObject implements LoadInterf
 		Repository.onlineDataFlag[serviceId]=false; 
 		if(serviceId<Repository.NUMBER_LC && serviceId>=0){
 			if(Repository.loaderMap.get(serviceId).getLoaderName().toLowerCase().contains("redis")){
-				Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+				Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId,0);
 			}
 		}
 	}
