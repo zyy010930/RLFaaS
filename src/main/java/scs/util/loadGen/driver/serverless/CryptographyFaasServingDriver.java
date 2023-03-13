@@ -84,7 +84,7 @@ public class CryptographyFaasServingDriver extends AbstractJobDriver{
                         double oldMean = mean;
                         mean = oldMean + ((double)t - oldMean)/timeList.size();
                         standard = standard + (t - oldMean)*(t - mean);
-                        cv = standard/mean;
+                        cv = standard/mean/(60000.0*60000.0);
                         System.out.println("mean:" + mean + ", " + "standard:" + standard + ", cv:" + cv);
                     }
                 }
