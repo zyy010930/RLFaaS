@@ -59,9 +59,11 @@ public class CryptographyFaasServingDriver extends AbstractJobDriver{
             FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
             if(ConfigPara.funcFlagArray[serviceId-1] == 0) {
+                coldStartTime++;
                 System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography-create.sh"));
                 FunctionList.funcMap.put(serviceId, true);
                 ConfigPara.funcFlagArray[serviceId-1] = 2;
+                System.out.println("Cryptography cold start time is" + coldStartTime);
             }
 
             if(type == 3)
@@ -102,6 +104,8 @@ public class CryptographyFaasServingDriver extends AbstractJobDriver{
             ConfigPara.funcFlagArray[serviceId-1] = 2;
             functionExec.exec();
             ConfigPara.funcFlagArray[serviceId-1] = 1;
+            invokeTime++;
+            System.out.println("Cryptography Invoke time is " + invokeTime);
 
             Date now1 = new Date();
             Date preWarmTime = new Date(now1.getTime() + (long) preWarm);
@@ -115,6 +119,7 @@ public class CryptographyFaasServingDriver extends AbstractJobDriver{
                     {
                         try {
                             FunctionList.funcMap.put(serviceId, true);
+                            System.out.println("Cryptography prewarm now. pre-warm is " + preWarm);
                             System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography-create.sh"));
                             ConfigPara.funcFlagArray[serviceId-1] = 1;
                         } catch (IOException e) {
@@ -137,6 +142,7 @@ public class CryptographyFaasServingDriver extends AbstractJobDriver{
                     {
                         try {
                             FunctionList.funcMap.put(serviceId, false);
+                            System.out.println("Cryptography keepAlive over. keepalive is " + keepAlive);
                             System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography.sh"));
                             ConfigPara.funcFlagArray[serviceId-1] = 0;
                         } catch (IOException e) {

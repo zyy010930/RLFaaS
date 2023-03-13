@@ -63,6 +63,7 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                 System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort-create.sh"));
                 FunctionList.funcMap.put(serviceId, true);
                 ConfigPara.funcFlagArray[serviceId-1] = 2;
+                System.out.println("sort cold start time is" + coldStartTime);
             }
 
             if(type == 3)
@@ -103,6 +104,8 @@ public class SortFaasServingDriver extends AbstractJobDriver{
             ConfigPara.funcFlagArray[serviceId-1] = 2;
             functionExec.exec();
             ConfigPara.funcFlagArray[serviceId-1] = 1;
+            invokeTime++;
+            System.out.println("sort Invoke time is " + invokeTime);
 
             Date now1 = new Date();
             Date preWarmTime = new Date(now1.getTime() + (long) preWarm);
@@ -116,6 +119,7 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                     {
                         try {
                             FunctionList.funcMap.put(serviceId, true);
+                            System.out.println("sort prewarm now. pre-warm is " + preWarm);
                             System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort-create.sh"));
                             ConfigPara.funcFlagArray[serviceId-1] = 1;
                         } catch (IOException e) {
@@ -138,6 +142,7 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                     {
                         try {
                             FunctionList.funcMap.put(serviceId, false);
+                            System.out.println("sort keepAlive over. keepalive is " + keepAlive);
                             System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort.sh"));
                             ConfigPara.funcFlagArray[serviceId-1] = 0;
                         } catch (IOException e) {
