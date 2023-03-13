@@ -53,7 +53,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 	/**
 	 * using countDown to send requests in open-loop
 	 */
-	public void executeJob(final int serviceId) {
+	public void executeJob(final int serviceId, int type) {
 		int sleepUnit=1000;
 		try {
 			System.out.println("mob-req");

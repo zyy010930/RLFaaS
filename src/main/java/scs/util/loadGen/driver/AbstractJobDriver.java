@@ -19,6 +19,9 @@ public abstract class AbstractJobDriver {
 	protected long oldTime;
 	protected boolean start = false;
 	protected ArrayList<Long> timeList = new ArrayList<>();
+	protected Double standard = 0.0;
+	protected Double mean = 0.0;
+	protected Double cv = 0.0;
  
 	protected abstract void initVariables();//init
 	/**
@@ -29,7 +32,7 @@ public abstract class AbstractJobDriver {
 	 * @param intensity QPS
 	 * @return Request result < request sending time, response time >
 	 */
-	public abstract void executeJob(int serviceId);
+	public abstract void executeJob(int serviceId, int type);
 
 	public abstract void coldStartManage(int serviceId);
 	

@@ -154,7 +154,7 @@ public class LoadGenController {
 			Repository.onlineDataFlag[serviceId]=false; 
 			if(serviceId<Repository.NUMBER_LC && serviceId>=0) { 
 				if(Repository.loaderMap.get(serviceId).getLoaderName().toLowerCase().contains("redis")){
-					Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId);
+					Repository.loaderMap.get(serviceId).getAbstractJobDriver().executeJob(serviceId,0);
 				}
 			}
 			response.getWriter().write("serviceId="+serviceId+" stopped loader");

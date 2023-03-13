@@ -3,6 +3,7 @@ package scs.methods;
 import scs.controller.OperWaitQueue;
 import scs.methods.LRFU.LFU;
 import scs.methods.LRFU.LRU;
+import scs.methods.Wild.Wild;
 
 /**
  * @ClassName OverFramework
@@ -44,6 +45,9 @@ public class OverFramework {
                 break;
             case 2:
                 LRU.run(sid);
+                break;
+            case 3:
+                Wild.run(sid);
                 break;
             default:
                 System.out.println("Method id is Chosen Error!");

@@ -38,7 +38,7 @@ public class ExampleDriver extends AbstractJobDriver{
 	/**
 	 * using countDown to send requests in open-loop
 	 */
-	public void executeJob(int serviceId) {
+	public void executeJob(int serviceId,int type) {
 		ExecutorService executor = Executors.newCachedThreadPool();
 	 
 		Repository.onlineQueryThreadRunning[serviceId]=true;

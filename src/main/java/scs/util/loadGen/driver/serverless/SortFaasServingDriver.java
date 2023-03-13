@@ -53,7 +53,7 @@ public class SortFaasServingDriver extends AbstractJobDriver{
     /**
      * using countDown to send requests in open-loop
      */
-    public void executeJob(final int serviceId) {
+    public void executeJob(final int serviceId,int type) {
         int sleepUnit=1000;
         try {
             System.out.println("sort-req");
@@ -65,19 +65,32 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                 ConfigPara.funcFlagArray[serviceId-1] = 2;
             }
 
-            //直方图初始化过程，前20次采用最小和最大调用间隔进行划分，达到20次则改用直方图策略5%和99%。
-            if(start == false)
+            if(type == 3)
             {
-                oldTime = new Date().getTime();
-                start = true;
-            }else {
-                long nowTime = new Date().getTime();
-                System.out.println("now:" + nowTime + " ,old:" + oldTime);
-                timeList.add(nowTime - oldTime);
-                oldTime = nowTime;
+                //直方图初始化过程，前20次采用最小和最大调用间隔进行划分，达到20次则改用直方图策略5%和99%。
+                if(start == false)
+                {
+                    oldTime = new Date().getTime();
+                    start = true;
+                }else {
+                    long nowTime = new Date().getTime();
+                    System.out.println("now:" + nowTime + " ,old:" + oldTime);
+                    long t = nowTime - oldTime;
+                    timeList.add(t);
+                    oldTime = nowTime;
+                    if(mean == 0)
+                    {
+                        mean = (double)t;
+                    }else{
+                        double oldMean = mean;
+                        mean = oldMean + ((double)t - oldMean)/timeList.size();
+                        standard = standard + (t - oldMean)*(t - mean);
+                        cv = standard/mean;
+                        System.out.println("mean:" + mean + ", " + "standard:" + standard + ", cv:" + cv);
+                    }
+                }
+                timeList.sort(Comparator.naturalOrder());
             }
-            timeList.sort(Comparator.naturalOrder());
-
 
             ConfigPara.kpArray[serviceId-1] = 5*60000;        //Setting the keep-alive is 5 min
             ConfigPara.funcFlagArray[serviceId-1] = 2;
