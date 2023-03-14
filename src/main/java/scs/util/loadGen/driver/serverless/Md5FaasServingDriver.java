@@ -105,7 +105,7 @@ public class Md5FaasServingDriver extends AbstractJobDriver{
             functionExec.exec();
             ConfigPara.funcFlagArray[serviceId-1] = 1;
             invokeTime++;
-            System.out.println(FuncName[serviceId-1] + " Invoke time is " + invokeTime + ", cold start time is " + coldStartTime + ", preWarm time is " + preWarm + ", keepAive time is " + keepAlive);
+            System.out.println(FuncName[serviceId-1] + " Invoke time is " + invokeTime + ", cold start time is " + coldStartTime + "cold start rate is " + ((double)invokeTime/coldStartTime)*100.0 + "%, preWarm time is " + preWarm + ", keepAive time is " + keepAlive);
 
             if(preWarm != 0.0) {
                 Date now1 = new Date();
@@ -136,12 +136,13 @@ public class Md5FaasServingDriver extends AbstractJobDriver{
             Date deleteTime = new Date(now.getTime() + (long) keepAlive - (long) preWarm);
             FunctionList.timeMap.put(serviceId, deleteTime);
             Timer timer = new Timer();
+            int lastTime = invokeTime;
             TimerTask timerTask = new TimerTask() {
                 @Override
                 public void run() {
                     Date now = new Date();
                     System.out.println("delete start!!!!!!!!! " + ConfigPara.funcFlagArray[serviceId-1]);
-                    if(ConfigPara.funcFlagArray[serviceId-1] != 0)
+                    if(ConfigPara.funcFlagArray[serviceId-1] != 0 && invokeTime == lastTime)
                     {
                         try {
                             FunctionList.funcMap.put(serviceId, false);
