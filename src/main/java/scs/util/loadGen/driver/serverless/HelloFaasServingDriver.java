@@ -105,7 +105,7 @@ public class HelloFaasServingDriver extends AbstractJobDriver{
             functionExec.exec();
             ConfigPara.funcFlagArray[serviceId-1] = 1;
             invokeTime++;
-            System.out.println(FuncName[serviceId-1] + " Invoke time is " + invokeTime + ", cold start time is " + coldStartTime + "cold start rate is " + ((double)invokeTime/coldStartTime)*100.0 + "%, preWarm time is " + preWarm + ", keepAive time is " + keepAlive);
+            System.out.println(FuncName[serviceId-1] + " Invoke time is " + invokeTime + ", cold start time is " + coldStartTime + ", cold start rate is " + ((double)coldStartTime/invokeTime)*100.0 + "%, preWarm time is " + preWarm + ", keepAive time is " + keepAlive);
 
             if(preWarm != 0.0) {
                 Date now1 = new Date();
