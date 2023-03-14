@@ -26,6 +26,7 @@ public abstract class AbstractJobDriver {
 	protected double keepAlive = 600000.0;
 	protected int coldStartTime = 0;
 	protected int invokeTime = 0;
+	protected int outOfBound = 0;
 
 	public static String createCmd[] = new String[]{
 			"bash /home/zyy/INFless/developer/servingFunctions/resnet-50-create.sh",

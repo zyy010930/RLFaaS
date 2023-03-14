@@ -78,6 +78,10 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                     System.out.println("now:" + nowTime + " ,old:" + oldTime);
                     long t = nowTime - oldTime;
                     timeList.add(t);
+                    if(outOfBound >= 3600000)
+                    {
+                        outOfBound++;
+                    }
                     oldTime = nowTime;
                     if(mean == 0)
                     {
@@ -86,12 +90,15 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                         double oldMean = mean;
                         mean = oldMean + ((double)t - oldMean)/timeList.size();
                         standard = standard + (t - oldMean)*(t - mean);
-                        cv = standard/mean/(60000.0*60000.0);
+                        cv = standard/mean/60000.0;
                         System.out.println("mean:" + mean + ", " + "standard:" + standard + ", cv:" + cv);
                         if(timeList.size() >= 50 && cv <= 2.0) //样本数目足够且直方图具有代表性，采用5%和99%的样本点
                         {
                             preWarm = (double)timeList.get(Math.min(timeList.size() - 1,((int)(timeList.size()*0.05) - 1)));
                             keepAlive = (double)timeList.get(Math.max(0,((int)(timeList.size()*0.99) - 1)));
+                        } else if(((double)outOfBound/invokeTime) >= 0.8)
+                        {
+                            //采用ARIMA时序预测
                         } else { //样本不足或者直方图不具有代表性，pre-warm设置为0，keep-alive设置一个较长时间
                             preWarm = 0.0;
                             keepAlive = 600000.0;
