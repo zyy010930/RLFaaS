@@ -132,14 +132,14 @@ public class HelloFaasServingDriver extends AbstractJobDriver{
             }
 
             Date now = new Date();
-            Date deleteTime = new Date(now.getTime() + ConfigPara.kpArray[serviceId-1] - (long) preWarm);
+            Date deleteTime = new Date(now.getTime() + (long) keepAlive - (long) preWarm);
             FunctionList.timeMap.put(serviceId, deleteTime);
             Timer timer = new Timer();
             TimerTask timerTask = new TimerTask() {
                 @Override
                 public void run() {
                     Date now = new Date();
-                    if(FunctionList.timeMap.get(serviceId).compareTo(now) < 0 && ConfigPara.funcFlagArray[serviceId-1] != 0)
+                    if(FunctionList.timeMap.get(serviceId).compareTo(now) <= 0 && ConfigPara.funcFlagArray[serviceId-1] != 0)
                     {
                         try {
                             FunctionList.funcMap.put(serviceId, false);
@@ -152,7 +152,7 @@ public class HelloFaasServingDriver extends AbstractJobDriver{
                     }
                 }
             };
-            timer.schedule(timerTask, ConfigPara.kpArray[serviceId-1] - (long) preWarm);
+            timer.schedule(timerTask, (long) keepAlive - (long) preWarm);
 
         }catch (IOException e) {
             e.printStackTrace();
