@@ -64,7 +64,7 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                 System.out.println(tool.exec(createCmd[serviceId-1]));
                 FunctionList.funcMap.put(serviceId, true);
                 ConfigPara.funcFlagArray[serviceId-1] = 2;
-                System.out.println(FuncName[serviceId-1] + " cold start time is" + coldStartTime);
+                System.out.println(FuncName[serviceId-1] + " cold start time is " + coldStartTime);
             }
 
             if(type == 3)
@@ -106,7 +106,7 @@ public class SortFaasServingDriver extends AbstractJobDriver{
             functionExec.exec();
             ConfigPara.funcFlagArray[serviceId-1] = 1;
             invokeTime++;
-            System.out.println(FuncName[serviceId-1] + " Invoke time is " + invokeTime + ", cold start time is " + coldStartTime);
+            System.out.println(FuncName[serviceId-1] + " Invoke time is " + invokeTime + ", cold start time is " + coldStartTime + ", preWarm time is " + preWarm + ", keepAive time is " + keepAlive);
 
             if(preWarm != 0.0) {
                 Date now1 = new Date();
