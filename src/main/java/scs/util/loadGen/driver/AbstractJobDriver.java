@@ -60,11 +60,6 @@ public abstract class AbstractJobDriver {
 	protected abstract void initVariables();//init
 	/**
 	 * execute job
-	 * @param requestCount 
-	 * @param warmUpCount 
-	 * @param pattern 
-	 * @param intensity QPS
-	 * @return Request result < request sending time, response time >
 	 */
 	public abstract void executeJob(int serviceId, int type);
 

@@ -154,7 +154,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 					}
 				}
 			};
-			timer.schedule(timerTask, ConfigPara.kpArray[serviceId-1]);
+			timer.schedule(timerTask, ConfigPara.kpArray[serviceId-1] - (long) preWarm);
 
 		}catch (IOException e) {
 			e.printStackTrace();
