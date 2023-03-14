@@ -26,6 +26,36 @@ public abstract class AbstractJobDriver {
 	protected double keepAlive = 600000.0;
 	protected int coldStartTime = 0;
 	protected int invokeTime = 0;
+
+	public static String createCmd[] = new String[]{
+			"bash /home/zyy/INFless/developer/servingFunctions/resnet-50-create.sh",
+			"bash /home/zyy/INFless/developer/servingFunctions/mobilenet-create.sh",
+			"bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hash-create.sh",
+			"bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/Md5-create.sh",
+			"bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello-create.sh",
+			"bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort-create.sh",
+			"bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography-create.sh",
+	};
+
+	public static String deleteCmd[] = new String[]{
+			"bash /home/zyy/INFless/developer/servingFunctions/resnet-50.sh",
+			"bash /home/zyy/INFless/developer/servingFunctions/mobilenet.sh",
+			"bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hash.sh",
+			"bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/Md5.sh",
+			"bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello.sh",
+			"bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort.sh",
+			"bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography.sh",
+	};
+
+	public static String FuncName[] = new String[]{
+			"resnet-50",
+			"mobilenet",
+			"hash",
+			"Md5",
+			"hello",
+			"sort",
+			"cryptography"
+	};
  
 	protected abstract void initVariables();//init
 	/**

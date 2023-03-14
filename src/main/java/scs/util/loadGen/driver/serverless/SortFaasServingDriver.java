@@ -56,14 +56,15 @@ public class SortFaasServingDriver extends AbstractJobDriver{
     public void executeJob(final int serviceId,int type) {
         int sleepUnit=1000;
         try {
-            System.out.println("sort-req");
+            System.out.println(FuncName[serviceId-1] + " request");
             FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
             if(ConfigPara.funcFlagArray[serviceId-1] == 0) {
-                System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort-create.sh"));
+                coldStartTime++;
+                System.out.println(tool.exec(createCmd[serviceId-1]));
                 FunctionList.funcMap.put(serviceId, true);
                 ConfigPara.funcFlagArray[serviceId-1] = 2;
-                System.out.println("sort cold start time is" + coldStartTime);
+                System.out.println(FuncName[serviceId-1] + " cold start time is" + coldStartTime);
             }
 
             if(type == 3)
@@ -105,33 +106,34 @@ public class SortFaasServingDriver extends AbstractJobDriver{
             functionExec.exec();
             ConfigPara.funcFlagArray[serviceId-1] = 1;
             invokeTime++;
-            System.out.println("sort Invoke time is " + invokeTime);
+            System.out.println(FuncName[serviceId-1] + " Invoke time is " + invokeTime + ", cold start time is " + coldStartTime);
 
-            Date now1 = new Date();
-            Date preWarmTime = new Date(now1.getTime() + (long) preWarm);
-            FunctionList.preMap.put(serviceId, preWarmTime);
-            Timer timer1 = new Timer();
-            TimerTask timerTask1 = new TimerTask() {
-                @Override
-                public void run() {
-                    Date now = new Date();
-                    if(FunctionList.preMap.get(serviceId).compareTo(now) < 0)
-                    {
-                        try {
-                            FunctionList.funcMap.put(serviceId, true);
-                            System.out.println("sort prewarm now. pre-warm is " + preWarm);
-                            System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort-create.sh"));
-                            ConfigPara.funcFlagArray[serviceId-1] = 1;
-                        } catch (IOException e) {
-                            e.printStackTrace();
+            if(preWarm != 0.0) {
+                Date now1 = new Date();
+                Date preWarmTime = new Date(now1.getTime() + (long) preWarm);
+                FunctionList.preMap.put(serviceId, preWarmTime);
+                Timer timer1 = new Timer();
+                TimerTask timerTask1 = new TimerTask() {
+                    @Override
+                    public void run() {
+                        Date now = new Date();
+                        if (FunctionList.preMap.get(serviceId).compareTo(now) < 0) {
+                            try {
+                                FunctionList.funcMap.put(serviceId, true);
+                                System.out.println(FuncName[serviceId-1] + " prewarm now. pre-warm is " + preWarm);
+                                System.out.println(tool.exec(createCmd[serviceId-1]));
+                                ConfigPara.funcFlagArray[serviceId - 1] = 1;
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
-                }
-            };
-            timer1.schedule(timerTask1, (long) preWarm);
+                };
+                timer1.schedule(timerTask1, (long) preWarm);
+            }
 
             Date now = new Date();
-            Date deleteTime = new Date(now.getTime() + ConfigPara.kpArray[serviceId-1]);
+            Date deleteTime = new Date(now.getTime() + ConfigPara.kpArray[serviceId-1] - (long) preWarm);
             FunctionList.timeMap.put(serviceId, deleteTime);
             Timer timer = new Timer();
             TimerTask timerTask = new TimerTask() {
@@ -142,8 +144,8 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                     {
                         try {
                             FunctionList.funcMap.put(serviceId, false);
-                            System.out.println("sort keepAlive over. keepalive is " + keepAlive);
-                            System.out.println(tool.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort.sh"));
+                            System.out.println(FuncName[serviceId-1] + " keepAlive over. keepalive is " + keepAlive);
+                            System.out.println(tool.exec(deleteCmd[serviceId-1]));
                             ConfigPara.funcFlagArray[serviceId-1] = 0;
                         } catch (IOException e) {
                             e.printStackTrace();
