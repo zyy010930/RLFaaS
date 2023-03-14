@@ -117,7 +117,8 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                     @Override
                     public void run() {
                         Date now = new Date();
-                        if (FunctionList.preMap.get(serviceId).compareTo(now) < 0 && ConfigPara.funcFlagArray[serviceId-1] == 0) {
+                        System.out.println("prewarm start!!!!!!!!! " + ConfigPara.funcFlagArray[serviceId-1]);
+                        if (ConfigPara.funcFlagArray[serviceId-1] == 0) {
                             try {
                                 FunctionList.funcMap.put(serviceId, true);
                                 System.out.println(FuncName[serviceId-1] + " prewarm now. pre-warm is " + preWarm);
@@ -140,7 +141,8 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                 @Override
                 public void run() {
                     Date now = new Date();
-                    if(FunctionList.timeMap.get(serviceId).compareTo(now) <= 0 && ConfigPara.funcFlagArray[serviceId-1] != 0)
+                    System.out.println("delete start!!!!!!!!! " + ConfigPara.funcFlagArray[serviceId-1]);
+                    if(ConfigPara.funcFlagArray[serviceId-1] != 0)
                     {
                         try {
                             FunctionList.funcMap.put(serviceId, false);
