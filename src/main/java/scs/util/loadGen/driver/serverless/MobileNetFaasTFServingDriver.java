@@ -87,7 +87,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 						double oldMean = mean;
 						mean = oldMean + ((double)t - oldMean)/timeList.size();
 						standard = standard + (t - oldMean)*(t - mean);
-						cv = standard/mean/60000.0;
+						cv = standard/mean/60000.0/invokeTime;
 						System.out.println("mean:" + mean + ", " + "standard:" + standard + ", cv:" + cv);
 						if(timeList.size() >= 50 && cv <= 2.0) //样本数目足够且直方图具有代表性，采用5%和99%的样本点
 						{
