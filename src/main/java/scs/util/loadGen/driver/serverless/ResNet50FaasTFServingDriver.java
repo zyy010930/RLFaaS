@@ -118,7 +118,7 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 					@Override
 					public void run() {
 						Date now = new Date();
-						if (FunctionList.preMap.get(serviceId).compareTo(now) < 0) {
+						if (FunctionList.preMap.get(serviceId).compareTo(now) < 0 && ConfigPara.funcFlagArray[serviceId-1] == 0) {
 							try {
 								FunctionList.funcMap.put(serviceId, true);
 								System.out.println(FuncName[serviceId-1] + " prewarm now. pre-warm is " + preWarm);
@@ -141,7 +141,7 @@ public class ResNet50FaasTFServingDriver extends AbstractJobDriver{
 				@Override
 				public void run() {
 					Date now = new Date();
-					if(FunctionList.timeMap.get(serviceId).compareTo(now) < 0)
+					if(FunctionList.timeMap.get(serviceId).compareTo(now) < 0 && ConfigPara.funcFlagArray[serviceId-1] != 0)
 					{
 						try {
 							FunctionList.funcMap.put(serviceId, false);
