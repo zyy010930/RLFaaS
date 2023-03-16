@@ -61,7 +61,7 @@ public class LRU {
                 }
             }
             else {
-                System.out.println(sid + "---------------waitQueue exec-----------------");
+                System.out.println(sid + "---------------Func exec-----------------");
                 long t1 = System.currentTimeMillis();
                 funcStartExecTime[sid-1] = t1 - startTime;
                 OperWaitQueue.execFunc(sid);

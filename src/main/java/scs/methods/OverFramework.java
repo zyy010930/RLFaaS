@@ -1,6 +1,7 @@
 package scs.methods;
 
 import scs.controller.OperWaitQueue;
+import scs.methods.FaasCache.GreedyDual;
 import scs.methods.LRFU.LFU;
 import scs.methods.LRFU.LRU;
 import scs.methods.Wild.Wild;
@@ -48,6 +49,9 @@ public class OverFramework {
                 break;
             case 3:
                 Wild.run(sid);
+                break;
+            case 4:
+                GreedyDual.run(sid);
                 break;
             default:
                 System.out.println("Method id is Chosen Error!");

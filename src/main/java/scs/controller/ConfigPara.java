@@ -17,6 +17,9 @@ public class ConfigPara {
     public static Double[] funcCapacity;        //The sizes of functions
     public static Integer[] kpArray;            //This array records the keep-alive time for functions
 
+    public static Double[] initTime;
+    public static Integer[] invokeTime;
+
     /*********
         When functions are running at memory and the remaining memory capacity cannot support to response other functions,
         the functions are added into the waitQueue. Therefore, the waitQueue stores ids of waiting functions.
@@ -40,6 +43,9 @@ public class ConfigPara {
         kpArray = new Integer[]{0,0,0,0,0,0,0};
         funcFlagArray = new Integer[]{0,0,0,0,0,0,0};
         waitQueue = new LinkedList<>();
+
+        initTime = new Double[]{1.7,2.2,2.5,3.1,2.9,3.5,2.0};
+        invokeTime = new Integer[]{0,0,0,0,0,0,0};
     }
 
     public static void setMemoryCapacity(Double currFuncCapacity1) {
