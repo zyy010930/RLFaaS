@@ -27,10 +27,10 @@ public class ARIMAReader {
                 }
                 else
                 {
+                    if(country.length == 1 && country[0] != "0")
+                        continue;
                     ArrayList<Double> list = new ArrayList<>();
                     for (int i = 0; i < country.length; i++) {
-                        if(country[i] == "")
-                            break;
                         list.add(Double.parseDouble(country[i]));
                     }
                     arimaList.put(num,list);
