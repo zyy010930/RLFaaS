@@ -1,7 +1,7 @@
 package scs.methods;
 
 import scs.controller.OperWaitQueue;
-import scs.methods.FaasCache.GreedyDual;
+import scs.methods.FaaSCache.GreedyDual;
 import scs.methods.LRFU.LFU;
 import scs.methods.LRFU.LRU;
 import scs.methods.Wild.Wild;

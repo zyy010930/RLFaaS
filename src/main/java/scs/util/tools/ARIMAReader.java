@@ -21,6 +21,7 @@ public class ARIMAReader {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){
             while ((line = br.readLine()) != null) {
                 String[] country = line.split(cvsSplitBy);
+                System.out.println(line + " " + country.length);
                 if(country.length == 0)
                 {
                     continue;
