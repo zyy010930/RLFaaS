@@ -1,7 +1,5 @@
 package scs.util.tools;
 
-import org.jcp.xml.dsig.internal.SignerOutputStream;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
