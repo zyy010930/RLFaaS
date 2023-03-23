@@ -18,6 +18,7 @@ import scs.util.loadGen.threads.FunctionExec;
 import scs.util.loadGen.threads.LoadExecThread;
 import scs.util.loadGen.threads.LoadExecThreadRandom;
 import scs.util.repository.Repository;
+import scs.util.tools.ARIMAReader;
 import scs.util.tools.HttpClientPool;
 import scs.util.tools.SSHTool;
 
@@ -77,11 +78,11 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                     long nowTime = new Date().getTime();
                     System.out.println("now:" + nowTime + " ,old:" + oldTime);
                     long t = nowTime - oldTime;
-                    timeList.add(t);
-                    if(outOfBound >= 3600000)
+                    if(t >= 7200000)
                     {
-                        outOfBound++;
+                        outOfBoundTime++;
                     }
+                    timeList.add(t);
                     oldTime = nowTime;
                     if(mean == 0)
                     {
@@ -96,10 +97,13 @@ public class SortFaasServingDriver extends AbstractJobDriver{
                         {
                             preWarm = (double)timeList.get(Math.min(timeList.size() - 1,((int)(timeList.size()*0.05) - 1)));
                             keepAlive = (double)timeList.get(Math.max(0,((int)(timeList.size()*0.99) - 1)));
-                        } else if(((double)outOfBound/invokeTime) >= 0.8)
+                        } else if((double)outOfBoundTime/invokeTime >= 0.5)
                         {
-                            //采用ARIMA时序预测
-                        } else { //样本不足或者直方图不具有代表性，pre-warm设置为0，keep-alive设置一个较长时间
+                            arimaList = ARIMAReader.arimaList.get(serviceId);
+                            preWarm = arimaList.get(invokeTime)*0.85;
+                            keepAlive = arimaList.get(invokeTime)*0.3;
+                        }
+                        else { //样本不足或者直方图不具有代表性，pre-warm设置为0，keep-alive设置一个较长时间
                             preWarm = 0.0;
                             keepAlive = 600000.0;
                         }

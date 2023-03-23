@@ -1,8 +1,10 @@
 package scs.controller;
 
+import scs.util.tools.ARIMAReader;
 import scs.util.tools.CSVReader;
 import scs.util.tools.FunctionRequest;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,7 @@ import java.util.TreeMap;
  */
 public class FuncExecTimeGen {
 
-    Map<Integer, ArrayList<Integer>> funcExecTimeGenAver() {
+    Map<Integer, ArrayList<Integer>> funcExecTimeGenAver() throws FileNotFoundException {
         CSVReader reader = new CSVReader();
         /*
         List<Map.Entry<String, ArrayList<Integer>>> list = reader.getAzure();
@@ -33,6 +35,9 @@ public class FuncExecTimeGen {
         FunctionRequest functionRequest = new FunctionRequest();
         System.out.println("Invoke Map Build------");
         Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMapTest(mp);
+        ARIMAReader arimaReader = new ARIMAReader();
+        arimaReader.getARIMA();
+        System.out.println("Arima read------");
 
         Map<Integer,ArrayList<Integer>> funcMap = new TreeMap<>();
         for(int i = 1; i <= 7; i++)

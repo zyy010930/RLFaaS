@@ -61,6 +61,7 @@
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.4.9" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpmime:4.5.5" />
+          <element id="library" level="project" name="Maven: gov.nist.math:jama:1.0.3" />
         </element>
       </element>
       <element id="directory" name="META-INF">
