@@ -32,7 +32,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 	 * Singleton code block
 	 */
 	private static MobileNetFaasTFServingDriver driver=null;
-	private SSHTool tool = new SSHTool("192.168.3.154", "root", "wnlof309b507", StandardCharsets.UTF_8);
+	private SSHTool tool = new SSHTool("192.168.1.4", "root", "wnlof309b507", StandardCharsets.UTF_8);
 	//private StringBuilder builder=new StringBuilder();
 	
 	public MobileNetFaasTFServingDriver(){initVariables();}
@@ -48,7 +48,7 @@ public class MobileNetFaasTFServingDriver extends AbstractJobDriver{
 		httpClient=HttpClientPool.getInstance().getConnection();
 		queryItemsStr=Repository.mobileNetFaasBaseURL;
 		jsonParmStr=Repository.mobileNetParmStr;
-		queryItemsStr=queryItemsStr.replace("Ip","192.168.3.154");
+		queryItemsStr=queryItemsStr.replace("Ip","192.168.1.4");
 		queryItemsStr=queryItemsStr.replace("Port","31112");
 	}
 

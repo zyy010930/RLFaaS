@@ -32,7 +32,7 @@ public class HashFaasServingDriver extends AbstractJobDriver{
      * Singleton code block
      */
     private static HashFaasServingDriver driver=null;
-    private SSHTool tool = new SSHTool("192.168.3.154", "root", "wnlof309b507", StandardCharsets.UTF_8);
+    private SSHTool tool = new SSHTool("192.168.1.4", "root", "wnlof309b507", StandardCharsets.UTF_8);
     public HashFaasServingDriver(){initVariables();}
     public synchronized static HashFaasServingDriver getInstance() {
         if (driver == null) {
@@ -46,7 +46,7 @@ public class HashFaasServingDriver extends AbstractJobDriver{
         httpClient=HttpClientPool.getInstance().getConnection();
         queryItemsStr=Repository.HashFaasBaseURL;
         jsonParmStr=Repository.resNet50ParmStr;
-        queryItemsStr=queryItemsStr.replace("Ip","192.168.3.154");
+        queryItemsStr=queryItemsStr.replace("Ip","192.168.1.4");
         queryItemsStr=queryItemsStr.replace("Port","31112");
     }
 
