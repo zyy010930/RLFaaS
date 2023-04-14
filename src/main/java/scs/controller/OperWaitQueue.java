@@ -19,7 +19,7 @@ import java.util.Queue;
  * @Version 1.0
  */
 public class OperWaitQueue {
-    private static SSHTool tool1 = new SSHTool("192.168.3.154", "root", "wnlof309b507", StandardCharsets.UTF_8);
+    private static SSHTool tool1 = new SSHTool("192.168.1.4", "root", "wnlof309b507", StandardCharsets.UTF_8);
 
     public static void execQueueFunc() {
         if(ConfigPara.waitQueue.size() != 0) {
