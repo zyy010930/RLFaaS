@@ -20,7 +20,7 @@ public class Hybrid {
         System.out.println("毕设");
         ConfigPara.invokeTime[sid - 1]++;
         priority[sid - 1] = ConfigPara.invokeTime[sid - 1] * ConfigPara.initTime[sid - 1] / ConfigPara.funcCapacity[sid - 1];
-        if(ConfigPara.funcCapacity[sid - 1] == 0) {
+        if(ConfigPara.funcFlagArray[sid - 1] == 0) {
             Double pri = Double.MAX_VALUE;
             Integer tempSid = 0;
             while (ConfigPara.funcCapacity[sid - 1] > ConfigPara.getRemainMemCapacity()) {
