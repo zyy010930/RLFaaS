@@ -37,7 +37,7 @@ public class Hybrid {
             Integer tempSid = 0;
             while (ConfigPara.funcCapacity[sid - 1] > ConfigPara.getRemainMemCapacity()) {
                 for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
-                    if (priority[i] < pri && ConfigPara.funcFlagArray[sid - 1] != 0) {
+                    if (priority[i] < pri && ConfigPara.funcFlagArray[i] != 0) {
                         pri = priority[i];
                         tempSid = i + 1;
                     }
