@@ -20,11 +20,13 @@ public class Hybrid {
 
     public static void printMemory()
     {
+        System.out.println("-----当前内存包括-----");
         for(int i = 0; i < 7; i++)
         {
             if(ConfigPara.funcFlagArray[i] == 1)
                 System.out.println(AbstractJobDriver.FuncName[i]);
         }
+        System.out.println("-------------------");
     }
     public static void run(Integer sid) {
         System.out.println("毕设");
