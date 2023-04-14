@@ -334,6 +334,24 @@ public class Repository{
 		if(loaderIndex==7){
 			return new LoaderDriver("cryptography", CryptographyFaasServingDriver.getInstance());
 		}
+		if(loaderIndex==8){
+			return new LoaderDriver("nodeinfo", NodeInfoFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==9){
+			return new LoaderDriver("alpine", AlpineFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==10){
+			return new LoaderDriver("curl", CurlFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==11){
+			return new LoaderDriver("cows", CowsFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==12){
+			return new LoaderDriver("sleep", SleepFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==13){
+			return new LoaderDriver("printer", PrinterFaasServingDriver.getInstance());
+		}
 		return null;
 	} 
 
