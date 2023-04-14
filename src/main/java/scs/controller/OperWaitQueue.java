@@ -80,7 +80,7 @@ public class OperWaitQueue {
                 break;
             case 3:
                 try {
-                    System.out.println(tool1.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hash.sh"));
+                    System.out.println(tool1.exec("bash bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hash.sh"));
                     ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
                     ConfigPara.funcFlagArray[sid-1] = 0;
                 }catch (IOException e) {
@@ -89,7 +89,7 @@ public class OperWaitQueue {
                 break;
             case 4:
                 try {
-                    System.out.println(tool1.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/Md5.sh"));
+                    System.out.println(tool1.exec("bash bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/Md5.sh"));
                     ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
                     ConfigPara.funcFlagArray[sid-1] = 0;
                 }catch (IOException e) {
@@ -98,7 +98,7 @@ public class OperWaitQueue {
                 break;
             case 5:
                 try {
-                    System.out.println(tool1.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello.sh"));
+                    System.out.println(tool1.exec("bash bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello.sh"));
                     ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
                     ConfigPara.funcFlagArray[sid-1] = 0;
                 }catch (IOException e) {
@@ -107,7 +107,7 @@ public class OperWaitQueue {
                 break;
             case 6:
                 try {
-                    System.out.println(tool1.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort.sh"));
+                    System.out.println(tool1.exec("bash bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort.sh"));
                     ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
                     ConfigPara.funcFlagArray[sid-1] = 0;
                 }catch (IOException e) {
@@ -116,7 +116,7 @@ public class OperWaitQueue {
                 break;
             case 7:
                 try {
-                    System.out.println(tool1.exec("bash /home/zyy/BBServerless/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography.sh"));
+                    System.out.println(tool1.exec("bash bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography.sh"));
                     ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
                     ConfigPara.funcFlagArray[sid-1] = 0;
                 }catch (IOException e) {

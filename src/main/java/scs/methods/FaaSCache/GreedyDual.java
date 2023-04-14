@@ -19,14 +19,14 @@ public class GreedyDual {
         priority[sid - 1] = ConfigPara.invokeTime[sid - 1]*ConfigPara.initTime[sid - 1]/ConfigPara.funcCapacity[sid - 1];
         if(ConfigPara.waitQueue.size() != 0) {
             if (ConfigPara.funcFlagArray[sid - 1] == 0) {
-                Double pri = 0.0;
+                Double pri = Double.MAX_VALUE;
                 Integer tempSid = 0;
                 System.out.println(sid + "-------------waitQueue not empty,Add waitQueue-----------");
                 ConfigPara.waitQueue.add(sid);
                 queuePrint(ConfigPara.waitQueue);
 
                 for(int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
-                    if(ConfigPara.funcFlagArray[i] == 1 && priority[i] > pri) {
+                    if(ConfigPara.funcFlagArray[i] == 1 && priority[i] < pri) {
                         pri = priority[i];
                         tempSid = i + 1;
                     }
