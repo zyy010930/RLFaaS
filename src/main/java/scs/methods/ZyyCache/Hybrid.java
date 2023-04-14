@@ -29,7 +29,7 @@ public class Hybrid {
         System.out.println("-------------------");
     }
     public static void run(Integer sid) {
-        System.out.println("毕设");
+        System.out.println("毕设" + AbstractJobDriver.FuncName[sid - 1]);
         ConfigPara.invokeTime[sid - 1]++;
         priority[sid - 1] = ConfigPara.invokeTime[sid - 1] * ConfigPara.initTime[sid - 1] / ConfigPara.funcCapacity[sid - 1];
         if(ConfigPara.funcFlagArray[sid - 1] == 0) {
