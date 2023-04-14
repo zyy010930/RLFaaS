@@ -49,8 +49,7 @@ public class Hybrid {
             }
             System.out.println("释放内存");
         }
-        printMemory();
         OperWaitQueue.execFuncHybrid(sid);
-
+        printMemory();
     }
 }
