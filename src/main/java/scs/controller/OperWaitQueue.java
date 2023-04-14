@@ -58,6 +58,13 @@ public class OperWaitQueue {
         Repository.loaderMap.get(sid).getAbstractJobDriver().executeJob(sid,0);
     }
 
+    public static void execFuncHybrid(Integer sid){
+        if(ConfigPara.funcFlagArray[sid-1] == 0) {
+            ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[sid - 1]);
+        }
+        Repository.loaderMap.get(sid).getAbstractJobDriver().exec(sid);
+    }
+
     public static void releaseFunc(Integer sid) {
         switch (sid){
             case 1:

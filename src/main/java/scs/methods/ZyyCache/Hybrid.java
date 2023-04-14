@@ -6,7 +6,7 @@ import scs.controller.OperWaitQueue;
 import java.util.Queue;
 
 public class Hybrid {
-    private static Double[] priority = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    public static Double[] priority = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     public Hybrid(){}
 
     public static void queuePrint(Queue<Integer> queue)
@@ -19,20 +19,24 @@ public class Hybrid {
     public static void run(Integer sid) {
         ConfigPara.invokeTime[sid - 1]++;
         priority[sid - 1] = ConfigPara.invokeTime[sid - 1] * ConfigPara.initTime[sid - 1] / ConfigPara.funcCapacity[sid - 1];
-        Double pri = Double.MAX_VALUE;
-        Integer tempSid = 0;
-        while(ConfigPara.funcCapacity[sid - 1] <= ConfigPara.getRemainMemCapacity()) {
-            for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
-                if (priority[i] < pri) {
-                    pri = priority[i];
-                    tempSid = i + 1;
+        if(ConfigPara.funcCapacity[sid - 1] == 0) {
+            Double pri = Double.MAX_VALUE;
+            Integer tempSid = 0;
+            while (ConfigPara.funcCapacity[sid - 1] <= ConfigPara.getRemainMemCapacity()) {
+                for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
+                    if (priority[i] < pri) {
+                        pri = priority[i];
+                        tempSid = i + 1;
+                    }
+                }
+                if (tempSid != 0) {
+                    System.out.println(tempSid + "-----------release-----------");
+                    OperWaitQueue.releaseFunc(tempSid);
                 }
             }
-            if (tempSid != 0) {
-                System.out.println(sid + "-----------release-----------");
-                OperWaitQueue.releaseFunc(tempSid);
-            }
         }
-        OperWaitQueue.execFunc(sid);
+        OperWaitQueue.execFuncHybrid(sid);
+
+
     }
 }
