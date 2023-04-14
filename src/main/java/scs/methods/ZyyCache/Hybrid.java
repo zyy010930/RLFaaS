@@ -20,9 +20,10 @@ public class Hybrid {
 
     public static void printMemory()
     {
-        for(Integer i : ConfigPara.funcFlagArray)
+        for(int i = 0; i < 7; i++)
         {
-            System.out.println(AbstractJobDriver.FuncName[i]);
+            if(ConfigPara.funcFlagArray[i] == 1)
+                System.out.println(AbstractJobDriver.FuncName[i]);
         }
     }
     public static void run(Integer sid) {
