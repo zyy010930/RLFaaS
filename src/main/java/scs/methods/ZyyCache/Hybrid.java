@@ -2,6 +2,7 @@ package scs.methods.ZyyCache;
 
 import scs.controller.ConfigPara;
 import scs.controller.OperWaitQueue;
+import scs.util.loadGen.driver.AbstractJobDriver;
 
 import java.util.Queue;
 
@@ -14,6 +15,14 @@ public class Hybrid {
         for(Integer i : queue)
         {
             System.out.println(i + " ");
+        }
+    }
+
+    public static void printMemory()
+    {
+        for(Integer i : ConfigPara.funcFlagArray)
+        {
+            System.out.println(AbstractJobDriver.FuncName[i]);
         }
     }
     public static void run(Integer sid) {
@@ -37,8 +46,8 @@ public class Hybrid {
             }
             System.out.println("释放内存");
         }
+        printMemory();
         OperWaitQueue.execFuncHybrid(sid);
-
 
     }
 }
