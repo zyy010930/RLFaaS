@@ -22,7 +22,7 @@ public class Hybrid {
         if(ConfigPara.funcCapacity[sid - 1] == 0) {
             Double pri = Double.MAX_VALUE;
             Integer tempSid = 0;
-            while (ConfigPara.funcCapacity[sid - 1] <= ConfigPara.getRemainMemCapacity()) {
+            while (ConfigPara.funcCapacity[sid - 1] > ConfigPara.getRemainMemCapacity()) {
                 for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
                     if (priority[i] < pri) {
                         pri = priority[i];
