@@ -35,6 +35,7 @@ public class Hybrid {
                     OperWaitQueue.releaseFunc(tempSid);
                 }
             }
+            System.out.println("释放内存");
         }
         OperWaitQueue.execFuncHybrid(sid);
 

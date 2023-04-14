@@ -61,6 +61,7 @@ public class OperWaitQueue {
     public static void execFuncHybrid(Integer sid){
         if(ConfigPara.funcFlagArray[sid-1] == 0) {
             ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[sid - 1]);
+            System.out.println("目前大小：" + ConfigPara.getRemainMemCapacity());
         }
         Repository.loaderMap.get(sid).getAbstractJobDriver().exec(sid);
     }
