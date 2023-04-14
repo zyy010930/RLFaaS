@@ -17,6 +17,7 @@ public class Hybrid {
         }
     }
     public static void run(Integer sid) {
+        System.out.println("毕设");
         ConfigPara.invokeTime[sid - 1]++;
         priority[sid - 1] = ConfigPara.invokeTime[sid - 1] * ConfigPara.initTime[sid - 1] / ConfigPara.funcCapacity[sid - 1];
         if(ConfigPara.funcCapacity[sid - 1] == 0) {
