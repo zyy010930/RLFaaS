@@ -23,11 +23,12 @@ public class Hybrid {
         System.out.println("-----当前内存包括-----");
         for(int i = 0; i < 7; i++)
         {
-            if(ConfigPara.funcFlagArray[i] == 1)
+            if(ConfigPara.funcFlagArray[i] != 0)
                 System.out.println(AbstractJobDriver.FuncName[i]);
         }
         System.out.println("-------------------");
     }
+
     public static void run(Integer sid) {
         System.out.println("毕设" + AbstractJobDriver.FuncName[sid - 1]);
         ConfigPara.invokeTime[sid - 1]++;
