@@ -26,7 +26,7 @@ public class Hybrid {
             if(ConfigPara.funcFlagArray[i] != 0)
                 System.out.println(AbstractJobDriver.FuncName[i]);
         }
-        System.out.println("-------------------");
+        System.out.println("------内存:" + ConfigPara.getRemainMemCapacity() + "-----");
     }
 
     public static void run(Integer sid) {
@@ -37,6 +37,7 @@ public class Hybrid {
             Double pri = Double.MAX_VALUE;
             Integer tempSid = 0;
             while (ConfigPara.funcCapacity[sid - 1] > ConfigPara.getRemainMemCapacity()) {
+                System.out.println("开始查询符合的容器");
                 for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
                     if (priority[i] < pri && ConfigPara.funcFlagArray[i] != 0) {
                         pri = priority[i];
