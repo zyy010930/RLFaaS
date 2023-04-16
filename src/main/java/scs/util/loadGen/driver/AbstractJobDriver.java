@@ -282,7 +282,7 @@ public abstract class AbstractJobDriver {
 									}
 									if (tempSid != 0) {
 										System.out.println(tempSid + "-----------release-----------");
-										System.out.println(tool.exec(createCmd[serviceId-1]));
+										System.out.println(tool.exec(deleteCmd[serviceId-1]));
 									}
 								}
 								System.out.println(tool.exec(createCmd[serviceId-1]));
