@@ -48,7 +48,8 @@ public class Hybrid {
                     OperWaitQueue.releaseFunc(tempSid);
                 }
             }
-            System.out.println("释放内存");
+            System.out.println("释放内存给:" + AbstractJobDriver.FuncName[sid - 1]);
+            ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[sid - 1]);
         }
         OperWaitQueue.execFuncHybrid(sid);
         printMemory();

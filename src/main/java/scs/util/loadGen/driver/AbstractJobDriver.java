@@ -205,7 +205,7 @@ public abstract class AbstractJobDriver {
 				System.out.println(tool.exec(createCmd[serviceId-1]));
 				FunctionList.funcMap.put(serviceId, true);
 				ConfigPara.funcFlagArray[serviceId-1] = 2;
-				ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[serviceId - 1]);
+//				ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[serviceId - 1]);
 				System.out.println("目前大小：" + ConfigPara.getRemainMemCapacity());
 				System.out.println(FuncName[serviceId-1] + " cold start time is " + coldStartTime);
 			}
