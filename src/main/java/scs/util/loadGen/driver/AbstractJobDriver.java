@@ -284,11 +284,12 @@ public abstract class AbstractJobDriver {
 									}
 									if (tempSid != 0) {
 										System.out.println(tempSid + "-----------release-----------");
-										System.out.println(tool.exec(deleteCmd[serviceId-1]));
+										System.out.println(tool.exec(deleteCmd[tempSid-1]));
+										ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[tempSid-1]);
 									}
 								}
 								System.out.println(tool.exec(createCmd[serviceId-1]));
-								ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[serviceId-1]);
+								ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[serviceId-1]);
 								ConfigPara.funcFlagArray[serviceId - 1] = 1;
 							} catch (IOException e) {
 								e.printStackTrace();
