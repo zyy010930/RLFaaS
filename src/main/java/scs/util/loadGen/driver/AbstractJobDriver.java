@@ -275,7 +275,7 @@ public abstract class AbstractJobDriver {
 								Double pri = Double.MAX_VALUE;
 								Integer tempSid = 0;
 								Hybrid hybrid = new Hybrid();
-								while(ConfigPara.funcCapacity[serviceId - 1] <= ConfigPara.getRemainMemCapacity()) {
+								while(ConfigPara.funcCapacity[serviceId - 1] > ConfigPara.getRemainMemCapacity()) {
 									for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
 										if (hybrid.priority[i] < pri) {
 											pri = hybrid.priority[i];
