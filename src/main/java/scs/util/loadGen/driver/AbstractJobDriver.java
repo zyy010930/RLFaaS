@@ -328,7 +328,7 @@ public abstract class AbstractJobDriver {
 			}
 
 			Date now = new Date();
-			Date deleteTime = new Date(now.getTime() + (long) keepAlive - (long) preWarm);
+			Date deleteTime = new Date(now.getTime() + (long) keepAlive);
 			FunctionList.timeMap.put(serviceId, deleteTime);
 			Timer timer = new Timer();
 			int lastTime = invokeTime;
@@ -350,7 +350,7 @@ public abstract class AbstractJobDriver {
 					}
 				}
 			};
-			timer.schedule(timerTask, (long) keepAlive - (long) preWarm);
+			timer.schedule(timerTask, (long) keepAlive);
 
 		}catch (IOException e) {
 			e.printStackTrace();
