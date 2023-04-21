@@ -85,11 +85,11 @@ public class LoadGenController {
 
 						//Setting Memory Capacity
 						ConfigPara configPara = new ConfigPara();
-						configPara.setMemoryCapacity(23.5);
+						configPara.setMemoryCapacity(60.5);
 
 						System.out.println("start thread");
 
-						ExecutorService executor = Executors.newFixedThreadPool(7);
+						ExecutorService executor = Executors.newFixedThreadPool(16);
 						FunctionThread thread1 = new FunctionThread(1, funcMap.get(1));
 						FunctionThread thread2 = new FunctionThread(2, funcMap.get(2));
 						FunctionThread thread3 = new FunctionThread(3, funcMap.get(3));
@@ -97,6 +97,15 @@ public class LoadGenController {
 						FunctionThread thread5 = new FunctionThread(5, funcMap.get(5));
 						FunctionThread thread6 = new FunctionThread(6, funcMap.get(6));
 						FunctionThread thread7 = new FunctionThread(7, funcMap.get(7));
+						FunctionThread thread8 = new FunctionThread(8, funcMap.get(8));
+						FunctionThread thread9 = new FunctionThread(9, funcMap.get(9));
+						FunctionThread thread10 = new FunctionThread(10, funcMap.get(10));
+						FunctionThread thread11 = new FunctionThread(11, funcMap.get(11));
+						FunctionThread thread12 = new FunctionThread(12, funcMap.get(12));
+						FunctionThread thread13 = new FunctionThread(13, funcMap.get(13));
+						FunctionThread thread14 = new FunctionThread(14, funcMap.get(14));
+						FunctionThread thread15 = new FunctionThread(15, funcMap.get(15));
+						FunctionThread thread16 = new FunctionThread(16, funcMap.get(16));
 						executor.execute(thread1);
 						executor.execute(thread2);
 						executor.execute(thread3);
@@ -104,6 +113,15 @@ public class LoadGenController {
 						executor.execute(thread5);
 						executor.execute(thread6);
 						executor.execute(thread7);
+						executor.execute(thread8);
+						executor.execute(thread9);
+						executor.execute(thread10);
+						executor.execute(thread11);
+						executor.execute(thread12);
+						executor.execute(thread13);
+						executor.execute(thread14);
+						executor.execute(thread15);
+						executor.execute(thread16);
 						executor.shutdown();
 					} else {
 						response.getWriter().write("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);
