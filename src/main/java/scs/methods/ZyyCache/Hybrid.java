@@ -39,7 +39,7 @@ public class Hybrid {
             while (ConfigPara.funcCapacity[sid - 1] > ConfigPara.getRemainMemCapacity()) {
                 System.out.println("开始查询符合的容器");
                 for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
-                    if (priority[i] < pri && ConfigPara.funcFlagArray[i] != 0) {
+                    if (priority[i] < pri && ConfigPara.funcFlagArray[i] == 1) {
                         pri = priority[i];
                         tempSid = i + 1;
                     }
