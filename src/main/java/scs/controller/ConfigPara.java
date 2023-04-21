@@ -35,17 +35,17 @@ public class ConfigPara {
     public static Integer[] funcFlagArray;
 
     public ConfigPara() {
-        maxFuncCapacity = 47.0;
-        minFuncCapacity = 9.0;
-        currFuncCapacity = 23.5;
-        funcCapacity = new Double[]{7.0, 6.0, 6.0, 6.0, 7.0, 9.0, 6.0};
+        maxFuncCapacity = 120.5;
+        minFuncCapacity = 10.6;
+        currFuncCapacity = 60.5;
+        funcCapacity = new Double[]{7.3, 6.1, 6.5, 5.7, 7.8, 9.0, 8.5,10.6,5.4,7.1,6.6,8.1,9.2,8.0,7.2,10.4};
 
-        kpArray = new Integer[]{0,0,0,0,0,0,0};
-        funcFlagArray = new Integer[]{0,0,0,0,0,0,0};
+        kpArray = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        funcFlagArray = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         waitQueue = new LinkedList<>();
 
-        initTime = new Double[]{1.7,2.2,2.5,3.1,2.9,3.5,2.0};
-        invokeTime = new Integer[]{0,0,0,0,0,0,0};
+        initTime = new Double[]{1.7,2.2,2.5,3.1,2.9,3.5,2.0,1.7,2.2,2.5,3.1,2.9,3.5,2.0,1.7,2.8};
+        invokeTime = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     }
 
     public static void setMemoryCapacity(Double currFuncCapacity1) {

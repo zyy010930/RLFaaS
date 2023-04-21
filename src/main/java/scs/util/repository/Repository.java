@@ -338,19 +338,28 @@ public class Repository{
 			return new LoaderDriver("nodeinfo", NodeInfoFaasServingDriver.getInstance());
 		}
 		if(loaderIndex==9){
-			return new LoaderDriver("alpine", AlpineFaasServingDriver.getInstance());
-		}
-		if(loaderIndex==10){
 			return new LoaderDriver("curl", CurlFaasServingDriver.getInstance());
 		}
-		if(loaderIndex==11){
+		if(loaderIndex==10){
 			return new LoaderDriver("cows", CowsFaasServingDriver.getInstance());
 		}
-		if(loaderIndex==12){
+		if(loaderIndex==11){
 			return new LoaderDriver("sleep", SleepFaasServingDriver.getInstance());
 		}
-		if(loaderIndex==13){
+		if(loaderIndex==12){
 			return new LoaderDriver("printer", PrinterFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==13){
+			return new LoaderDriver("figlet", FigLetFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==14){
+			return new LoaderDriver("nmap", NmapFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==15){
+			return new LoaderDriver("nslookup", NsLookUpFaasServingDriver.getInstance());
+		}
+		if(loaderIndex==16){
+			return new LoaderDriver("shasum", ShaSumFaasServingDriver.getInstance());
 		}
 		return null;
 	} 

@@ -131,6 +131,23 @@ public class OperWaitQueue {
                     e.printStackTrace();
                 }
                 break;
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+                try {
+                    System.out.println(tool1.exec("bash /home/zyy/test.sh"));
+                    ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
+                    ConfigPara.funcFlagArray[sid-1] = 0;
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
             default:
                 System.out.println("Function Release Error!");
         }

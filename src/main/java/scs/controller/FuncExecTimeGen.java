@@ -40,7 +40,7 @@ public class FuncExecTimeGen {
         System.out.println("Arima read------");
 
         Map<Integer,ArrayList<Integer>> funcMap = new TreeMap<>();
-        for(int i = 1; i <= 7; i++)
+        for(int i = 1; i <= 16; i++)
         {
             ArrayList<Integer> timeList = new ArrayList<>();
 

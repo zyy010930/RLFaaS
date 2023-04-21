@@ -46,6 +46,15 @@ public abstract class AbstractJobDriver {
 			"bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello-create.sh",
 			"bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort-create.sh",
 			"bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography-create.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
 	};
 
 	public static String deleteCmd[] = new String[]{
@@ -56,6 +65,15 @@ public abstract class AbstractJobDriver {
 			"bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello.sh",
 			"bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort.sh",
 			"bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
+			"bash /home/zyy/test.sh",
 	};
 
 	public static String FuncName[] = new String[]{
@@ -65,7 +83,16 @@ public abstract class AbstractJobDriver {
 			"Md5",
 			"hello",
 			"sort",
-			"cryptography"
+			"cryptography",
+			"nodeInfo",
+			"curl",
+			"cows",
+			"sleep",
+			"printer",
+			"figlet",
+			"nmap",
+			"nslookup",
+			"shasum"
 	};
  
 	protected abstract void initVariables();//init
