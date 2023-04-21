@@ -21,7 +21,7 @@ public class Hybrid {
     public static void printMemory()
     {
         System.out.println("-----当前内存包括-----");
-        for(int i = 0; i < 7; i++)
+        for(int i = 0; i < 16; i++)
         {
             if(ConfigPara.funcFlagArray[i] != 0)
                 System.out.println(AbstractJobDriver.FuncName[i]);
