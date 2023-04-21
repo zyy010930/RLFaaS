@@ -44,6 +44,15 @@ public class LoadGenController {
 		mp.put(5, 5);
 		mp.put(6, 6);
 		mp.put(7, 7);
+		mp.put(8, 8);
+		mp.put(9, 9);
+		mp.put(10, 10);
+		mp.put(11, 11);
+		mp.put(12, 12);
+		mp.put(13, 13);
+		mp.put(14, 14);
+		mp.put(15, 15);
+		mp.put(16, 16);
 	}
 
 	private ArrayList<Map<Integer,Integer>> functionList = new ArrayList<Map<Integer, Integer>>();
