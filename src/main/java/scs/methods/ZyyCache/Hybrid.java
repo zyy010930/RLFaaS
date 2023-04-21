@@ -7,7 +7,7 @@ import scs.util.loadGen.driver.AbstractJobDriver;
 import java.util.Queue;
 
 public class Hybrid {
-    public static Double[] priority = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    public static Double[] priority = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0,0.0};
     public Hybrid(){}
 
     public static void queuePrint(Queue<Integer> queue)
