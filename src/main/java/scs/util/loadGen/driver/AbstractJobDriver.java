@@ -340,11 +340,10 @@ public abstract class AbstractJobDriver {
 					if(ConfigPara.funcFlagArray[serviceId-1] != 0 && invokeTime == lastTime)
 					{
 						try {
-							FunctionList.funcMap.put(serviceId, false);
-							System.out.println(FuncName[serviceId-1] + " keepAlive over. keepalive is " + keepAlive);
-							System.out.println(tool.exec(deleteCmd[serviceId-1]));
 							ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[serviceId-1]);
 							ConfigPara.funcFlagArray[serviceId-1] = 0;
+							System.out.println(FuncName[serviceId-1] + " keepAlive over. keepalive is " + keepAlive);
+							System.out.println(tool.exec(deleteCmd[serviceId-1]));
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
