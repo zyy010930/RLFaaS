@@ -228,11 +228,12 @@ public abstract class AbstractJobDriver {
 			FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
 			if(ConfigPara.funcFlagArray[serviceId-1] == 0) {
+				System.out.println("目前大小：" + ConfigPara.getRemainMemCapacity());
 				ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[serviceId - 1]);
+				System.out.println("目前大小：" + ConfigPara.getRemainMemCapacity());
 				ConfigPara.funcFlagArray[serviceId-1] = 2;
 				coldStartTime++;
 				System.out.println(tool.exec(createCmd[serviceId-1]));
-				System.out.println("目前大小：" + ConfigPara.getRemainMemCapacity());
 				System.out.println(FuncName[serviceId-1] + " cold start time is " + coldStartTime);
 			}
 			else
