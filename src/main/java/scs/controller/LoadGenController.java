@@ -341,6 +341,7 @@ public class LoadGenController {
 			} catch (InterruptedException e) {
 				throw new RuntimeException(e);
 			}
+			ArrayList<Double> list = new ArrayList<>();
 			for(int i = 1; i <= 1440; i++)
 			{
 				try {
@@ -348,6 +349,12 @@ public class LoadGenController {
 				} catch (InterruptedException e) {
 					throw new RuntimeException(e);
 				}
+				list.add(ConfigPara.getRemainMemCapacity());
+				System.out.println("将内存数据载入list,list长度" + list.size());
+			}
+
+			for(int i = 0;i < list.size(); i++)
+			{
 				File writeFile = new File("/home/zyy/capacity.csv");
 				try{
 					//第二步：通过BufferedReader类创建一个使用默认大小输出缓冲区的缓冲字符输出流
@@ -356,7 +363,7 @@ public class LoadGenController {
 					//第三步：将文档的下一行数据赋值给lineData，并判断是否为空，若不为空则输出
 					//调用write的方法将字符串写到流中
 					writeText.write(String.valueOf(ConfigPara.getRemainMemCapacity()));
-					writeText.write("\\r\\n");
+					writeText.newLine();
 					//使用缓冲区的刷新方法将数据刷到目的地中
 					writeText.flush();
 					//关闭缓冲区，缓冲区没有调用系统底层资源，真正调用底层资源的是FileWriter对象，缓冲区仅仅是一个提高效率的作用
