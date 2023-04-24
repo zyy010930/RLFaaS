@@ -1,5 +1,6 @@
 package scs.controller;
 
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -98,7 +99,7 @@ public class LoadGenController {
 
 						System.out.println("start thread");
 
-						ExecutorService executor = Executors.newFixedThreadPool(16);
+						ExecutorService executor = Executors.newFixedThreadPool(17);
 						FunctionThread thread1 = new FunctionThread(1, funcMap.get(1));
 						FunctionThread thread2 = new FunctionThread(2, funcMap.get(2));
 						FunctionThread thread3 = new FunctionThread(3, funcMap.get(3));
@@ -115,6 +116,7 @@ public class LoadGenController {
 						FunctionThread thread14 = new FunctionThread(14, funcMap.get(14));
 						FunctionThread thread15 = new FunctionThread(15, funcMap.get(15));
 						FunctionThread thread16 = new FunctionThread(16, funcMap.get(16));
+						CapacityThread thread17 = new CapacityThread();
 						executor.execute(thread1);
 						executor.execute(thread2);
 						executor.execute(thread3);
@@ -131,6 +133,7 @@ public class LoadGenController {
 						executor.execute(thread14);
 						executor.execute(thread15);
 						executor.execute(thread16);
+						executor.execute(thread17);
 						executor.shutdown();
 					} else {
 						response.getWriter().write("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);
@@ -325,6 +328,41 @@ public class LoadGenController {
 				}
 
 				OverFramework.run(serviceId, 5);
+			}
+		}
+	}
+
+	static class CapacityThread extends Thread {
+		public CapacityThread(){}
+
+		public void run(){
+			for(int i = 1; i <= 1440; i++)
+			{
+				try {
+					Thread.sleep(60000*i);
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+				File writeFile = new File("/home/zyy/capacity.csv");
+				try{
+					//第二步：通过BufferedReader类创建一个使用默认大小输出缓冲区的缓冲字符输出流
+					BufferedWriter writeText = new BufferedWriter(new FileWriter(writeFile));
+
+					//第三步：将文档的下一行数据赋值给lineData，并判断是否为空，若不为空则输出
+					writeText.newLine();    //换行
+					//调用write的方法将字符串写到流中
+					writeText.write(String.valueOf(ConfigPara.getRemainMemCapacity()));
+
+					//使用缓冲区的刷新方法将数据刷到目的地中
+					writeText.flush();
+					//关闭缓冲区，缓冲区没有调用系统底层资源，真正调用底层资源的是FileWriter对象，缓冲区仅仅是一个提高效率的作用
+					//因此，此处的close()方法关闭的是被缓存的流对象
+					writeText.close();
+				}catch (FileNotFoundException e){
+					System.out.println("没有找到指定文件");
+				}catch (IOException e){
+					System.out.println("文件读写出错");
+				}
 			}
 		}
 	}

@@ -107,12 +107,16 @@ public abstract class AbstractJobDriver {
 			FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
 			if(ConfigPara.funcFlagArray[serviceId-1] == 0) {
+				System.out.println("目前大小：" + ConfigPara.getRemainMemCapacity());
+				ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[serviceId - 1]);
+				System.out.println("目前大小：" + ConfigPara.getRemainMemCapacity());
+				ConfigPara.funcFlagArray[serviceId-1] = 2;
 				coldStartTime++;
 				System.out.println(tool.exec(createCmd[serviceId-1]));
-				FunctionList.funcMap.put(serviceId, true);
-				ConfigPara.funcFlagArray[serviceId-1] = 2;
 				System.out.println(FuncName[serviceId-1] + " cold start time is " + coldStartTime);
 			}
+			else
+				ConfigPara.funcFlagArray[serviceId-1] = 2;
 
 			if(type == 3)
 			{
@@ -159,11 +163,12 @@ public abstract class AbstractJobDriver {
 			}
 
 			ConfigPara.kpArray[serviceId-1] = (int)keepAlive;        //Setting the keep-alive
-			ConfigPara.funcFlagArray[serviceId-1] = 2;
+			//ConfigPara.funcFlagArray[serviceId-1] = 2;
 			functionExec.exec();
-			ConfigPara.funcFlagArray[serviceId-1] = 1;
+			//ConfigPara.funcFlagArray[serviceId-1] = 1;
 			invokeTime++;
 			System.out.println(FuncName[serviceId-1] + " Invoke time is " + invokeTime + ", cold start time is " + coldStartTime + ", cold start rate is " + ((double)coldStartTime/invokeTime)*100.0 + "%, preWarm time is " + preWarm + ", keepAive time is " + keepAlive);
+			ConfigPara.funcFlagArray[serviceId-1] = 1;
 
 			if(preWarm != 0.0) {
 				Date now1 = new Date();
@@ -177,7 +182,6 @@ public abstract class AbstractJobDriver {
 						System.out.println("prewarm start!!!!!!!!! " + ConfigPara.funcFlagArray[serviceId-1]);
 						if (ConfigPara.funcFlagArray[serviceId-1] == 0) {
 							try {
-								FunctionList.funcMap.put(serviceId, true);
 								System.out.println(FuncName[serviceId-1] + " prewarm now. pre-warm is " + preWarm);
 								System.out.println(tool.exec(createCmd[serviceId-1]));
 								ConfigPara.funcFlagArray[serviceId - 1] = 1;
@@ -191,7 +195,7 @@ public abstract class AbstractJobDriver {
 			}
 
 			Date now = new Date();
-			Date deleteTime = new Date(now.getTime() + (long) keepAlive - (long) preWarm);
+			Date deleteTime = new Date(now.getTime() + (long) keepAlive);
 			FunctionList.timeMap.put(serviceId, deleteTime);
 			Timer timer = new Timer();
 			int lastTime = invokeTime;
@@ -200,20 +204,20 @@ public abstract class AbstractJobDriver {
 				public void run() {
 					Date now = new Date();
 					System.out.println("delete start!!!!!!!!! " + ConfigPara.funcFlagArray[serviceId-1]);
-					if(ConfigPara.funcFlagArray[serviceId-1] != 0 && invokeTime == lastTime)
+					if(ConfigPara.funcFlagArray[serviceId-1] == 1 && invokeTime == lastTime)
 					{
 						try {
-							FunctionList.funcMap.put(serviceId, false);
+							ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[serviceId-1]);
+							ConfigPara.funcFlagArray[serviceId-1] = 0;
 							System.out.println(FuncName[serviceId-1] + " keepAlive over. keepalive is " + keepAlive);
 							System.out.println(tool.exec(deleteCmd[serviceId-1]));
-							ConfigPara.funcFlagArray[serviceId-1] = 0;
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
 					}
 				}
 			};
-			timer.schedule(timerTask, (long) keepAlive - (long) preWarm);
+			timer.schedule(timerTask, (long) keepAlive);
 
 		}catch (IOException e) {
 			e.printStackTrace();
