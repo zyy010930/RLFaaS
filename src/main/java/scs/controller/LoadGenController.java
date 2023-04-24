@@ -354,10 +354,9 @@ public class LoadGenController {
 					BufferedWriter writeText = new BufferedWriter(new FileWriter(writeFile,true));
 
 					//第三步：将文档的下一行数据赋值给lineData，并判断是否为空，若不为空则输出
-					writeText.newLine();    //换行
 					//调用write的方法将字符串写到流中
 					writeText.write(String.valueOf(ConfigPara.getRemainMemCapacity()));
-
+					writeText.write("\\r\\n");
 					//使用缓冲区的刷新方法将数据刷到目的地中
 					writeText.flush();
 					//关闭缓冲区，缓冲区没有调用系统底层资源，真正调用底层资源的是FileWriter对象，缓冲区仅仅是一个提高效率的作用
