@@ -346,7 +346,7 @@ public class LoadGenController {
 				File writeFile = new File("/home/zyy/capacity.csv");
 				try{
 					//第二步：通过BufferedReader类创建一个使用默认大小输出缓冲区的缓冲字符输出流
-					BufferedWriter writeText = new BufferedWriter(new FileWriter(writeFile));
+					BufferedWriter writeText = new BufferedWriter(new FileWriter(writeFile,true));
 
 					//第三步：将文档的下一行数据赋值给lineData，并判断是否为空，若不为空则输出
 					writeText.newLine();    //换行
