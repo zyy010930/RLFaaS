@@ -336,6 +336,11 @@ public class LoadGenController {
 		public CapacityThread(){}
 
 		public void run(){
+			try {
+				Thread.sleep(120000);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
 			for(int i = 1; i <= 1440; i++)
 			{
 				try {
