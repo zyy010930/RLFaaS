@@ -339,7 +339,7 @@ public class LoadGenController {
 			for(int i = 1; i <= 1440; i++)
 			{
 				try {
-					Thread.sleep(60000*i);
+					Thread.sleep(60000);
 				} catch (InterruptedException e) {
 					throw new RuntimeException(e);
 				}
