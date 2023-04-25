@@ -342,7 +342,7 @@ public class LoadGenController {
 				throw new RuntimeException(e);
 			}
 			ArrayList<Double> list = new ArrayList<>();
-			for(int i = 1; i <= 120; i++)
+			for(int i = 1; i <= 5; i++)
 			{
 				try {
 					Thread.sleep(60000);
@@ -356,10 +356,11 @@ public class LoadGenController {
 
 			File writeFile = new File("/home/zyy/capacity.csv");
 			try{
-				BufferedWriter writeText = new BufferedWriter(new FileWriter(writeFile));
+				BufferedWriter writeText = new BufferedWriter(new FileWriter(writeFile,true));
 				for(int i = 0;i < list.size(); i++) {
-					writeText.newLine();
 					writeText.write(String.valueOf(list.get(i)));
+					writeText.newLine();
+					System.out.println(list.get(i));
 				}
 				//使用缓冲区的刷新方法将数据刷到目的地中
 				writeText.flush();
