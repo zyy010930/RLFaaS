@@ -359,7 +359,7 @@ public class LoadGenController {
 				BufferedWriter writeText = new BufferedWriter(new FileWriter(writeFile));
 				for(int i = 0;i < list.size(); i++) {
 					writeText.newLine();
-					writeText.write(String.valueOf(ConfigPara.getRemainMemCapacity()));
+					writeText.write(String.valueOf(list.get(i)));
 				}
 				//使用缓冲区的刷新方法将数据刷到目的地中
 				writeText.flush();
