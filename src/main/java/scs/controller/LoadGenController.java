@@ -95,7 +95,7 @@ public class LoadGenController {
 
 						//Setting Memory Capacity
 						ConfigPara configPara = new ConfigPara();
-						configPara.setMemoryCapacity(60.0);
+						configPara.setMemoryCapacity(75.0);
 
 						System.out.println("start thread");
 
