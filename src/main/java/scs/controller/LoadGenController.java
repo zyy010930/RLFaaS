@@ -95,7 +95,7 @@ public class LoadGenController {
 
 						//Setting Memory Capacity
 						ConfigPara configPara = new ConfigPara();
-						configPara.setMemoryCapacity(60.0);
+						configPara.setMemoryCapacity(75.0);
 
 						System.out.println("start thread");
 
@@ -327,7 +327,7 @@ public class LoadGenController {
 					e.printStackTrace();
 				}
 
-				OverFramework.run(serviceId, 5);
+				OverFramework.run(serviceId, 4);
 			}
 		}
 	}
@@ -350,7 +350,7 @@ public class LoadGenController {
 					throw new RuntimeException(e);
 				}
 				double d = 0;
-				for(int j = 0; j < ConfigPara.funcFlagArray.length; j++)
+				for(int j = 0;j < ConfigPara.funcFlagArray.length; j++)
 				{
 					if(ConfigPara.funcFlagArray[j] != 0)
 					{

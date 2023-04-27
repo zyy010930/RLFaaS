@@ -278,7 +278,7 @@ public abstract class AbstractJobDriver {
 					}
 					else { //样本不足或者直方图不具有代表性，pre-warm设置为0，keep-alive设置一个较长时间
 						preWarm = 0.0;
-						keepAlive = 600000.0;
+						keepAlive = 1200000.0;
 					}
 				}
 			}
