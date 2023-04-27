@@ -349,7 +349,14 @@ public class LoadGenController {
 				} catch (InterruptedException e) {
 					throw new RuntimeException(e);
 				}
-				double d = ConfigPara.getRemainMemCapacity();
+				double d = 0;
+				for(int j = 0; j < ConfigPara.funcFlagArray.length; j++)
+				{
+					if(ConfigPara.funcFlagArray[j] != 0)
+					{
+						d += ConfigPara.funcCapacity[j];
+					}
+				}
 				list.add(d);
 				System.out.println("将内存数据载入list,list长度:" + list.size() + " size:" + d);
 			}

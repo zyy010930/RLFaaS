@@ -3,7 +3,7 @@ import scs.controller.ConfigPara;
 import scs.controller.OperWaitQueue;
 import java.util.Queue;
 public class GreedyDual {
-    private static Double[] priority = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    private static Double[] priority = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     private static long startTime = System.currentTimeMillis();
     public GreedyDual(){}
     public static void queuePrint(Queue<Integer> queue)
