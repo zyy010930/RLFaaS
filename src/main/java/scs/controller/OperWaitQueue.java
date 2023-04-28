@@ -51,7 +51,7 @@ public class OperWaitQueue {
     }
 
     public static void execFunc(Integer sid) {
-        Repository.loaderMap.get(sid).getAbstractJobDriver().executeJob(sid,3);
+        Repository.loaderMap.get(sid).getAbstractJobDriver().executeJob(sid,0);
     }
 
     public static void execFuncHybrid(Integer sid){
