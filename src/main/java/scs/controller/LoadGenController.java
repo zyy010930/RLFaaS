@@ -327,7 +327,7 @@ public class LoadGenController {
 					e.printStackTrace();
 				}
 
-				OverFramework.run(serviceId, 4);
+				OverFramework.run(serviceId, 3);
 			}
 		}
 	}
@@ -342,7 +342,7 @@ public class LoadGenController {
 				throw new RuntimeException(e);
 			}
 			ArrayList<Double> list = new ArrayList<>();
-			for(int i = 1; i <= 120; i++)
+			for(int i = 1; i <= 720; i++)
 			{
 				try {
 					Thread.sleep(60000);
@@ -361,23 +361,28 @@ public class LoadGenController {
 				System.out.println("将内存数据载入list,list长度:" + list.size() + " size:" + d);
 			}
 
-			File writeFile = new File("/home/zyy/capacity.csv");
-			try{
-				BufferedWriter writeText = new BufferedWriter(new FileWriter(writeFile,true));
-				for(int i = 0;i < list.size(); i++) {
-					writeText.write(String.valueOf(list.get(i)));
-					writeText.newLine();
-					System.out.println(list.get(i));
-				}
-				//使用缓冲区的刷新方法将数据刷到目的地中
-				writeText.flush();
-				//关闭缓冲区，缓冲区没有调用系统底层资源，真正调用底层资源的是FileWriter对象，缓冲区仅仅是一个提高效率的作用
-				//因此，此处的close()方法关闭的是被缓存的流对象
-				writeText.close();
-			}catch (FileNotFoundException e){
-				System.out.println("没有找到指定文件");
-			}catch (IOException e){
-				System.out.println("文件读写出错");
+//			File writeFile = new File("/home/zyy/capacity.csv");
+//			try{
+//				BufferedWriter writeText = new BufferedWriter(new FileWriter(writeFile,true));
+//				for(int i = 0;i < list.size(); i++) {
+//					writeText.write(String.valueOf(list.get(i)));
+//					writeText.newLine();
+//					System.out.println(list.get(i));
+//				}
+//				//使用缓冲区的刷新方法将数据刷到目的地中
+//				writeText.flush();
+//				//关闭缓冲区，缓冲区没有调用系统底层资源，真正调用底层资源的是FileWriter对象，缓冲区仅仅是一个提高效率的作用
+//				//因此，此处的close()方法关闭的是被缓存的流对象
+//				writeText.close();
+//			}catch (FileNotFoundException e){
+//				System.out.println("没有找到指定文件");
+//			}catch (IOException e){
+//				System.out.println("文件读写出错");
+//			}
+			for(int i = 0;i < list.size(); i++) {
+				//writeText.write(String.valueOf(list.get(i)));
+				//writeText.newLine();
+				System.out.println(list.get(i));
 			}
 		}
 	}
