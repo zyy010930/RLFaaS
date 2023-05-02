@@ -327,7 +327,7 @@ public class LoadGenController {
 					e.printStackTrace();
 				}
 
-				OverFramework.run(serviceId, 4);
+				OverFramework.run(serviceId, 5);
 			}
 		}
 	}
@@ -359,6 +359,10 @@ public class LoadGenController {
 				}
 				list.add(d);
 				System.out.println("将内存数据载入list,list长度:" + list.size() + " size:" + d);
+				if(d != ConfigPara.getRemainMemCapacity())
+				{
+					ConfigPara.setMemoryCapacity(d);
+				}
 			}
 
 //			File writeFile = new File("/home/zyy/capacity.csv");
