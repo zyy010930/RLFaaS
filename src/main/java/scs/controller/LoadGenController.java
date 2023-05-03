@@ -359,9 +359,9 @@ public class LoadGenController {
 				}
 				list.add(d);
 				System.out.println("将内存数据载入list,list长度:" + list.size() + " size:" + d);
-				if(d != ConfigPara.getRemainMemCapacity())
+				if((60.0 - d) != ConfigPara.getRemainMemCapacity())
 				{
-					ConfigPara.setMemoryCapacity(d);
+					ConfigPara.setMemoryCapacity(60.0 - d);
 				}
 			}
 
