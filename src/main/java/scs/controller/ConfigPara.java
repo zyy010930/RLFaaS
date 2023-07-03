@@ -1,5 +1,6 @@
 package scs.controller;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -19,6 +20,7 @@ public class ConfigPara {
 
     public static Double[] initTime;
     public static Integer[] invokeTime;
+    public static Double[] costNum;
 
     /*********
         When functions are running at memory and the remaining memory capacity cannot support to response other functions,
@@ -46,6 +48,8 @@ public class ConfigPara {
 
         initTime = new Double[]{1.7,2.2,2.5,3.1,2.9,3.5,2.0,1.7,2.2,2.5,3.1,2.9,3.5,2.0,1.7,2.8};
         invokeTime = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+        costNum = new Double[]{0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
     }
 
     public static void setMemoryCapacity(Double currFuncCapacity1) {
