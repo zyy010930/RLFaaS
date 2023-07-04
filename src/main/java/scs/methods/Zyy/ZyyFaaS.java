@@ -86,7 +86,7 @@ public class ZyyFaaS {
                     ConfigPara.costNum[i] = 0.5 * (ConfigPara.invokeTime[i] / invokeTime) + 0.5 * (ConfigPara.kpArray[i] / kp); //计算每个函数容器的释放代价
                 }
 
-                Double min = Double.MAX_VALUE;
+                double min = Double.MAX_VALUE;
                 Set<Integer> bestList = new HashSet<>();
                 for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
                     double cost = 0.0;
@@ -96,7 +96,7 @@ public class ZyyFaaS {
                     Set<Integer> list1 = new HashSet<>();
                     for (Map.Entry<Set<Integer>, Double> entry : mp1.entrySet()) {
                         cost = entry.getValue();
-                        list.addAll(entry.getKey());
+                        list1.addAll(entry.getKey());
                     }
                     if (cost < min) {
                         min = cost;
@@ -107,7 +107,7 @@ public class ZyyFaaS {
                 for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
                     if (bestList.contains(i))
                         System.out.println(i + "-----------release-----------");
-                    OperWaitQueue.releaseFunc(i);
+                    OperWaitQueue.releaseFunc(i + 1);
                 }
             }
         }
