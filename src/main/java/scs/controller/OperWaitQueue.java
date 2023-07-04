@@ -62,6 +62,10 @@ public class OperWaitQueue {
         Repository.loaderMap.get(sid).getAbstractJobDriver().exec(sid);
     }
 
+    public static void execFuncZyy(Integer sid){
+        Repository.loaderMap.get(sid).getAbstractJobDriver().ZyyExec(sid);
+    }
+
     public static void releaseFunc(Integer sid) {
         switch (sid){
             case 1:

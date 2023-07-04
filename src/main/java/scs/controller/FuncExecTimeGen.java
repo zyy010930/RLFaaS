@@ -37,6 +37,7 @@ public class FuncExecTimeGen {
         Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMapTest(mp);
         ARIMAReader arimaReader = new ARIMAReader();
         arimaReader.getARIMA();
+        arimaReader.getGRU();
         System.out.println("Arima read------");
 
         Map<Integer,ArrayList<Integer>> funcMap = new TreeMap<>();

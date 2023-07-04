@@ -111,7 +111,7 @@ public class ZyyFaaS {
                 }
             }
         }
-        OperWaitQueue.execFuncHybrid(sid);
+        OperWaitQueue.execFuncZyy(sid);
         printMemory();
     }
 
