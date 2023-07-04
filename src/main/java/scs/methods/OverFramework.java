@@ -5,6 +5,7 @@ import scs.methods.FaaSCache.GreedyDual;
 import scs.methods.LRFU.LFU;
 import scs.methods.LRFU.LRU;
 import scs.methods.Wild.Wild;
+import scs.methods.Zyy.ZyyFaaS;
 import scs.methods.ZyyCache.Hybrid;
 
 /**
@@ -56,6 +57,9 @@ public class OverFramework {
                 break;
             case 5:
                 Hybrid.run(sid);
+                break;
+            case 6:
+                ZyyFaaS.run(sid);
                 break;
             default:
                 System.out.println("Method id is Chosen Error!");
