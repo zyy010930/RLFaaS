@@ -393,6 +393,7 @@ public abstract class AbstractJobDriver {
 				start = true;
 			}else {
 				preList = ARIMAReader.predictList.get(serviceId);
+				System.out.println(preList.size() + "and" + invokeTime);
 				preWarm = preList.get(invokeTime + 1) - 0.5;
 				keepAlive = 1200000.0;
 			}
@@ -421,12 +422,12 @@ public abstract class AbstractJobDriver {
 								System.out.println(FuncName[serviceId-1] + " prewarm now. pre-warm is " + preWarm);
 								if(ConfigPara.funcCapacity[serviceId - 1] > ConfigPara.getRemainMemCapacity()) {
 									int kp = 0;
-									int invokeTime = 0;
+									int invoke = 0;
 									for(int j=0;j<ConfigPara.funcFlagArray.length;j++)
 									{
-										if(ConfigPara.invokeTime[j]>invokeTime)
+										if(ConfigPara.invokeTime[j]>invoke)
 										{
-											invokeTime = ConfigPara.invokeTime[j];
+											invoke = ConfigPara.invokeTime[j];
 										}
 										if(ConfigPara.kpArray[j]>kp)
 										{
@@ -435,7 +436,7 @@ public abstract class AbstractJobDriver {
 									}
 									for(int i=0;i<ConfigPara.funcFlagArray.length;i++)
 									{
-										ConfigPara.costNum[i] = 0.5*(ConfigPara.invokeTime[i]/invokeTime) + 0.5*(ConfigPara.kpArray[i]/kp); //计算每个函数容器的释放代价
+										ConfigPara.costNum[i] = 0.5*(ConfigPara.invokeTime[i]/invoke) + 0.5*(ConfigPara.kpArray[i]/kp); //计算每个函数容器的释放代价
 									}
 
 									Double min = Double.MAX_VALUE;
