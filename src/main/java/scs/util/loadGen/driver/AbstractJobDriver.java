@@ -39,6 +39,8 @@ public abstract class AbstractJobDriver {
 	protected int outOfBoundTime = 0;
 	protected ArrayList<Double> arimaList = new ArrayList<>();
 	protected ArrayList<Integer> preList = new ArrayList<>();
+	protected long nowTime = 0;
+	protected long firstTime = 0;
 	private SSHTool tool = new SSHTool("192.168.1.4", "root", "wnlof309b507", StandardCharsets.UTF_8);
 
 	public static String createCmd[] = new String[]{
@@ -375,6 +377,9 @@ public abstract class AbstractJobDriver {
 			System.out.println(FuncName[serviceId-1] + " request");
 			FunctionExec functionExec = new FunctionExec(httpClient, queryItemsStr, serviceId, jsonParmStr, sleepUnit, "POST");
 
+			if(firstTime == 0){
+				firstTime = new Date().getTime();
+			}
 			if(ConfigPara.funcFlagArray[serviceId-1] == 0) {
 				System.out.println("目前大小：" + ConfigPara.getRemainMemCapacity());
 				ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() - ConfigPara.funcCapacity[serviceId - 1]);
@@ -392,9 +397,17 @@ public abstract class AbstractJobDriver {
 				oldTime = new Date().getTime();
 				start = true;
 			}else {
+				nowTime = new Date().getTime();
+				int intervalTime = (int) ((nowTime - firstTime) / 1000);
 				preList = ARIMAReader.predictList.get(serviceId);
 				System.out.println(preList.size() + "and" + invokeTime);
-				preWarm = preList.get(invokeTime + 1) - 0.5;
+				for(int i = intervalTime + 1; i < preList.size();i++)
+				{
+					if(preList.get(i) != 0)
+					{
+						preWarm = (i - intervalTime - 1) * 1000;
+					}
+				}
 				keepAlive = 1200000.0;
 			}
 

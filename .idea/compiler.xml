@@ -9,8 +9,5 @@
         <module name="loadGen" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="loadGen" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

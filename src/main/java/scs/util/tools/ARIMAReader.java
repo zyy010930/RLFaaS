@@ -53,20 +53,20 @@ public class ARIMAReader {
             while ((line = br.readLine()) != null) {
                 String[] country = line.split(cvsSplitBy);
                 ArrayList<Integer> list = new ArrayList<>();
-                ArrayList<Integer> preList = new ArrayList<>();
+                //ArrayList<Integer> preList = new ArrayList<>();
                 for (int i = 0; i < country.length; i++) {
                     list.add(Integer.parseInt(country[i]));
                 }
-                int old = -1;
-                for(int i = 0;i<list.size();i++)
-                {
-                    if(list.get(i) != 0)
-                    {
-                        preList.add(i - old);
-                        old = i;
-                    }
-                }
-                predictList.put(num, preList);
+//                int old = -1;
+//                for(int i = 0;i<list.size();i++)
+//                {
+//                    if(list.get(i) != 0)
+//                    {
+//                        preList.add(i - old);
+//                        old = i;
+//                    }
+//                }
+                predictList.put(num, list);
                 num++;
             }
         } catch (IOException e) {
