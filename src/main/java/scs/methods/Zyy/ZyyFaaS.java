@@ -36,7 +36,7 @@ public class ZyyFaaS {
         {
             Set<Integer> list = new HashSet<>(idList);
             list.add(id);
-            mp.put(idList,(double) idList.size()/ConfigPara.funcFlagArray.length);
+            mp.put(idList,0.5 * ((double) idList.size()/ConfigPara.funcFlagArray.length) + 0.5 * sumCost);
             return mp;
         }
         Double min = Double.MAX_VALUE;
@@ -83,7 +83,7 @@ public class ZyyFaaS {
                     }
                 }
                 for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
-                    ConfigPara.costNum[i] = 0.5 * (ConfigPara.invokeTime[i] / invokeTime) + 0.5 * (ConfigPara.kpArray[i] / kp); //计算每个函数容器的释放代价
+                    ConfigPara.costNum[i] = 0.7 * (ConfigPara.invokeTime[i] / invokeTime) + 0.3 * (ConfigPara.kpArray[i] / kp); //计算每个函数容器的释放代价
                 }
 
                 double min = Double.MAX_VALUE;
