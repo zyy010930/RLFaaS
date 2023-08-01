@@ -342,7 +342,7 @@ public class LoadGenController {
 				throw new RuntimeException(e);
 			}
 			ArrayList<Double> list = new ArrayList<>();
-			for(int i = 1; i <= 480; i++)
+			for(int i = 1; i <= 720; i++)
 			{
 				try {
 					Thread.sleep(60000);
