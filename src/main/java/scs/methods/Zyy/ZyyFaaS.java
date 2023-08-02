@@ -83,7 +83,7 @@ public class ZyyFaaS {
                     }
                 }
                 for (int i = 0; i < ConfigPara.funcFlagArray.length; i++) {
-                    ConfigPara.costNum[i] = 0.3 * (ConfigPara.invokeTime[i] / invokeTime) + 0.7 * (ConfigPara.kpArray[i] / kp); //计算每个函数容器的释放代价
+                    ConfigPara.costNum[i] = 0.1 * (ConfigPara.invokeTime[i] / invokeTime) + 0.9 * (ConfigPara.kpArray[i] / kp); //计算每个函数容器的释放代价
                 }
 
                 double min = Double.MAX_VALUE;
