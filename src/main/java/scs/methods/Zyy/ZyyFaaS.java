@@ -36,7 +36,7 @@ public class ZyyFaaS {
         {
             Set<Integer> list = new HashSet<>(idList);
             list.add(id);
-            mp.put(idList,0.7 * ((double) idList.size()/ConfigPara.funcFlagArray.length) + 0.3 * sumCost);
+            mp.put(idList,0.5 * ((double) idList.size()/ConfigPara.funcFlagArray.length) + 0.5 * sumCost);
             return mp;
         }
         Double min = Double.MAX_VALUE;
