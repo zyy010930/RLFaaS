@@ -95,7 +95,7 @@ public class LoadGenController {
 
 						//Setting Memory Capacity
 						ConfigPara configPara = new ConfigPara();
-						configPara.setMemoryCapacity(45.0);
+						configPara.setMemoryCapacity(75.0);
 
 						System.out.println("start thread");
 
@@ -359,9 +359,9 @@ public class LoadGenController {
 				}
 				list.add(d);
 				System.out.println("将内存数据载入list,list长度:" + list.size() + " size:" + d);
-				if((45.0 - d) != ConfigPara.getRemainMemCapacity())
+				if((75.0 - d) != ConfigPara.getRemainMemCapacity())
 				{
-					ConfigPara.setMemoryCapacity(45.0 - d);
+					ConfigPara.setMemoryCapacity(75.0 - d);
 				}
 			}
 

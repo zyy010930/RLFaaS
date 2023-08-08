@@ -39,7 +39,7 @@ public class ConfigPara {
     public ConfigPara() {
         maxFuncCapacity = 120.5;
         minFuncCapacity = 10.6;
-        currFuncCapacity = 45.0;
+        currFuncCapacity = 75.0;
         funcCapacity = new Double[]{7.3, 6.1, 6.5, 5.7, 7.8, 9.0, 8.5,10.6,5.4,7.1,6.6,8.1,9.2,8.0,7.2,10.4};
 
         kpArray = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
