@@ -449,7 +449,7 @@ public abstract class AbstractJobDriver {
 									}
 									for(int i=0;i<ConfigPara.funcFlagArray.length;i++)
 									{
-										ConfigPara.costNum[i] = 0.5*(ConfigPara.invokeTime[i]/invoke) + 0.5*(ConfigPara.kpArray[i]/kp); //计算每个函数容器的释放代价
+										ConfigPara.costNum[i] = 0.1*(ConfigPara.invokeTime[i]/invoke) + 0.9*(ConfigPara.kpArray[i]/kp); //计算每个函数容器的释放代价
 									}
 
 									Double min = Double.MAX_VALUE;
