@@ -95,7 +95,7 @@ public class LoadGenController {
 
 						//Setting Memory Capacity
 						ConfigPara configPara = new ConfigPara();
-						configPara.setMemoryCapacity(90.0);
+						configPara.setMemoryCapacity(60.0);
 
 						System.out.println("start thread");
 
@@ -342,7 +342,7 @@ public class LoadGenController {
 				throw new RuntimeException(e);
 			}
 			ArrayList<Double> list = new ArrayList<>();
-			for(int i = 1; i <= 180; i++) //add
+			for(int i = 1; i <= 720; i++) //add
 			{
 				try {
 					Thread.sleep(60000);
@@ -359,9 +359,9 @@ public class LoadGenController {
 				}
 				list.add(d);
 				System.out.println("将内存数据载入list,list长度:" + list.size() + " size:" + d);
-				if((90.0 - d) != ConfigPara.getRemainMemCapacity())
+				if((60.0 - d) != ConfigPara.getRemainMemCapacity())
 				{
-					ConfigPara.setMemoryCapacity(90.0 - d);
+					ConfigPara.setMemoryCapacity(60.0 - d);
 				}
 			}
 

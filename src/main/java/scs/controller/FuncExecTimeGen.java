@@ -46,8 +46,8 @@ public class FuncExecTimeGen {
             ArrayList<Integer> timeList = new ArrayList<>();
 
             int lastIndex = 0;
-            //for(int j = 0; j < InvokeMap.get(i).size(); j++)
-            for(int j = 540; j < 720; j++)
+            for(int j = 0; j < InvokeMap.get(i).size(); j++)
+            //for(int j = 540; j < 720; j++)
             {
                 if(InvokeMap.get(i).get(j) == 0) {
                     lastIndex = lastIndex + 60000;

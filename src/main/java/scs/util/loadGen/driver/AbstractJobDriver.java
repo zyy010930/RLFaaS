@@ -398,7 +398,7 @@ public abstract class AbstractJobDriver {
 				start = true;
 			}else {
 				nowTime = new Date().getTime();
-				int intervalTime = (int) ((nowTime - firstTime) / 1000) + 540; //add
+				int intervalTime = (int) ((nowTime - firstTime) / 1000); //add
 				preList = ARIMAReader.predictList.get(serviceId);
 				System.out.println(preList.size() + "and" + invokeTime);
 				for(int i = intervalTime + 1; i < preList.size();i++)
