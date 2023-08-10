@@ -69,67 +69,39 @@ public class OperWaitQueue {
     public static void releaseFunc(Integer sid) {
         switch (sid){
             case 1:
-                try {
-                    System.out.println(tool1.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50.sh"));
-                    ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
-                    ConfigPara.funcFlagArray[sid-1] = 0;
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
+                //System.out.println(tool1.exec("bash /home/zyy/INFless/developer/servingFunctions/resnet-50.sh"));
+                ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
+                ConfigPara.funcFlagArray[sid-1] = 0;
                 break;
             case 2:
-                try {
-                    System.out.println(tool1.exec("bash /home/zyy/INFless/developer/servingFunctions/mobilenet.sh"));
-                    ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
-                    ConfigPara.funcFlagArray[sid-1] = 0;
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
+                //System.out.println(tool1.exec("bash /home/zyy/INFless/developer/servingFunctions/mobilenet.sh"));
+                ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
+                ConfigPara.funcFlagArray[sid-1] = 0;
                 break;
             case 3:
-                try {
-                    System.out.println(tool1.exec("bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hash.sh"));
-                    ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
-                    ConfigPara.funcFlagArray[sid-1] = 0;
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
+                //System.out.println(tool1.exec("bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hash.sh"));
+                ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
+                ConfigPara.funcFlagArray[sid-1] = 0;
                 break;
             case 4:
-                try {
-                    System.out.println(tool1.exec("bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/Md5.sh"));
-                    ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
-                    ConfigPara.funcFlagArray[sid-1] = 0;
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
+                //System.out.println(tool1.exec("bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/Md5.sh"));
+                ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
+                ConfigPara.funcFlagArray[sid-1] = 0;
                 break;
             case 5:
-                try {
-                    System.out.println(tool1.exec("bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello.sh"));
-                    ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
-                    ConfigPara.funcFlagArray[sid-1] = 0;
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
+                //System.out.println(tool1.exec("bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/hello.sh"));
+                ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
+                ConfigPara.funcFlagArray[sid-1] = 0;
                 break;
             case 6:
-                try {
-                    System.out.println(tool1.exec("bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort.sh"));
-                    ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
-                    ConfigPara.funcFlagArray[sid-1] = 0;
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
+                //System.out.println(tool1.exec("bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/sort.sh"));
+                ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
+                ConfigPara.funcFlagArray[sid-1] = 0;
                 break;
             case 7:
-                try {
-                    System.out.println(tool1.exec("bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography.sh"));
-                    ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
-                    ConfigPara.funcFlagArray[sid-1] = 0;
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
+                //System.out.println(tool1.exec("bash /home/zyy/BurstyServerlessBenchmark/DIC/WebServices/openfaas/python-code/cryptography.sh"));
+                ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
+                ConfigPara.funcFlagArray[sid-1] = 0;
                 break;
             case 8:
             case 9:
@@ -140,13 +112,9 @@ public class OperWaitQueue {
             case 14:
             case 15:
             case 16:
-                try {
-                    System.out.println(tool1.exec("bash /home/zyy/test.sh"));
-                    ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
-                    ConfigPara.funcFlagArray[sid-1] = 0;
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
+                //System.out.println(tool1.exec("bash /home/zyy/test.sh"));
+                ConfigPara.setMemoryCapacity(ConfigPara.getRemainMemCapacity() + ConfigPara.funcCapacity[sid-1]);
+                ConfigPara.funcFlagArray[sid-1] = 0;
                 break;
             default:
                 System.out.println("Function Release Error!");
