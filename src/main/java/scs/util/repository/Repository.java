@@ -132,11 +132,11 @@ public class Repository{
 		initList();
 		readProperties();
 		initLoaderMap();
-		System.out.println("init之后，if之前");
-		if(Repository.rmiServiceEnable==true){
-                         System.out.println("if中");
-			RmiService.getInstance().service(Repository.serverIp, Repository.rmiPort);//start the RMI service
-	}
+//		System.out.println("init之后，if之前");
+//		if(Repository.rmiServiceEnable==true){
+//                         System.out.println("if中");
+//			RmiService.getInstance().service(Repository.serverIp, Repository.rmiPort);//start the RMI service
+//	}
 	}
 	/**
 	 * read properties 
