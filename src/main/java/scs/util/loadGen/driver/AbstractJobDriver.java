@@ -41,7 +41,7 @@ public abstract class AbstractJobDriver {
 	protected ArrayList<Integer> preList = new ArrayList<>();
 	protected long nowTime = 0;
 	protected long firstTime = 0;
-	private SSHTool tool = new SSHTool("192.168.1.4", "root", "wnlof309b507", StandardCharsets.UTF_8);
+	private SSHTool tool = new SSHTool("192.168.1.7", "root", "wnlof309b507", StandardCharsets.UTF_8);
 
 	public static String createCmd[] = new String[]{
 			"bash /home/zyy/INFless/developer/servingFunctions/resnet-50-create.sh",

@@ -36,6 +36,8 @@ public class ConfigPara {
     ********/
     public static Integer[] funcFlagArray;
 
+    public static String[] funcName;
+
     public ConfigPara() {
         maxFuncCapacity = 120.5;
         minFuncCapacity = 10.6;
@@ -50,6 +52,7 @@ public class ConfigPara {
         invokeTime = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
         costNum = new Double[]{0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
+        funcName = new String[]{"mandelbrot"};
     }
 
     public static void setMemoryCapacity(Double currFuncCapacity1) {

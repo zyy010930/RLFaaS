@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import scs.pojo.PageQueryData;
 import scs.pojo.QueryData;
 import scs.util.format.DataFormats;
 import scs.util.repository.Repository;
+import scs.util.tools.HttpClientPool;
 
 /**
  * Load generator controller class, it includes interfaces as follows:
@@ -38,22 +40,10 @@ public class LoadGenController {
 	private static Map<Integer,Integer> mp;
 	{
 		mp = new HashMap<Integer, Integer>();
-		mp.put(1, 1);
-		mp.put(2, 2);
-		mp.put(3, 3);
-		mp.put(4, 4);
-		mp.put(5, 5);
-		mp.put(6, 6);
-		mp.put(7, 7);
-		mp.put(8, 8);
-		mp.put(9, 9);
-		mp.put(10, 10);
-		mp.put(11, 11);
-		mp.put(12, 12);
-		mp.put(13, 13);
-		mp.put(14, 14);
-		mp.put(15, 15);
-		mp.put(16, 16);
+		for(int i = 1; i<=16;i++)
+		{
+			mp.put(i,i);
+		}
 	}
 
 	private ArrayList<Map<Integer,Integer>> functionList = new ArrayList<Map<Integer, Integer>>();
@@ -68,80 +58,22 @@ public class LoadGenController {
 			@RequestParam(value="serviceId",required=true) int serviceId,
 			@RequestParam(value="concurrency",required=true) int concurrency){
 		try{
-			if (serviceId < 0 || serviceId >= Repository.NUMBER_LC){
-				response.getWriter().write("serviceId="+serviceId+" does not exist with service number="+Repository.NUMBER_LC);
-			} else {
-				if (concurrency > 0) {
-					Repository.concurrency[serviceId]=1;
-				} else {
-					Repository.concurrency[serviceId]=0;
-				}
-				intensity=intensity<=0?1:intensity;//validation
-				Repository.realRequestIntensity[serviceId]=intensity;
-				
-				if(Repository.onlineQueryThreadRunning[serviceId]==true){
-					response.getWriter().write("online query threads"+serviceId+" are already running");
-				}else{
-					Repository.onlineDataFlag[serviceId]=true; 
-					Repository.statisticsCount[serviceId]=0;//init statisticsCount
-					Repository.totalQueryCount[serviceId]=0;//init totalQueryCount
-					Repository.totalRequestCount[serviceId]=0;//init totalRequestCount
-					Repository.onlineDataList.get(serviceId).clear();//clear onlineDataList
-					Repository.windowOnlineDataList.get(serviceId).clear();//clear windowOnlineDataList
-					if(true) {
-						//obtaining functions time internals
-						FuncExecTimeGen funcExecTimeGen = new FuncExecTimeGen();
-						Map<Integer, ArrayList<Integer>> funcMap = funcExecTimeGen.funcExecTimeGenAver();
+			FuncExecTimeGen funcExecTimeGen = new FuncExecTimeGen();
+			Map<Integer, ArrayList<Integer>> funcMap = funcExecTimeGen.funcExecTimeGenAver();
 
-						//Setting Memory Capacity
-						ConfigPara configPara = new ConfigPara();
-						configPara.setMemoryCapacity(60.0);
-
-						System.out.println("start thread");
-
-						ExecutorService executor = Executors.newFixedThreadPool(17);
-						FunctionThread thread1 = new FunctionThread(1, funcMap.get(1));
-						FunctionThread thread2 = new FunctionThread(2, funcMap.get(2));
-						FunctionThread thread3 = new FunctionThread(3, funcMap.get(3));
-						FunctionThread thread4 = new FunctionThread(4, funcMap.get(4));
-						FunctionThread thread5 = new FunctionThread(5, funcMap.get(5));
-						FunctionThread thread6 = new FunctionThread(6, funcMap.get(6));
-						FunctionThread thread7 = new FunctionThread(7, funcMap.get(7));
-						FunctionThread thread8 = new FunctionThread(8, funcMap.get(8));
-						FunctionThread thread9 = new FunctionThread(9, funcMap.get(9));
-						FunctionThread thread10 = new FunctionThread(10, funcMap.get(10));
-						FunctionThread thread11 = new FunctionThread(11, funcMap.get(11));
-						FunctionThread thread12 = new FunctionThread(12, funcMap.get(12));
-						FunctionThread thread13 = new FunctionThread(13, funcMap.get(13));
-						FunctionThread thread14 = new FunctionThread(14, funcMap.get(14));
-						FunctionThread thread15 = new FunctionThread(15, funcMap.get(15));
-						FunctionThread thread16 = new FunctionThread(16, funcMap.get(16));
-						CapacityThread thread17 = new CapacityThread();
-						executor.execute(thread1);
-						executor.execute(thread2);
-						executor.execute(thread3);
-						executor.execute(thread4);
-						executor.execute(thread5);
-						executor.execute(thread6);
-						executor.execute(thread7);
-						executor.execute(thread8);
-						executor.execute(thread9);
-						executor.execute(thread10);
-						executor.execute(thread11);
-						executor.execute(thread12);
-						executor.execute(thread13);
-						executor.execute(thread14);
-						executor.execute(thread15);
-						executor.execute(thread16);
-						executor.execute(thread17);
-						executor.shutdown();
-					} else {
-						response.getWriter().write("serviceId="+serviceId+"doesnot has loaderDriver instance with LC number="+Repository.NUMBER_LC);
-					}
-				}
+			//Setting Memory Capacity
+			//ConfigPara configPara = new ConfigPara();
+			//configPara.setMemoryCapacity(60.0);
+			System.out.println("start thread");
+			ExecutorService executor = Executors.newFixedThreadPool(1);
+			for(int i = 1;i<=1;i++)
+			{
+				FunctionThread thread = new FunctionThread(i, funcMap.get(i));
+				executor.execute(thread);
 			}
-
-
+//			CapacityThread thread = new CapacityThread();
+//			executor.execute(thread);
+			executor.shutdown();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -326,9 +258,33 @@ public class LoadGenController {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-
-				OverFramework.run(serviceId, 6);
+				RunThread runThread = new RunThread(serviceId);
+				ExecutorService executor = Executors.newFixedThreadPool(1);
+				executor.execute(runThread);
+				executor.shutdown();
 			}
+		}
+	}
+
+	static class RunThread extends Thread {
+		private Integer serviceId;
+		private CloseableHttpClient httpClient;
+		private String queryItemsStr;
+		private String jsonParmStr;
+		public RunThread(){}
+
+		public RunThread(Integer id){
+			serviceId = id;
+			httpClient= HttpClientPool.getInstance().getConnection();
+			queryItemsStr= Repository.HashFaasBaseURL;
+			jsonParmStr=Repository.resNet50ParmStr;
+			queryItemsStr=queryItemsStr.replace("Ip","192.168.1.7");
+			queryItemsStr=queryItemsStr.replace("Port","31112");
+			queryItemsStr=queryItemsStr.replace("Hash",ConfigPara.funcName[id]);
+		}
+		public void run() {
+			int time= HttpClientPool.postResponseTime(httpClient, queryItemsStr, jsonParmStr);
+			System.out.println(time);
 		}
 	}
 

@@ -35,10 +35,11 @@ public class FuncExecTimeGen {
         FunctionRequest functionRequest = new FunctionRequest();
         System.out.println("Invoke Map Build------");
         Map<Integer,ArrayList<Integer>> InvokeMap = functionRequest.getMapTest(mp);
-        ARIMAReader arimaReader = new ARIMAReader();
-        arimaReader.getARIMA();
-        arimaReader.getGRU();
-        System.out.println("Arima read------");
+//        ARIMAReader arimaReader = new ARIMAReader();
+//        //读取ARIMA和GRU预测的数据
+//        arimaReader.getARIMA();
+//        arimaReader.getGRU();
+//        System.out.println("Arima read------");
 
         Map<Integer,ArrayList<Integer>> funcMap = new TreeMap<>();
         for(int i = 1; i <= 16; i++)
